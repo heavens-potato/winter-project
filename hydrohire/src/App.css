@@ -5,7 +5,8 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  max-width: 40vw;
+  height: auto;
   pointer-events: none;
 }
 
@@ -22,4 +23,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: rgb(0, 0, 0);
+}
+
+@media (min-width: 600px) {
+  .App-logo {
+    max-width: 35vmin;
+  }
 }
