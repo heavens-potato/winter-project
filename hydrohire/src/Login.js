@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import { TextField, Button, Typography, Box, Link, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, createTheme, ThemeProvider } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import capybaraLogo from './assets/img/Capybara.png';
+import { auth } from './firebase'; // Import auth from firebase.js
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const theme = createTheme({
   typography: {
@@ -13,16 +15,24 @@ const theme = createTheme({
 function Login() {
 
   const [showPassword, setShowPassword] = React.useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    console.log('Form submitted! Email: ', email, 'Password: ', password); // placeholder code for authentication logic
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log("Login Success!")
+    } catch (error) {
+      setErrorMessage(error.message);
+      console.log("Failure")
+    }
   }
 
   return (
