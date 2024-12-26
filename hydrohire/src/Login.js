@@ -17,7 +17,6 @@ function Login() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleSubmit = async (event) => {
@@ -28,10 +27,10 @@ function Login() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      console.log("Login Success!")
+      console.log("Login Success!");
     } catch (error) {
       setErrorMessage(error.message);
-      console.log("Failure")
+      console.log("Failure");
     }
   }
 
