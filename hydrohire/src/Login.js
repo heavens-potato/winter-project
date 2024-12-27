@@ -8,7 +8,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const theme = createTheme({
   typography: {
-    fontFamily: '"Nunito", sans-serif',
+    fontFamily: '"Poppins", serif',
   },
 });
 
@@ -36,8 +36,8 @@ function Login() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <header className="App-header">
+      <div className="Login">
+        <header className="Login-header">
           {/* Capybara Logo */}
           <img src={capybaraLogo} className="App-logo" alt="logo" />
 
