@@ -27,14 +27,6 @@ function SignUp() {
         setErrorMessage('Passwrods must match.');
         return;
     }
-
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      setSuccessMessage('Sign up success!');
-      setErrorMessage('');
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
   }
 
   return (
