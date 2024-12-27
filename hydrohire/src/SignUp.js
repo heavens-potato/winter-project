@@ -4,7 +4,17 @@ import { TextField, Button, Typography, Box, Link, FormControl, InputLabel, Outl
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import capybaraLogo from './assets/img/Capybara.png';
 import { auth } from './firebase'; // Import auth from firebase.js
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
+function checkPasswordStrength(password) {
+  const passwordRegex = new RegExp (/^(?=.*[@$!%*?&])(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d@$!%?&]{8,}$/);
+  return passwordRegex.test(password);
+}
+
+function validateEmail(email) {
+  const emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+  return emailRegex.test(email);
+}
 
 function SignUp() {
 
@@ -23,10 +33,32 @@ function SignUp() {
     const password = event.target.password.value;
     const confirmPassword = event.target.confirmPassword.value;
 
+    if(!validateEmail(email)) {
+      setErrorMessage('Invalid Email');
+      return;
+    }
+    
+    if(!checkPasswordStrength(password)) {
+      console.log("dasdfasf");
+      setErrorMessage('Invalid Password');
+      return;
+    }
+
     if (password !== confirmPassword) {
         setErrorMessage('Passwrods must match.');
         return;
     }
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      setErrorMessage("");
+      setSuccessMessage("Hooray!");
+      console.log('Login Success!');
+    } catch (error) {
+      setErrorMessage('Failed to login.');
+      console.log('Failure');
+    }
+    
   }
 
   return (

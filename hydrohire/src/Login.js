@@ -8,7 +8,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 
 function validateEmail(email) {
   const emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-  console.log(emailRegex.test(email));
+  return emailRegex.test(email);
 }
 
 function Login() {
@@ -22,15 +22,19 @@ function Login() {
     event.preventDefault();
     
     const email = event.target.email.value;
-    validateEmail(email);
+    const res = validateEmail(email); //check if email matches format
     const password = event.target.password.value;
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      console.log('Login Success!');
-    } catch (error) {
-      setErrorMessage('Failed to login.');
-      console.log('Failure');
+    if(res){ //case if email is valid
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        console.log('Login Success!');
+      } catch (error) {
+        setErrorMessage('Failed to login.');
+        console.log('Failure');
+      }
+    } else { //case if email is invalid
+        setErrorMessage('Invalid Email');
     }
   }
 
