@@ -1,6 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material';
+import Navbar from './Navbar';
 import Landing from './Landing';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -30,16 +31,29 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Routes>
-          {/* Landing Home Page */}
-          <Route path="/" element={<Landing />}></Route>
-
-          {/* Login & Sign Up Routes */}
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/signup" element={<SignUp />}></Route>
-        </Routes>
+        <AppContent />
       </Router>
     </ThemeProvider>
+  );
+}
+
+function AppContent() {
+  const location = useLocation();
+
+  return (
+    <>
+      {/* Render Navbar only if the current route is not /login or /signup */}
+      {location.pathname !== '/login' && location.pathname !== '/signup' && <Navbar />}
+      
+      <Routes>
+        {/* Landing Home Page */}
+        <Route path="/" element={<Landing />}></Route>
+
+        {/* Login & Sign Up Routes */}
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/signup" element={<SignUp />}></Route>
+      </Routes>
+    </>
   );
 }
 

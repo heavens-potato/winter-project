@@ -6,7 +6,7 @@ import capybaraLogo from './assets/img/Capybara.png';
 
 function Landing() {
   return (
-    <Box sx={{ display: 'flex', height: '100vh' }}>
+    <Box sx={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
       {/* Left Half */}
       <Grid container item xs={6} justifyContent="center" alignItems="center">
         <img src={capybaraLogo} alt="Capybara" style={{ width: '80%', height: 'auto' }} />
