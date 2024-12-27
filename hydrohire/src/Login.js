@@ -12,6 +12,11 @@ const theme = createTheme({
   },
 });
 
+function validateEmail(email) {
+  const emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+  console.log(emailRegex.test(email));
+}
+
 function Login() {
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -23,6 +28,7 @@ function Login() {
     event.preventDefault();
     
     const email = event.target.email.value;
+    validateEmail(email);
     const password = event.target.password.value;
 
     try {
