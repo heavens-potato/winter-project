@@ -12,32 +12,46 @@ const theme = createTheme({
   },
 });
 
-function Login() {
+function SignUp() {
 
   const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     
     const email = event.target.email.value;
     const password = event.target.password.value;
+    const confirmPassword = event.target.confirmPassword.value;
+
+    if (password.length < 8) {
+        setErrorMessage('Password must be at least 8 characters long.');
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        setErrorMessage('Passwrods must match.');
+        return;
+    }
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      console.log('Login Success!');
+      setSuccessMessage('Sign up success!');
+      setErrorMessage('');
     } catch (error) {
-      setErrorMessage('Failed to login.');
-      console.log('Failure');
+      setErrorMessage(error.message);
     }
   }
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="Login">
-        <header className="Login-header">
+      <div className="SignUp">
+        <header className="SignUp-header">
           {/* Capybara Logo */}
           <img src={capybaraLogo} className="App-logo" alt="logo" />
 
@@ -46,15 +60,14 @@ function Login() {
             HydroHire
           </Typography>
 
-          {/* Login Box Start */}
-          <Box 
-            component="form" 
+          {/* Sign Up Box Start */}
+          <Box
+            component="form"
             onSubmit={handleSubmit}
-            sx={{ display:'flex', flexDirection:'column', gap:2, width:'350px', margin:'0 auto', }}
+            sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '350px', margin: '0 auto' }}
           >
-
             {/* Email Input */}
-            <TextField label="Email" type="email" variant="outlined" fullWidth name="email" required />
+            <TextField label="Email" type="email" variant="outlined" fullWidth name="email" placeholder="Email address" required />
 
             {/* Password Input */}
             <FormControl variant="outlined" fullWidth required>
@@ -63,6 +76,7 @@ function Login() {
                 id="outlined-adornment-password"
                 type={showPassword ? 'text' : 'password'}
                 name="password"
+                placeholder="Must be at least 8 characters"
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -80,10 +94,35 @@ function Login() {
               />
             </FormControl>
 
-            {/* Login Button */}
-            <Button 
-              variant="contained" 
-              type="submit" 
+            {/* Confirm Password Input */}
+            <FormControl variant="outlined" fullWidth required>
+              <InputLabel htmlFor="outlined-adornment-confirm-password">Confirm Password</InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-confirm-password"
+                type={showConfirmPassword ? 'text' : 'password'}
+                name="confirmPassword"
+                placeholder="Passwords must match"
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label={
+                        showConfirmPassword ? 'hide password' : 'display password'
+                      }
+                      onClick={handleClickShowConfirmPassword}
+                      edge="end"
+                    >
+                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Confirm Password"
+              />
+            </FormControl>
+
+            {/* Sign Up Button */}
+            <Button
+              variant="contained"
+              type="submit"
               fullWidth
               sx={{
                 backgroundColor: '#82cef5',
@@ -91,28 +130,33 @@ function Login() {
                 '&:hover': {
                   backgroundColor: '#67a3c2',
                   color: '#fff',
-                }
+                },
               }}
             >
-              Login
+              Sign Up
             </Button>
 
-            {/* Error Message Display */}
+            {/* Error & Success Message Display */}
             {errorMessage && (
               <Typography color="error" align="center">
                 {errorMessage}
               </Typography>
             )}
+            {successMessage && (
+              <Typography color="success.main" align="center">
+                {successMessage}
+              </Typography>
+            )}
 
-            {/* Sign Up Link */}
+            {/* Login Link */}
             <Typography variant="body1" align="center">
-              Don't have an account?{' '}
-              <Link href="/signup" underline="hover">
-                Sign Up
+              Already have an account?{' '}
+              <Link href="/login" underline="hover">
+                Log In
               </Link>
             </Typography>
 
-          {/* Login Box End */}
+          {/* Sign Up Box End */}
           </Box>
         </header>
       </div>
@@ -120,4 +164,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignUp;
