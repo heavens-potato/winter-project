@@ -1,16 +1,10 @@
 import React, {useState} from 'react';
 import './App.css';
-import { TextField, Button, Typography, Box, Link, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, createTheme, ThemeProvider } from '@mui/material';
+import { TextField, Button, Typography, Box, Link, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import capybaraLogo from './assets/img/Capybara.png';
 import { auth } from './firebase'; // Import auth from firebase.js
 import { signInWithEmailAndPassword } from 'firebase/auth';
-
-const theme = createTheme({
-  typography: {
-    fontFamily: '"Poppins", serif',
-  },
-});
 
 function SignUp() {
 
@@ -44,8 +38,7 @@ function SignUp() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="SignUp">
+    <div className="SignUp">
         <header className="SignUp-header">
           {/* Capybara Logo */}
           <img src={capybaraLogo} className="App-logo" alt="logo" />
@@ -120,11 +113,12 @@ function SignUp() {
               type="submit"
               fullWidth
               sx={{
-                backgroundColor: '#82cef5',
-                color: '#000',
+                fontSize: 24,
+                backgroundColor: (theme) => theme.palette.primary.main, 
+                color: (theme) => theme.palette.primary.dark,  
                 '&:hover': {
-                  backgroundColor: '#67a3c2',
-                  color: '#fff',
+                  backgroundColor: (theme) => theme.palette.primary.dark,
+                  color: (theme) => theme.palette.primary.white,  
                 },
               }}
             >
@@ -146,7 +140,7 @@ function SignUp() {
             {/* Login Link */}
             <Typography variant="body1" align="center">
               Already have an account?{' '}
-              <Link href="/login" underline="hover">
+              <Link href="/login" underline="hover" sx={{ fontWeight: 'bold' }}>
                 Log In
               </Link>
             </Typography>
@@ -155,7 +149,6 @@ function SignUp() {
           </Box>
         </header>
       </div>
-    </ThemeProvider>
   );
 }
 

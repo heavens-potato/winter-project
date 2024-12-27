@@ -1,16 +1,10 @@
 import React, {useState} from 'react';
 import './App.css';
-import { TextField, Button, Typography, Box, Link, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, createTheme, ThemeProvider } from '@mui/material';
+import { TextField, Button, Typography, Box, Link, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import capybaraLogo from './assets/img/Capybara.png';
 import { auth } from './firebase'; // Import auth from firebase.js
 import { signInWithEmailAndPassword } from 'firebase/auth';
-
-const theme = createTheme({
-  typography: {
-    fontFamily: '"Poppins", serif',
-  },
-});
 
 function validateEmail(email) {
   const emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
@@ -41,8 +35,7 @@ function Login() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="Login">
+    <div className="Login">
         <header className="Login-header">
           {/* Capybara Logo */}
           <img src={capybaraLogo} className="App-logo" alt="logo" />
@@ -92,15 +85,16 @@ function Login() {
               type="submit" 
               fullWidth
               sx={{
-                backgroundColor: '#82cef5',
-                color: '#000',
+                fontSize: 24,
+                backgroundColor: (theme) => theme.palette.primary.main, 
+                color: (theme) => theme.palette.primary.dark,  
                 '&:hover': {
-                  backgroundColor: '#67a3c2',
-                  color: '#fff',
-                }
+                  backgroundColor: (theme) => theme.palette.primary.dark,
+                  color: (theme) => theme.palette.primary.white,  
+                },
               }}
             >
-              Login
+              Log In
             </Button>
 
             {/* Error Message Display */}
@@ -113,7 +107,7 @@ function Login() {
             {/* Sign Up Link */}
             <Typography variant="body1" align="center">
               Don't have an account?{' '}
-              <Link href="/signup" underline="hover">
+              <Link href="/signup" underline="hover" sx={{ fontWeight: 'bold' }}>
                 Sign Up
               </Link>
             </Typography>
@@ -122,7 +116,6 @@ function Login() {
           </Box>
         </header>
       </div>
-    </ThemeProvider>
   );
 }
 

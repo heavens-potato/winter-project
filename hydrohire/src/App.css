@@ -12,11 +12,6 @@
 }
 
 .Login-header, .SignUp-header {
-  background-color: #f4f4f4;
-  font-family: "Nunito", serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
