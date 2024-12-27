@@ -29,11 +29,6 @@ function SignUp() {
     const password = event.target.password.value;
     const confirmPassword = event.target.confirmPassword.value;
 
-    if (password.length < 8) {
-        setErrorMessage('Password must be at least 8 characters long.');
-        return;
-    }
-
     if (password !== confirmPassword) {
         setErrorMessage('Passwrods must match.');
         return;
