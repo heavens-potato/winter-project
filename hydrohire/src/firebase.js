@@ -2,8 +2,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth"; // Import auth from firebase.js
 
-console.log('API Key from .env:', process.env.REACT_APP_API_KEY); 
-
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
