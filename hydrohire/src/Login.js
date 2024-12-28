@@ -5,6 +5,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import capybaraLogo from './assets/img/Capybara.png';
 import { auth } from './firebase'; // Import auth from firebase.js
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import './input.css';
 
 function validateEmail(email) {
   const emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
