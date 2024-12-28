@@ -12,6 +12,7 @@
     "dotenv": "^16.4.7",
     "firebase": "^11.1.0",
     "fs": "^0.0.1-security",
+    "motion": "^11.15.0",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
     "react": "^19.0.0",

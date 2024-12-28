@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 
 function Navbar() {
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: '#D9D9D9', boxShadow: 'none', height: '101px', padding: '0' }}>
+    <AppBar position="static" sx={{ backgroundColor: '#D9D9D9', boxShadow: 'none', height: '101px', padding: '0' }}>
       <Toolbar
         sx={{
             height: '100%',

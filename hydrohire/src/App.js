@@ -45,7 +45,7 @@ function AppContent() {
   return (
     <>
       {/* Render Navbar only if the current route is not /login or /signup */}
-      {location.pathname !== '/login' && location.pathname !== '/signup' && <Navbar />}
+      {/* {location.pathname !== '/login' && location.pathname !== '/signup' && <Navbar />} */}
       
       <Routes>
         {/* Landing Home Page */}

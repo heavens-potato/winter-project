@@ -5,7 +5,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import capybaraLogo from './assets/img/Capybara.png';
 import { auth } from './firebase'; // Import auth from firebase.js
 import { signInWithEmailAndPassword } from 'firebase/auth';
-
+import { motion } from 'framer-motion';
 
 function validateEmail(email) {
   const emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
@@ -42,6 +42,12 @@ function Login() {
   return (
     <div className="bg-[#D9EAF5] min-h-screen flex items-center justify-center">
         <header className="flex flex-col items-center justify-center text-black text-[calc(10px+2vmin)] w-full max-w-4xl p-6">
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            layout
+          >
           <div className="bg-white w-90% p-6 rounded-2xl shadow-lg">
             <div className="flex items-center justify-between mb-6">
               {/* Left Half */}
@@ -135,6 +141,7 @@ function Login() {
             {/* Login Box End */}
             </Box>
           </div>
+          </motion.div>
         </header>
       </div>
   );
