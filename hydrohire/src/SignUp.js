@@ -40,12 +40,12 @@ function SignUp() {
     
     if(!checkPasswordStrength(password)) {
       console.log("dasdfasf");
-      setErrorMessage('Password Must Have At Least 1 Lowercase Letter, UpperCase Letter, Number, and Special Character');
+      setErrorMessage('Password must have at least 1 lowercase letter, uppercase letter, number, and special character');
       return;
     }
 
     if (password !== confirmPassword) {
-        setErrorMessage('Passwrods must match.');
+        setErrorMessage('Passwords must match.');
         return;
     }
 

@@ -15,7 +15,14 @@ function Navbar() {
         }}
       >
         {/* Title */}
-        <Typography variant="h6" sx={{ flexGrow: 1, color: '#000', fontSize: 38, padding: '1rem' }}>
+        <Typography 
+            variant="h6"
+            sx={{ 
+                flexGrow: 1, 
+                color: '#313541', 
+                fontSize: 36, 
+                fontWeight: 'bold', 
+                padding: '1rem', }}>
           hydroHire
         </Typography>
 
