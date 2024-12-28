@@ -11,15 +11,15 @@ function Landing() {
   const features = [
     {
       title: 'Feature 1',
-      description: 'Description of Feature 1',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
     },
     {
       title: 'Feature 2',
-      description: 'Description of Feature 2',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
     },
     {
       title: 'Feature 3',
-      description: 'Description of Feature 3',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
     },
   ];
 
@@ -103,7 +103,7 @@ function Landing() {
       </motion.div>
     </Box>
 
-    {/* three features section */}
+    {/* 3 Features */}
     <motion.div
       initial = {{ opacity: 0 }}
       whileInView={{ opacity: 1 }} 
@@ -122,6 +122,7 @@ function Landing() {
       {features.map((feature, index) => (
         <Grid item xs={12} sm={4} key={index} sx={{
           minWidth: { xs: 350, md: 600, lg: 350 },
+          maxWidth: 350,
           borderRadius: 25,
         }}>
           <motion.div
@@ -133,7 +134,7 @@ function Landing() {
           <Card>
             <CardContent>
               <Typography variant="h5" component="h2" sx={{
-                fontSize: 24,
+                fontSize: 32,
                 color: (theme) => theme.palette.primary.main,
                 justifyContent: 'center',
                 textAlign: 'center',
@@ -143,8 +144,10 @@ function Landing() {
                 {feature.title}
               </Typography>
               <Typography variant="body2" sx={{
+                fontSize: 18,
                 justifyContent: 'center',
                 textAlign: 'center',
+                wordWrap: 'break-word',
               }}>
                 {feature.description}
               </Typography>
