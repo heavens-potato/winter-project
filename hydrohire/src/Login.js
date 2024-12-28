@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './App.css';
+//import './App.css';
 import { TextField, Button, Typography, Box, Link, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import capybaraLogo from './assets/img/Capybara.png';
@@ -39,10 +39,10 @@ function Login() {
   }
 
   return (
-    <div className="Login">
-        <header className="Login-header">
+    <div className="text-center">
+        <header className="min-h-screen flex flex-col items-center justify-center text-black text-[calc(10px+2vmin)]">
           {/* Capybara Logo */}
-          <img src={capybaraLogo} className="App-logo" alt="logo" />
+          <img src={capybaraLogo} className="max-w-[40vw] h-auto pointer-events-none md:max-w-[35vmin]" alt="logo" />
 
           {/* Title */}
           <Typography variant="h3" gutterBottom>
@@ -53,6 +53,7 @@ function Login() {
           <Box 
             component="form" 
             onSubmit={handleSubmit}
+            className="font-poppins"
             sx={{ display:'flex', flexDirection:'column', gap:2, width:'350px', margin:'0 auto', }}
           >
 
