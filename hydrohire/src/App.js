@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material';
 import './output.css';
+import './input.css';
 import Navbar from './Navbar';
 import Landing from './Landing';
 import Login from './Login';
