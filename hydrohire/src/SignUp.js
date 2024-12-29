@@ -31,6 +31,7 @@ function SignUp() {
     const email = event.target.email.value;
     const password = event.target.password.value;
     const confirmPassword = event.target.confirmPassword.value;
+    const displayName = event.target.displayName.value;
 
     if(!validateEmail(email)) {
       setErrorMessage('Invalid Email');
@@ -98,7 +99,7 @@ function SignUp() {
                 sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '350px', margin: '0 auto' }}
             >
                 {/* Name Input */}
-                <TextField label="Name" type="text" variant="outlined" fullWidth name="name" placeholder="Name" required />
+                <TextField label="Display name" type="text" variant="outlined" fullWidth name="displayName" placeholder="Display name" required />
 
                 {/* Email Input */}
                 <TextField label="Email" type="email" variant="outlined" fullWidth name="email" placeholder="Email address" required />
