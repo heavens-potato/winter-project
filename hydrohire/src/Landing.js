@@ -26,7 +26,7 @@ function Landing() {
   return (
     <div>
     <Navbar />
-    <Box sx={{ display: 'flex', overflow: 'hidden', minHeight: '90vh', flexGrow: 1, position: 'relative', justifyContent: 'center', alignItems: 'center'}}>
+    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'column', lg: 'row '}, overflow: 'hidden', minHeight: '90vh', flexGrow: 1, position: 'relative', justifyContent: 'center', alignItems: 'center'}}>
       {/* Left Half */}
       <motion.div
         initial={{ x: -100, opacity: 0 }} 
@@ -39,6 +39,7 @@ function Landing() {
         </Grid>
       </motion.div>
       
+      {/* Right Half */}
       <motion.div
         initial={{ x: 100, opacity: 0}} 
         animate={{ x: 0, opacity: 1 }} 
@@ -48,7 +49,7 @@ function Landing() {
       <Grid container item xs={6} justifyContent="center" alignItems="center" sx={{ padding: 3 }}>
         <Box sx={{ width: '80%' }}>
           {/* Heading */}
-          <Typography variant="h3" sx={{ fontWeight: 'bold', textAlign: 'left' }}>
+          <Typography variant="h3"  sx={{ fontWeight: 'bold', textAlign: 'left' }}>
             Take charge of your job hunt with hydroHire
           </Typography>
 
@@ -58,20 +59,20 @@ function Landing() {
           </Typography>
 
           {/* Buttons */}
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: 3 }}>
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'column', lg: 'row '}, justifyContent: 'space-between', marginTop: 3, alignItems: 'center' }}>
             <motion.div
               initial={{ opacity: 0}} 
               animate={{ opacity: 1 }} 
               transition={{ duration: 0.3, delay: 0.6 }}
             >
               {/* Sign Up Button */}
-              <Link to="/signup" style={{ textDecoration: 'none', marginRight: 2 }}>
+              <Link to="/signup" style={{ textDecoration: 'none', marginRight: {xs: 0, md: 2, lg: 2} }}>
                 <Button 
                   variant="contained" 
                   sx={{ 
                       backgroundColor: (theme) => theme.palette.primary.light, 
                       color: (theme) => theme.palette.primary.white, 
-                      width: '292px', height: '72px', borderRadius: '10px', fontSize: 32 }}>
+                      width: '292px', height: '72px', borderRadius: {xs: '5px', md: '10px'} , fontSize: { xs: 20, md: 32 } }}>
                   Sign Up
                 </Button>
               </Link>
@@ -92,7 +93,7 @@ function Landing() {
                       color: (theme) => theme.palette.primary.light,
                       borderColor: (theme) => theme.palette.primary.light,
                       border: '4px solid',
-                      width: '292px', height: '72px', borderRadius: '10px', fontSize: 32 }}>
+                      width: '292px', height: '72px', borderRadius: '10px', fontSize: { xs: 20, md: 32 }, marginTop: {xs: 3, md: 0 } }}>
                   Log In
                 </Button>
               </Link>
