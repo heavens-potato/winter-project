@@ -48,7 +48,7 @@ function Login() {
             transition={{ duration: 0.5 }}
             layout
           >
-          <div className="bg-white w-90% p-6 rounded-2xl shadow-lg">
+          <div className="bg-white w-90% p-3 md:p-6 rounded-2xl shadow-lg">
             <div className="flex items-center justify-between mb-6">
               {/* Left Half */}
               <div className="flex flex-col justify-center flex-1">
