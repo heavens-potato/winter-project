@@ -78,7 +78,6 @@ function Landing() {
               </Link>
             </motion.div>
             
-
             {/* Login Button */}
             <motion.div
               initial={{ opacity: 0}} 

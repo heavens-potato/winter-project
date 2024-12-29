@@ -44,8 +44,8 @@ function SignUp() {
     }
 
     if (password !== confirmPassword) {
-        setErrorMessage('Passwords must match.');
-        return;
+      setErrorMessage('Passwords must match.');
+      return;
     }
 
     try {
