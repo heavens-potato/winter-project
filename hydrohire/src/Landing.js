@@ -59,7 +59,7 @@ function Landing() {
           </Typography>
 
           {/* Buttons */}
-          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'column', lg: 'row '}, justifyContent: 'space-between', marginTop: 3, alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row'}, justifyContent: 'space-evenly', marginTop: 3, alignItems: 'center' }}>
             <motion.div
               initial={{ opacity: 0}} 
               animate={{ opacity: 1 }} 
@@ -117,8 +117,8 @@ function Landing() {
           flexDirection: { xs: 'column', lg: 'row' },
           justifyContent: 'space-between', 
           alignItems: 'center', 
-          padding: { xs: 5 , md: 15 },
-          gap: 5
+          padding: { xs: 3 , md: 15 },
+          gap: {xs: 3, md: 5}
         }}>
       {features.map((feature, index) => (
         <Grid item xs={12} sm={4} key={index} sx={{
