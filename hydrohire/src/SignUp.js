@@ -97,6 +97,9 @@ function SignUp() {
                 onSubmit={handleSubmit}
                 sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '350px', margin: '0 auto' }}
             >
+                {/* Name Input */}
+                <TextField label="Name" type="text" variant="outlined" fullWidth name="name" placeholder="Name" required />
+
                 {/* Email Input */}
                 <TextField label="Email" type="email" variant="outlined" fullWidth name="email" placeholder="Email address" required />
 
