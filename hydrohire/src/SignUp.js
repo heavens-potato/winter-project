@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import { TextField, Button, Typography, Box, Link, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import capybaraLogo from './assets/img/Capybara.png';
-import { auth } from './firebase'; // Import auth from firebase.js
+import { auth, db } from './firebase'; // Import auth from firebase.js
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { motion } from 'framer-motion';
+import { doc, setDoc } from "firebase/firestore";
 
 function checkPasswordStrength(password) {
   const passwordRegex = new RegExp (/^(?=.*[@$!%*?&])(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d@$!%?&]{8,}$/);
@@ -31,7 +32,9 @@ function SignUp() {
     const email = event.target.email.value;
     const password = event.target.password.value;
     const confirmPassword = event.target.confirmPassword.value;
-    const displayName = event.target.displayName.value;
+    const displayInput = event.target.displayName.value;
+
+    
 
     if(!validateEmail(email)) {
       setErrorMessage('Invalid Email');
@@ -50,10 +53,14 @@ function SignUp() {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      const user = cred.user;
+      await setDoc(doc(db, "users", user.uid), {
+        displayName: displayInput,
+      });
       setErrorMessage("");
       setSuccessMessage("Hooray!");
-      console.log('Login Success!');
+      console.log('SignUp Success!');
     } catch (error) {
       setErrorMessage('Failed to login.');
       console.log('Failure');
