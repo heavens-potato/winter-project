@@ -35,7 +35,7 @@ function Landing() {
         layout
       >
         <Grid container item xs={6} justifyContent="center" alignItems="center">
-          <img src={capybaraLogo} alt="Capybara" style={{ width: '80%', height: 'auto' }} />
+          <img src={capybaraLogo} alt="Capybara" style={{ width: { sm: '30%', lg: '80%' }, height: 'auto' }} />
         </Grid>
       </motion.div>
       
@@ -121,9 +121,11 @@ function Landing() {
         }}>
       {features.map((feature, index) => (
         <Grid item xs={12} sm={4} key={index} sx={{
-          minWidth: { xs: 350, md: 600, lg: 350 },
-          maxWidth: 350,
-          borderRadius: 25,
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'column', lg: 'column', xl: 'row'},
+          minWidth: { xs: 350, md: 600, lg: 300 },
+          maxWidth: { lg: 330, xl: 400 },
+          // borderRadius: 25,
         }}>
           <motion.div
             initial={{ y: 100, opacity: 0 }}
@@ -132,14 +134,18 @@ function Landing() {
             transition = {{ duration: 0.3, delay: 0.3 }}
           >
           <Card>
-            <CardContent>
+            <CardContent
+              sx={{
+                padding: { xs: 1 , md: 1, lg: 3 },
+              }}
+            >
               <Typography variant="h5" component="h2" sx={{
                 fontSize: 32,
                 color: (theme) => theme.palette.primary.main,
                 justifyContent: 'center',
                 textAlign: 'center',
                 fontWeight: 'bold',
-                padding: { xs: 2, md: 3 }
+                padding: { xs: 2, lg: 3 }
                 }}>
                 {feature.title}
               </Typography>
