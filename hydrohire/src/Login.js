@@ -23,10 +23,10 @@ function Login() {
     event.preventDefault();
     
     const email = event.target.email.value;
-    const res = validateEmail(email); //check if email matches format
+    const res = validateEmail(email); // Check if email matches format
     const password = event.target.password.value;
 
-    if(res){ //case if email is valid
+    if(res){ // Case if email is valid
       try {
         await signInWithEmailAndPassword(auth, email, password);
         console.log('Login Success!');
@@ -34,7 +34,7 @@ function Login() {
         setErrorMessage('Failed to login.');
         console.log('Failure');
       }
-    } else { //case if email is invalid
+    } else { // Case if email is invalid
         setErrorMessage('Invalid Email');
     }
   }
