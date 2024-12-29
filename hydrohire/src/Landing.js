@@ -59,7 +59,7 @@ function Landing() {
           </Typography>
 
           {/* Buttons */}
-          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row'}, justifyContent: 'space-evenly', marginTop: 3, alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row'}, justifyContent: { md:'space-evenly', lg:'space-between'} , marginTop: 3, alignItems: 'center' }}>
             <motion.div
               initial={{ opacity: 0}} 
               animate={{ opacity: 1 }} 
