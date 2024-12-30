@@ -27,7 +27,7 @@ function Navbar() {
         </Typography>
 
         {/* Navigation Links */}
-        <Box sx={{ display: 'flex', gap: 4, padding: '1rem' }}>
+        <Box sx={{ display: 'flex', gap: 6, padding: '1rem' }}>
           <Button component={Link} to="/about" sx={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>
             About
           </Button>
