@@ -56,7 +56,7 @@ function Login() {
                   Welcome back!
                 </Typography>
                 <Typography variant="body2">
-                  Log in to HydroHire
+                  Log in to hydroHire
                 </Typography>
               </div>
 
