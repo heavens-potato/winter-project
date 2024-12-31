@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 import Landing from './Landing';
 import Login from './Login';
 import SignUp from './SignUp';
+import Dashboard from './Dashboard';
 
 const theme = createTheme({
   palette: {
@@ -54,6 +55,9 @@ function AppContent() {
         {/* Login & Sign Up Routes */}
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
+
+        {/* Dashboard */}
+        <Route path="/dashboard" element={<Dashboard />}></Route>
       </Routes>
     </>
   );
