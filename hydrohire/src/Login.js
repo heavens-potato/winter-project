@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-//import './App.css';
 import { TextField, Button, Typography, Box, Link, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import capybaraLogo from './assets/img/Capybara.png';
 import { auth } from './firebase'; // Import auth from firebase.js
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 function validateEmail(email) {
   const emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
@@ -13,9 +13,9 @@ function validateEmail(email) {
 }
 
 function Login() {
-
   const [showPassword, setShowPassword] = React.useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -30,6 +30,7 @@ function Login() {
       try {
         await signInWithEmailAndPassword(auth, email, password);
         console.log('Login Success!');
+        navigate('/dashboard');
       } catch (error) {
         setErrorMessage('Failed to login.');
         console.log('Failure');

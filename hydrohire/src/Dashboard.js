@@ -1,7 +1,9 @@
 import React from 'react';
-import { FormControl, InputLabel, Box, TextField, IconButton, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Select, MenuItem, useTheme, Typography } from '@mui/material';
-import Grid from '@mui/material/Grid2';
+import { Divider, Box, TextField, IconButton, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Select, MenuItem, useTheme, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Navbar from './Navbar';
 
 const columns = [
   { id: 'positionTitle', label: 'Position', width: 150 },
@@ -21,6 +23,7 @@ const columns = [
     style: { wordWrap: 'break-word', whiteSpace: 'normal' },
   },
   { id: 'status', label: 'Status', width: 150 },
+  { id: 'actions', label: 'Actions', width: 100 },
 ];
 
 // Sample data - delete once firestore collection is ready
@@ -37,9 +40,6 @@ function Dashboard() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [data, setData] = React.useState(rows);
   const [search, setSearch] = React.useState('');
-  const [statusFilter, setStatusFilter] = React.useState('');
-  const [dateFilter, setDateFilter] = React.useState('');
-  const [columnsFilter, setColumnsFilter] = React.useState([]);
 
   const theme = useTheme();
 
@@ -62,140 +62,167 @@ function Dashboard() {
     setSearch(event.target.value);
   };
 
-  const handleStatusFilterChange = (event) => setStatusFilter(event.target.value);
-  const handleDateChange = (event) => setDateFilter(event.target.value);
-  const handleColumnsChange = (event) => setColumnsFilter(event.target.value);
-
   return (
-    <Paper sx={{ width: 'calc(100% - 40px)', margin: '20px auto', padding: '10px', borderRadius: '8px' }}>
-      {/* Title */}
-      <Typography variant="h4" sx={{ marginBottom: '20px', fontSize: 28, fontWeight: 'bold' }}>
-        Job Application Tracker
-      </Typography>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
+        <Navbar />
+        <Paper sx={{ width: 'calc(100% - 40px)', margin: '20px auto', padding: '10px', borderRadius: '8px' }}>
+        {/* Application Overview */}
+        <Box sx={{ marginBottom: '30px' }}>
+          <Typography variant="h4" sx={{ fontSize: 28, fontWeight: 'bold', marginBottom: '10px' }}>
+            Application Overview
+          </Typography>
+          <Typography variant="body1" sx={{ fontSize: 16, color: theme.palette.text.secondary, marginBottom: '20px' }}>
+            Start adding applications to receive insightful visualizations about your job application process.
+          </Typography>
+          <Divider sx={{ width: '100%', margin: '0 auto' }} />
+        </Box>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        {/* Search Bar */}
-        <TextField
-          variant="outlined"
-          size="small"
-          placeholder="Search by position, company, or location"
-          value={search}
-          onChange={handleSearchChange}
-          sx={{ width: '50%', borderRadius: '40px', padding: '10px',
-            '& .MuiOutlinedInput-root': {
-              borderRadius: '20px',
-              paddingLeft: '12px',
-            }, }}
-          slotProps={{
-            input: {
-              startAdornment: (
-                <IconButton position="start">
-                  <SearchIcon />
-                </IconButton>
-              ),
-            },
-          }}
-        />
-        
-        {/* Add New Application Button */}
-        <Button 
-            variant="contained" 
-            color="primary" 
-            sx={{ 
-                marginLeft: '20px', 
-                fontSize: 18,
-                backgroundColor: (theme) => theme.palette.primary.main, 
-                  color: (theme) => theme.palette.primary.dark,  
-                  '&:hover': {
-                    backgroundColor: (theme) => theme.palette.primary.dark,
-                    color: (theme) => theme.palette.primary.white,  
-                  },
-                }}>
-          Add New Application
-        </Button>
-      </Box>
+        {/* Job Application Tracker */}
+        <Typography variant="h4" sx={{ marginBottom: '20px', fontSize: 28, fontWeight: 'bold' }}>
+            Job Application Tracker
+        </Typography>
 
-      {/* Table */}
-      <TableContainer>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  style={{ width: column.width, whiteSpace: 'nowrap', fontSize: 18, fontWeight: 'bold'
-                   }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => (
-                <TableRow 
-                    key={row.id}
-                    style={{
-                        backgroundColor: index % 2 === 0 
-                          ? theme.palette.primary.white 
-                          : theme.palette.secondary.light,
-                      }}
-                >
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell
-                        key={column.id}
-                        style={{
-                          fontSize: 16,
-                          width: column.width,
-                          ...(column.style || {}),
-                        }}
-                      >
-                        {column.id === 'status' ? (
-                          <Select
-                            value={value}
-                            onChange={(event) =>
-                              handleStatusChange(row.id, event.target.value)
-                            }
-                            size="small"
-                            sx={{
-                              minWidth: 130,
-                              borderRadius: '15px',
-                            }}
-                          >
-                            <MenuItem value="Saved">Saved</MenuItem>
-                            <MenuItem value="Applied">Applied</MenuItem>
-                            <MenuItem value="Screening">Screening</MenuItem>
-                            <MenuItem value="Interview">Interview</MenuItem>
-                            <MenuItem value="Offer">Offer</MenuItem>
-                            <MenuItem value="Rejected">Rejected</MenuItem>
-                          </Select>
-                        ) : column.format ? (
-                          column.format(value)
-                        ) : (
-                          value
-                        )}
-                      </TableCell>
-                    );
-                  })}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+            {/* Search Bar */}
+            <TextField
+            variant="outlined"
+            size="small"
+            placeholder="Search by position, company, or location"
+            value={search}
+            onChange={handleSearchChange}
+            sx={{ flexGrow: 1, borderRadius: '40px', padding: '10px',
+                '& .MuiOutlinedInput-root': {
+                borderRadius: '20px',
+                paddingLeft: '12px',
+                }, }}
+            slotProps={{
+                input: {
+                startAdornment: (
+                    <IconButton position="start">
+                    <SearchIcon />
+                    </IconButton>
+                ),
+                },
+            }}
+            />
+            
+            {/* Add New Application Button */}
+            <Button 
+                variant="contained" 
+                color="primary" 
+                sx={{ 
+                    marginLeft: '20px', 
+                    fontSize: 18,
+                    backgroundColor: (theme) => theme.palette.primary.main, 
+                    color: (theme) => theme.palette.primary.dark,  
+                    '&:hover': {
+                        backgroundColor: (theme) => theme.palette.primary.dark,
+                        color: (theme) => theme.palette.primary.white,  
+                    },
+                    }}>
+            Add New Application
+            </Button>
+        </Box>
+
+        {/* Table */}
+        <TableContainer>
+            <Table size="small">
+            <TableHead>
+                <TableRow>
+                {columns.map((column) => (
+                    <TableCell
+                    key={column.id}
+                    style={{ width: column.width, whiteSpace: 'nowrap', fontSize: 18, fontWeight: 'bold'
+                    }}
+                    >
+                    {column.label}
+                    </TableCell>
+                ))}
                 </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10]}
-        component="div"
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+            </TableHead>
+            <TableBody>
+                {data
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => (
+                    <TableRow 
+                        key={row.id}
+                        style={{
+                            backgroundColor: index % 2 === 0 
+                            ? theme.palette.primary.white 
+                            : theme.palette.secondary.light,
+                        }}
+                    >
+                    {columns.map((column) => {
+                        const value = row[column.id];
+                        return (
+                        <TableCell
+                            key={column.id}
+                            style={{
+                            fontSize: 16,
+                            width: column.width,
+                            ...(column.style || {}),
+                            }}
+                        >
+                            {column.id === 'actions' ? (
+                                <Box sx={{ display: 'flex', gap: '8px' }}>
+                                {/* Edit Icon */}
+                                <IconButton
+                                onClick={() => console.log(`Edit ${row.id}`)}
+                                sx={{ color: theme.palette.primary.dark }}
+                                >
+                                <EditIcon />
+                                </IconButton>
+                                {/* Delete Icon */}
+                                <IconButton
+                                onClick={() => console.log(`Delete ${row.id}`)}
+                                sx={{ color: theme.palette.primary.dark }}
+                                >
+                                <DeleteIcon />
+                                </IconButton>
+                            </Box>
+                            ) : column.id === 'status' ? (
+                            <Select
+                                value={value}
+                                onChange={(event) =>
+                                handleStatusChange(row.id, event.target.value)
+                                }
+                                size="small"
+                                sx={{
+                                minWidth: 130,
+                                borderRadius: '15px',
+                                }}
+                            >
+                                <MenuItem value="Saved">Saved</MenuItem>
+                                <MenuItem value="Applied">Applied</MenuItem>
+                                <MenuItem value="Screening">Screening</MenuItem>
+                                <MenuItem value="Interview">Interview</MenuItem>
+                                <MenuItem value="Offer">Offer</MenuItem>
+                                <MenuItem value="Rejected">Rejected</MenuItem>
+                            </Select>
+                            ) : column.format ? (
+                            column.format(value)
+                            ) : (
+                            value
+                            )}
+                        </TableCell>
+                        );
+                    })}
+                    </TableRow>
+                ))}
+            </TableBody>
+            </Table>
+        </TableContainer>
+        <TablePagination
+            rowsPerPageOptions={[5, 10]}
+            component="div"
+            count={data.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+        </Paper>
+    </Box>
   );
 }
 
