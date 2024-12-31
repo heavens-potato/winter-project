@@ -8,6 +8,7 @@
     "@mui/icons-material": "^6.3.0",
     "@mui/material": "^6.3.0",
     "@mui/system": "^6.3.0",
+    "@mui/x-data-grid": "^7.23.5",
     "cra-template": "1.2.0",
     "dotenv": "^16.4.7",
     "firebase": "^11.1.0",
