@@ -7,20 +7,18 @@ import { DataGrid } from '@mui/x-data-grid';
 import Navbar from './Navbar';
 
 const columns = [
-  { field: 'positionTitle', headerName: 'Position', width: 150 },
+  { field: 'positionTitle', headerName: 'Position', width: 175 },
   { field: 'companyName', headerName: 'Company', width: 150 },
   { field: 'location', headerName: 'Location', width: 150 },
   { 
     field: 'appDate', 
     headerName: 'App Date', 
-    width: 100, 
-    valueFormatter: (params) => new Date(params.value).toLocaleDateString('en-US') 
+    width: 150,
   },
   { 
     field: 'salary', 
     headerName: 'Salary', 
-    width: 120, 
-    valueFormatter: (params) => (params.value ? `$${params.value.toLocaleString('en-US')}` : 'N/A')
+    width: 150, 
   },
   { field: 'description', headerName: 'Description', width: 250, flex: 1 },
   { field: 'status', headerName: 'Status', width: 150, editable: true },
@@ -45,11 +43,11 @@ const columns = [
 
 // Sample data
 const rows = [
-  { id: '1', positionTitle: 'Software Engineer', companyName: 'Tech Corp', location: 'San Francisco, CA', appDate: '2024-01-15', salary: 120000, description: 'Excited about the role.', status: 'Applied' },
-  { id: '2', positionTitle: 'Data Analyst', companyName: 'Innovate LLC', location: 'New York, NY', appDate: '2024-01-20', salary: 90000, description: 'Scheduled for next week.', status: 'Interview' },
-  { id: '3', positionTitle: 'Product Manager', companyName: 'Buildit Inc.', location: 'Austin, TX', appDate: '2024-01-10', salary: 110000, description: 'Pending final decision.', status: 'Offer' },
-  { id: '4', positionTitle: 'UI/UX Designer', companyName: 'DesignPro', location: 'Seattle, WA', appDate: '2024-01-12', salary: 123480, description: 'Position filled.', status: 'Rejected' },
-  { id: '5', positionTitle: 'Backend Developer', companyName: 'CodeWorld', location: 'Boston, MA', appDate: '2024-01-18', salary: 95000, description: 'Submitted resume and cover letter.', status: 'Applied' },
+  { id: '1', positionTitle: 'Software Engineer', companyName: 'Tech Corp', location: 'San Francisco, CA', appDate: '2024-01-15', salary: '120000/yr', description: 'Excited about the role.', status: 'Applied' },
+  { id: '2', positionTitle: 'Data Analyst', companyName: 'Innovate LLC', location: 'New York, NY', appDate: '2024-01-20', salary: '90000/yr', description: 'Scheduled for next week.', status: 'Interview' },
+  { id: '3', positionTitle: 'Product Manager', companyName: 'Buildit Inc.', location: 'Austin, TX', appDate: '2024-01-10', salary: '110000/yr', description: 'Pending final decision.', status: 'Offer' },
+  { id: '4', positionTitle: 'UI/UX Designer', companyName: 'DesignPro', location: 'Seattle, WA', appDate: '2024-01-12', salary: '123480/yr', description: 'Position filled.', status: 'Rejected' },
+  { id: '5', positionTitle: 'Backend Developer', companyName: 'CodeWorld', location: 'Boston, MA', appDate: '2024-01-18', salary: '95000/yr', description: 'Submitted resume and cover letter.', status: 'Applied' },
 ];
 
 function Dashboard() {
@@ -100,18 +98,17 @@ function Dashboard() {
           {/* Add New Application Button */}
           <Button 
             variant="contained" 
-            color="primary" 
             sx={{ 
                 marginLeft: '20px', 
                 fontSize: 18,
-                backgroundColor: (theme) => theme.palette.primary.main, 
+                backgroundColor: (theme) => theme.palette.primary.light, 
                   color: (theme) => theme.palette.primary.dark,  
                   '&:hover': {
                     backgroundColor: (theme) => theme.palette.primary.dark,
                     color: (theme) => theme.palette.primary.white,  
                   },
                 }}>
-            Add New Application
+            + Add New Application
           </Button>
         </Box>
 
