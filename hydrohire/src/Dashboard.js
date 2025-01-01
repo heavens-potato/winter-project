@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, TextField, IconButton, Button, Paper, Divider, Select, MenuItem, Typography } from '@mui/material';
+import { Box, TextField, IconButton, Button, Paper, Divider, Select, MenuItem, Typography, useTheme } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -45,10 +45,20 @@ const rows = [
 function Dashboard() {
   const [pageSize, setPageSize] = React.useState(5);
   const [search, setSearch] = React.useState('');
+  const [status, setStatus] = React.useState('');
+  const [date, setDate] = React.useState('');
+  const [selectedColumns, setSelectedColumns] = React.useState(columns.map(col => col.field));
+  const theme = useTheme();
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
   };
+
+  const handleColumnsChange = (event) => {
+    setSelectedColumns(event.target.value);
+  };
+
+  const displayedColumns = columns.filter(column => selectedColumns.includes(column.field));
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -104,17 +114,88 @@ function Dashboard() {
           </Button>
         </Box>
 
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '20px', gap: 6 }}>
+            {/* Status Filter */}
+            <Select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                displayEmpty
+                size="small"
+                sx={{
+                    minWidth: 180,
+                    backgroundColor: 'white',
+                    borderRadius: '10px',
+                    height: '40px',
+                    '& .MuiSelect-select': { padding: '10px' },
+                }}
+            >
+                <MenuItem value="" disabled>Select Status</MenuItem>
+                <MenuItem value="Applied">Applied</MenuItem>
+                <MenuItem value="Screening">Screening</MenuItem>
+                <MenuItem value="Interview">Interview</MenuItem>
+                <MenuItem value="Offer">Offer</MenuItem>
+                <MenuItem value="Rejected">Rejected</MenuItem>
+            </Select>
+
+            {/* Date Filter */}
+            <TextField
+                variant="outlined"
+                size="small"
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                sx={{
+                    minWidth: 180,
+                    backgroundColor: 'white',
+                    borderRadius: '10px',
+                    height: '40px',
+                    '& .MuiOutlinedInput-root': {
+                        borderRadius: '10px',
+                    },
+                    '& .MuiOutlinedBase-root': {
+                        borderRadius: '10px',
+                    }
+                }}
+            />
+
+            {/* Columns Displayed */}
+            <Select
+                value={selectedColumns}
+                onChange={handleColumnsChange}
+                displayEmpty
+                multiple
+                size="small"
+                sx={{
+                    minWidth: 180,
+                    backgroundColor: 'white',
+                    borderRadius: '10px',
+                    height: '40px',
+                    '& .MuiSelect-select': { padding: '10px' },
+                }}
+            >
+                <MenuItem value="" disabled>Columns Displayed</MenuItem>
+                {columns
+                    .filter((column) => column.field !== 'actions')
+                    .map((column) => (
+                    <MenuItem key={column.field} value={column.field}>{column.headerName}</MenuItem>
+                ))}
+            </Select>
+        </Box>
+
         {/* DataGrid */}
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid
             rows={rows}
-            columns={columns}
+            columns={displayedColumns}
             pageSize={pageSize}
             onPageSizeChange={(newSize) => setPageSize(newSize)}
             disableSelectionOnClick
             rowsPerPageOptions={[5, 10, 20]}
             checkboxSelection={false}
             selectionModel={null}
+            getRowClassName={(params) =>
+                params.indexRelativeToCurrentPage % 2 === 0 ? `bg-${theme.palette.primary.white}` : `bg-[${theme.palette.secondary.light}]`
+            }
           />
         </div>
       </Paper>
