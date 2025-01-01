@@ -10,16 +10,8 @@ const columns = [
   { field: 'positionTitle', headerName: 'Position', width: 175 },
   { field: 'companyName', headerName: 'Company', width: 150 },
   { field: 'location', headerName: 'Location', width: 150 },
-  { 
-    field: 'appDate', 
-    headerName: 'App Date', 
-    width: 150,
-  },
-  { 
-    field: 'salary', 
-    headerName: 'Salary', 
-    width: 150, 
-  },
+  { field: 'appDate', headerName: 'App Date', width: 150 },
+  { field: 'salary', headerName: 'Salary', width: 150 },
   { field: 'description', headerName: 'Description', width: 250, flex: 1 },
   { field: 'status', headerName: 'Status', width: 150, editable: true },
   { 
