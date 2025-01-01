@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Typography, Box, Card, CardContent } from '@mui/material';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Grid from '@mui/material/Grid2';
 import capybaraLogo from './assets/img/Capybara.png';
 import Navbar from './Navbar';
@@ -31,7 +31,7 @@ function Landing() {
       <motion.div
         initial={{ x: -100, opacity: 0 }} 
         animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.3, type: 'spring', stiffness: 150, damping: 30 }}
+        transition={{ duration: 0.3, type: 'spring', stiffness: 150, damping: 15 }}
         layout
       >
         <Grid container item xs={6} justifyContent="center" alignItems="center">
@@ -43,7 +43,7 @@ function Landing() {
       <motion.div
         initial={{ x: 100, opacity: 0}} 
         animate={{ x: 0, opacity: 1 }} 
-        transition={{ duration: 0.3, delay: 0.3, type: 'spring', stiffness: 150, damping: 30 }}
+        transition={{ duration: 0.3, delay: 0.3, type: 'spring', stiffness: 150, damping: 15 }}
         layout
       >
       <Grid container item xs={6} justifyContent="center" alignItems="center" sx={{ padding: 3 }}>
@@ -63,7 +63,7 @@ function Landing() {
             <motion.div
               initial={{ opacity: 0}} 
               animate={{ opacity: 1 }} 
-              transition={{ duration: 0.3, delay: 0.6 }}
+              transition={{ duration: 0.3, delay: 0.8 }}
             >
               {/* Sign Up Button */}
               <Link to="/signup" style={{ textDecoration: 'none', marginRight: {xs: 0, md: 2, lg: 2} }}>
@@ -72,7 +72,8 @@ function Landing() {
                   sx={{ 
                       backgroundColor: (theme) => theme.palette.primary.light, 
                       color: (theme) => theme.palette.primary.white, 
-                      width: '292px', height: '72px', borderRadius: {xs: '5px', md: '10px'} , fontSize: { xs: 20, md: 32 } }}>
+                      width: '292px', height: '72px', borderRadius: {xs: '5px', md: '10px'} , fontSize: { xs: 20, md: 32 }
+                      }}>
                   Sign Up
                 </Button>
               </Link>
@@ -82,7 +83,7 @@ function Landing() {
             <motion.div
               initial={{ opacity: 0}} 
               animate={{ opacity: 1 }} 
-              transition={{ duration: 0.3, delay: 0.9 }}
+              transition={{ duration: 0.3, delay: 1.2 }}
             >
               <Link to="/login" style={{ textDecoration: 'none' }}>
                 <Button 
@@ -92,7 +93,8 @@ function Landing() {
                       color: (theme) => theme.palette.primary.light,
                       borderColor: (theme) => theme.palette.primary.light,
                       border: '4px solid',
-                      width: '292px', height: '72px', borderRadius: '10px', fontSize: { xs: 20, md: 32 }, marginTop: {xs: 3, md: 0 } }}>
+                      width: '292px', height: '72px', borderRadius: '10px', fontSize: { xs: 20, md: 32 }, marginTop: {xs: 3, md: 0 }
+                      }}>
                   Log In
                 </Button>
               </Link>
@@ -131,7 +133,7 @@ function Landing() {
             initial={{ y: 100, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }} 
             viewport={{ once: true }}
-            transition = {{ duration: 0.3, delay: 0.3 }}
+            transition = {{ duration: 0.3, delay: 0.3, }}
           >
           <Card>
             <CardContent
