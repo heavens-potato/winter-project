@@ -4,6 +4,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
+import { doc, setDoc, getDoc, onSnapshot } from "firebase/firestore";
+import { auth, db } from './firebase'; // Import auth from firebase.js
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Navbar from './Navbar';
 
 const columns = [
@@ -60,6 +63,24 @@ function Dashboard() {
 
   const displayedColumns = columns.filter(column => selectedColumns.includes(column.field));
 
+  const unsub = onSnapshot(doc(db, "cities", "SF"), (doc) => {
+    console.log("Current data: ", doc.data());
+});
+
+
+  const loadInfo = async (event) => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        onSnapshot(doc(db, "applications", uid), (doc) => {
+          console.log("Current data: ", doc.data());
+        });
+      } else {
+        console.log("No One Logged In!")
+      }
+    });
+  }
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Navbar />
@@ -99,6 +120,7 @@ function Dashboard() {
           />
           {/* Add New Application Button */}
           <Button 
+            // onClick = {loadInfo}
             variant="contained" 
             sx={{ 
                 marginLeft: '20px', 
