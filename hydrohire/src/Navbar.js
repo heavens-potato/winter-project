@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebase';
 import { useMediaQuery } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
@@ -18,6 +18,15 @@ function Navbar() {
   const handleMobileClick = () => {
     setShowResponsiveNav(!showResponsiveNav);
   };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      console.log('Logged out');
+    } catch (error) {
+      console.error('Error logging out:', error.message);
+    }
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -138,6 +147,26 @@ function Navbar() {
                 }}
               >
                 Dashboard
+              </Button>
+
+              {/* Logout Button */}
+              <Button
+                onClick={handleLogout}
+                sx={{
+                  color: 'white',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  backgroundColor: 'transparent',
+                  border: '3px solid black',
+                  borderRadius: '30px',
+                  padding: '0.5rem 1.5rem',
+                  '&:hover': {
+                    backgroundColor: 'white',
+                    color: 'black',
+                  },
+                }}
+              >
+                Logout
               </Button>
             </>
           ) : (
