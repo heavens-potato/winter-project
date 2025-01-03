@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Typography, Box, Card, CardContent } from '@mui/material';
 import { motion } from 'framer-motion';
 import Grid from '@mui/material/Grid2';
 import capybaraLogo from './assets/img/Capybara.png';
 import Navbar from './Navbar';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebase';
 
 function Landing() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const features = [
     {
@@ -66,7 +76,7 @@ function Landing() {
               transition={{ duration: 0.3, delay: 0.8 }}
             >
               {/* Sign Up Button */}
-              <Link to="/signup" style={{ textDecoration: 'none', marginRight: {xs: 0, md: 2, lg: 2} }}>
+              <Link to={isLoggedIn ? '/dashboard' : '/signup'} style={{ textDecoration: 'none', marginRight: {xs: 0, md: 2, lg: 2} }}>
                 <Button 
                   variant="contained" 
                   sx={{ 
@@ -85,7 +95,7 @@ function Landing() {
               animate={{ opacity: 1 }} 
               transition={{ duration: 0.3, delay: 1.2 }}
             >
-              <Link to="/login" style={{ textDecoration: 'none' }}>
+              <Link to={isLoggedIn ? '/dashboard' : '/login'} style={{ textDecoration: 'none' }}>
                 <Button 
                   variant="contained" 
                   sx={{ 
