@@ -227,8 +227,7 @@ function Dashboard() {
                         display: 'flex',
                         justifyContent: 'flex-end',
                         gap: 2, 
-                        padding: '30px', 
-                        paddingTop: '0px' 
+                        padding: '0 2rem 2rem 2rem'
                     }}
                 >
                     <Button onClick={handleDialogClose} 
