@@ -37,7 +37,7 @@ const columns = [
 ];
 
 // Sample data
-const rows = [
+let rows = [
   { id: '1', positionTitle: 'Software Engineer', companyName: 'Tech Corp', location: 'San Francisco, CA', appDate: '2024-01-15', salary: '120000/yr', description: 'Excited about the role.', status: 'Applied' },
   { id: '2', positionTitle: 'Data Analyst', companyName: 'Innovate LLC', location: 'New York, NY', appDate: '2024-01-20', salary: '90000/yr', description: 'Scheduled for next week.', status: 'Interview' },
   { id: '3', positionTitle: 'Product Manager', companyName: 'Buildit Inc.', location: 'Austin, TX', appDate: '2024-01-10', salary: '110000/yr', description: 'Pending final decision.', status: 'Offer' },
@@ -82,6 +82,26 @@ function Dashboard() {
               ...doc.data(),
             }));
             console.log(dataArray);
+            for(let i = 0; i < rows.length; i++) {
+              // rows.push(dataArray[i]);
+              if(i < dataArray.length){
+                rows[i].positionTitle = dataArray[i].jobTitle;
+                rows[i].appDate = dataArray[i].appDate;
+                rows[i].companyName = dataArray[i].companyName;
+                rows[i].location = dataArray[i].location;
+                rows[i].salary = dataArray[i].salary;
+                rows[i].description = dataArray[i].notes;
+                rows[i].status = dataArray[i].status;
+              } else {
+                rows[i].positionTitle = "";
+                rows[i].appDate = "";
+                rows[i].companyName = "";
+                rows[i].location = "";
+                rows[i].salary = 0;
+                rows[i].description = "";
+                rows[i].status = "";
+              }
+            }
           });
           return unsubscribe;
         } else {
