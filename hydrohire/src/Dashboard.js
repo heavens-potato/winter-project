@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Box, TextField, IconButton, Button, Paper, Divider, Select, MenuItem, Typography, useTheme } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
-import { doc, setDoc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, setDoc, getDoc, onSnapshot, collection } from "firebase/firestore";
 import { auth, db } from './firebase'; // Import auth from firebase.js
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Navbar from './Navbar';
@@ -67,23 +67,35 @@ function Dashboard() {
 
   const displayedColumns = columns.filter(column => selectedColumns.includes(column.field));
 
-  const unsub = onSnapshot(doc(db, "cities", "SF"), (doc) => {
-    console.log("Current data: ", doc.data());
-});
-
-
-  const loadInfo = async (event) => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
+  useEffect(() => {
+    const getData = async () =>{
+      try{
+        let user = auth.currentUser;
         const uid = user.uid;
-        onSnapshot(doc(db, "applications", uid), (doc) => {
-          console.log("Current data: ", doc.data());
-        });
-      } else {
-        console.log("No One Logged In!")
+        const parentDocRef = doc(db, 'applications', uid);
+        const docSnap = await getDoc(parentDocRef);
+        if (docSnap.exists()) {
+          const subCollectionRef = collection(docSnap.ref, 'apps');
+          const unsubscribe = onSnapshot(subCollectionRef, (querySnapshot) => {
+          const dataArray = querySnapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+            console.log(dataArray);
+          });
+          return unsubscribe;
+        } else {
+          console.log("No such document!");
+          return () => {}; // No-op unsubscribe
+        }
+      } catch(error) {
+        console.error("Error fetching data:");
+        return () => {}; // No-op unsubscribe
       }
-    });
-  }
+    };
+    getData();
+  });
+
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
