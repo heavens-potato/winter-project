@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebase';
@@ -14,6 +14,7 @@ function Navbar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [showResponsiveNav, setShowResponsiveNav] = useState(false);
+  const navigate = useNavigate();
 
   const handleMobileClick = () => {
     setShowResponsiveNav(!showResponsiveNav);
@@ -23,6 +24,9 @@ function Navbar() {
     try {
       await signOut(auth);
       console.log('Logged out');
+      if (window.location.pathname === '/dashboard') {
+        navigate('/');
+      }
     } catch (error) {
       console.error('Error logging out:', error.message);
     }
