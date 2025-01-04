@@ -103,7 +103,7 @@ function Landing() {
                       color: (theme) => theme.palette.primary.light,
                       borderColor: (theme) => theme.palette.primary.light,
                       border: '4px solid',
-                      width: '292px', height: '72px', borderRadius: '10px', fontSize: { xs: 20, md: 32 }, marginTop: {xs: 3, md: 0 }
+                      width: '292px', height: '72px', borderRadius: '10px', fontSize: { xs: 20, md: 32 }, 
                       }}>
                   Log In
                 </Button>
