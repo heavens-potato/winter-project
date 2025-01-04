@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebase';
 import { motion } from 'framer-motion';
+import { useMediaQuery } from '@mui/system';
+import { useTheme } from '@mui/material/styles';
+import MenuIcon from '@mui/icons-material/Menu';
+import CancelIcon from '@mui/icons-material/Cancel';
+import PaletteIcon from '@mui/icons-material/Palette';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 function ResponsiveNav() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -17,6 +25,18 @@ function ResponsiveNav() {
       }); 
       return () => unsubscribe();
     }, []);
+
+    const handleLogout = async () => {
+        try {
+          await signOut(auth);
+          console.log('Logged out');
+          if (window.location.pathname === '/dashboard') {
+            navigate('/');
+          }
+        } catch (error) {
+          console.error('Error logging out:', error.message);
+        }
+    }
 
     return (
     <motion.div 
@@ -75,6 +95,26 @@ function ResponsiveNav() {
                 }}
                 >
                 Dashboard
+                </Button>
+
+                {/* Logout Button */}
+                <Button
+                    onClick={handleLogout}
+                    sx={{
+                        color: 'white',
+                        fontSize: '20px',
+                        fontWeight: 'bold',
+                        backgroundColor: 'transparent',
+                        border: '3px solid black',
+                        borderRadius: '30px',
+                        padding: '0.5rem 1.5rem',
+                        '&:hover': {
+                            backgroundColor: 'white',
+                            color: 'black',
+                        },
+                    }}
+                >
+                    Logout
                 </Button>
             </>
             ) : (
