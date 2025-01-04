@@ -14,7 +14,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [showResponsiveNav, setShowResponsiveNav] = useState(false);
   const [openProfilePopup, setOpenProfilePopup] = useState(false);
   const navigate = useNavigate();
@@ -76,8 +76,6 @@ function Navbar() {
                 padding: '1rem', }}>
           hydroHire
         </Typography>
-
-
               
         {isMobile ? (
           //if the screen is of mobile width, render the hambuurger icon
