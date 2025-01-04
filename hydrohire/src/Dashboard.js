@@ -55,10 +55,18 @@ function Dashboard() {
   const theme = useTheme();
 
   const handleDialogOpen = () => setOpenDialog(true);
-  const handleDialogClose = () => setOpenDialog(false);
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  }
+
+  const handleSubmit = (event) => {
+    console.log("Add works!");
+    setOpenDialog(false);
+  }
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
+    console.log(event.target);
   };
 
   const handleColumnsChange = (event) => {
@@ -172,18 +180,21 @@ function Dashboard() {
           </Button>
 
           {/* Add Application Popup */}
+        <form
+          onSubmit={handleSubmit}
+          >
+
           <Dialog 
             open={openDialog} 
-            onClose={handleDialogClose} 
             maxWidth="md" 
             fullWidth
             PaperProps={{
                 sx: {
-                    borderRadius: '20px',
-                    overflow: 'hidden',
+                  borderRadius: '20px',
+                  overflow: 'hidden',
                 }
-            }}
-           > 
+              }}
+              > 
             <DialogTitle sx={{ fontSize: 28, fontWeight: 'bold'}}>Add New Job</DialogTitle>
                 <DialogContent sx={{ borderRadius: '20px' }}>
                     <Box
@@ -208,7 +219,7 @@ function Dashboard() {
                             variant="outlined"
                             required
                             sx={{ backgroundColor: 'white' }}
-                        >
+                            >
                             <MenuItem value="" disabled>Resume Uploaded</MenuItem>
                             <MenuItem value="Default">Default</MenuItem>
                             <MenuItem value="Version 1">Version 1</MenuItem>
@@ -222,7 +233,7 @@ function Dashboard() {
                             variant="outlined"
                             required
                             sx={{ backgroundColor: 'white' }}
-                        >
+                            >
                             <MenuItem value="" disabled>Status</MenuItem>
                             <MenuItem value="Applied">Applied</MenuItem>
                             <MenuItem value="Interview">Interview</MenuItem>
@@ -236,7 +247,7 @@ function Dashboard() {
                             variant="outlined"
                             required
                             sx={{ backgroundColor: 'white' }}
-                        >
+                            >
                             <MenuItem value="" disabled>Cover Letter</MenuItem>
                             <MenuItem value="None">None</MenuItem>
                             <MenuItem value="Version 1">Version 1</MenuItem>
@@ -250,49 +261,50 @@ function Dashboard() {
                                 multiline
                                 rows={4}
                                 variant="outlined"
-                            />
+                                />
                         </Box>
                     </Box>
                 </DialogContent>
                 <DialogActions 
                     sx={{ 
-                        display: 'flex',
+                      display: 'flex',
                         justifyContent: 'flex-end',
                         gap: 2, 
                         padding: '0 2rem 2rem 2rem'
-                    }}
+                      }}
                 >
                     <Button onClick={handleDialogClose} 
                         variant="outlined"
                         sx={{ 
-                            fontSize: 18,
+                          fontSize: 18,
                             borderColor: (theme) => theme.palette.primary.main, 
                             color: (theme) => theme.palette.primary.main, 
                             '&:hover': {
-                                backgroundColor: (theme) => theme.palette.secondary.main,
-                                color: 'black',
+                              backgroundColor: (theme) => theme.palette.secondary.main,
+                              color: 'black',
                             }
-                        }}
+                          }}
                     >
                             Cancel
                     </Button>
-                    <Button 
-                        onClick={handleDialogClose} 
+                    <Button
+                        type="submit" 
                         variant="contained" 
                         sx={{ 
-                            fontSize: 18,
-                            backgroundColor: (theme) => theme.palette.primary.light, 
-                              color: (theme) => theme.palette.primary.dark,  
-                              '&:hover': {
-                                backgroundColor: (theme) => theme.palette.primary.dark,
-                                color: (theme) => theme.palette.primary.white,  
-                              },
+                          fontSize: 18,
+                          backgroundColor: (theme) => theme.palette.primary.light, 
+                          color: (theme) => theme.palette.primary.dark,  
+                          '&:hover': {
+                            backgroundColor: (theme) => theme.palette.primary.dark,
+                            color: (theme) => theme.palette.primary.white,  
+                          },
                             }}
-                    >
+                            >
                             Add
                     </Button>
                 </DialogActions>
             </Dialog>
+          </form>
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '20px', gap: 6 }}>
