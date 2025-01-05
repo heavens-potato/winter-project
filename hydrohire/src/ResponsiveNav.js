@@ -4,17 +4,21 @@ import { TextField, Dialog, DialogTitle, DialogContent, IconButton, AppBar, Tool
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebase';
 import { motion } from 'framer-motion';
-import { useMediaQuery } from '@mui/system';
-import { useTheme } from '@mui/material/styles';
-import MenuIcon from '@mui/icons-material/Menu';
-import CancelIcon from '@mui/icons-material/Cancel';
-import PaletteIcon from '@mui/icons-material/Palette';
-import SettingsIcon from '@mui/icons-material/Settings';
+import ProfilePop from './ProfilePop';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-function ResponsiveNav() {
+function ResponsiveNav({ onClose }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
     const [openProfilePopup, setOpenProfilePopup] = useState(false);
+
+    const openProfilePop = () => {
+        setOpenProfilePopup(true);
+    };
+
+    const closeProfilePop = () => {
+        setOpenProfilePopup(false);
+    }
 
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -39,24 +43,16 @@ function ResponsiveNav() {
         }
     }
 
-    const handleProfileClick = () => {
-        setOpenProfilePopup(true);
-    }
-
-
-    const handleClosePopup = () => {
-        setOpenProfilePopup(false);
-    } 
-
     return (
     <motion.div 
-        className="bg-[#FFB165] h-screen w-3/4 z-50 absolute right-0"
+        className="bg-[#FFB165] h-screen w-3/5 z-50 absolute right-0"
         initial = {{ x:100 }}
         animate = {{ x: 0 }}
         exit = {{ x: 100 }}
         transition = {{ duration: 0.3 }}
     > 
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 6, padding: '1rem', paddingTop: '6rem'}}>
+            <HighlightOffIcon onClick={ onClose } sx={{ position: 'absolute' , top: '1.5rem', right: '1.5rem', cursor: 'pointer' }} />
             <Button component={Link} to="/about" sx={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>
             About
             </Button>
@@ -67,7 +63,7 @@ function ResponsiveNav() {
             <>
                 {/* My Profile Button */}
                 <Button
-                onClick={handleProfileClick}
+                onClick={ openProfilePop }
                 sx={{
                     color: 'black',
                     fontSize: '20px',
@@ -84,6 +80,29 @@ function ResponsiveNav() {
                 >
                 My Profile
                 </Button>
+
+
+
+                {/* ADD CLOSE BUTTON FOR PROFILE POP UP */}
+
+
+
+                {openProfilePopup && (
+                <div 
+                    style={{ 
+                        position: 'fixed', 
+                        top: 0, 
+                        left: 0, 
+                        width: '100%',  
+                        height: '100%', 
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+                        zIndex: 999999,
+                    }} 
+                >
+                    <ProfilePop onClose= { closeProfilePop }/> 
+                </div>
+                )}
+
 
                 {/* Dashboard Button */}
                 <Button
@@ -171,95 +190,7 @@ function ResponsiveNav() {
                 </Button>
             </>
             )}
-
-    {/* Profile Popup Dialog */}
-      <Dialog 
-        open={openProfilePopup} 
-        onClose={handleClosePopup} 
-        maxWidth="md" 
-        fullWidth
-        PaperProps={{
-          sx: {
-            borderRadius: '20px',
-             overflow: 'hidden',
-          }
-        }}
-      >
-        <DialogTitle 
-          sx={{ backgroundColor: (theme) => theme.palette.primary.light, 
-          color: 'white', 
-          fontSize: 28, 
-          fontWeight: 'bold',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '1rem 2rem 1rem 2rem'
-          }}
-        >
-          My Profile
-          <IconButton
-            size="large" 
-            edge="end"
-            color="inherit"
-            onClick={handleClosePopup}
-            sx={{ fontSize: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          >
-            <CancelIcon sx={{ fontSize: 'inherit' }} />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent sx={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '1rem', width: '100%' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1.5rem' }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-                <SettingsIcon sx={{ fontSize: '2rem' }} />
-                <Typography sx={{ fontSize: 28, fontWeight: 600 }}>Edit Profile</Typography>
-              </Box>
-                <TextField label="Display Name" type="text" variant="outlined" fullWidth name="displayName" placeholder="Display name" required />
-                <TextField label="Email" type="email" variant="outlined" fullWidth name="email" placeholder="Email address" required />
-                <Button
-                  variant="contained"
-                  type="submit"
-                  fullWidth
-                  sx={{
-                      fontSize: 24,
-                      backgroundColor: (theme) => theme.palette.primary.main, 
-                      color: (theme) => theme.palette.primary.dark,  
-                      '&:hover': {
-                      backgroundColor: (theme) => theme.palette.primary.dark,
-                      color: (theme) => theme.palette.primary.white,  
-                      },
-                  }}
-                  >
-                  Save
-                </Button>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  fullWidth
-                  sx={{
-                      fontSize: 24,
-                      backgroundColor: (theme) => theme.palette.primary.dark,
-                      color: (theme) => theme.palette.primary.white,  
-                      '&:hover': {
-                      backgroundColor: (theme) => theme.palette.primary.main, 
-                      color: (theme) => theme.palette.primary.dark, 
-                      },
-                  }}
-                  >
-                  Change Password
-                </Button>
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-                <PaletteIcon sx={{ fontSize: '2rem' }} />
-                <Typography sx={{ fontSize: 28, fontWeight: 600 }}>Theme Color</Typography>
-            </Box>
-          </Box>
-        </DialogContent>
-      </Dialog>
-        
     </Box>
-    
-
     </motion.div>
     )
 }
