@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { createTheme, ThemeProvider } from '@mui/material';
 import './output.css';
 import './input.css';
-import Navbar from './Navbar';
 import Landing from './Landing';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -44,10 +43,7 @@ function AppContent() {
   const location = useLocation();
 
   return (
-    <>
-      {/* Render Navbar only if the current route is not /login or /signup */}
-      {/* {location.pathname !== '/login' && location.pathname !== '/signup' && <Navbar />} */}
-      
+    <>      
       <Routes>
         {/* Landing Home Page */}
         <Route path="/" element={<Landing />}></Route>

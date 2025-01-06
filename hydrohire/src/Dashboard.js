@@ -25,7 +25,7 @@ const columns = [
     renderCell: (params) => (
       <Box sx={{ display: 'flex', gap: '8px' }}>
         {/* Edit Icon */}
-        <IconButton onClick={() => console.log(`Edit ${params.id}`)}>
+        <IconButton onClick={() => params.row.handleEditClick(params.row)}>
           <EditIcon />
         </IconButton>
         {/* Delete Icon */}
@@ -52,15 +52,29 @@ function Dashboard() {
   const [status, setStatus] = React.useState('');
   const [date, setDate] = React.useState('');
   const [selectedColumns, setSelectedColumns] = React.useState(columns.map(col => col.field));
+  const [selectedApp, setSelectedApp] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [rows, setRows] = useState([]);
   const theme = useTheme();
 
   const handleDialogOpen = () => setOpenDialog(true);
+
+  const handleEditClick = (appData) => {
+    setSelectedApp(appData);
+    setOpenDialog(true);
+  }
+
   const handleDialogClose = () => {
+    setSelectedApp(null);
     setOpenDialog(false);
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event, updatedAppData) => {
+    if (selectedApp) {
+        setRows(rows.map(row => row.id === selectedApp.id ? { ...row, ...updatedAppData } : row ));
+    } else {
+        setRows(prevRows => [...prevRows, { id: Date.now().toString(), ...updatedAppData }]);
+    }
     console.log("Add works!");
     setOpenDialog(false);
   }
@@ -89,7 +103,9 @@ function Dashboard() {
           const dataArray = querySnapshot.docs.map((doc) => ({
               id: doc.id,
               ...doc.data(),
+              handleEditClick: handleEditClick,
             }));
+            setRows(dataArray);
             console.log(dataArray);
             for(let i = 0; i < rows.length; i++) {
               // rows.push(dataArray[i]);
@@ -123,8 +139,7 @@ function Dashboard() {
       }
     };
     getData();
-  });
-
+  }, []);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -165,7 +180,7 @@ function Dashboard() {
           />
           {/* Add New Application Button */}
           <Button 
-            onClick = {handleDialogOpen}
+            onClick={handleDialogOpen}
             variant="contained" 
             sx={{ 
                 marginLeft: '20px', 
@@ -187,6 +202,7 @@ function Dashboard() {
             handleSubmit={handleSubmit}
             title="Add New Job"
             actionButton="Add"
+            appData={selectedApp}
           />
         </Box>
 
