@@ -39,11 +39,11 @@ function ProfilePop( { onClose } ) {
         className="flex items-center justify-center h-screen w-screen overflow-scroll"
         >
           <div className="flex flex-col items-center justify-center w-screen">
-            <div className="flex flex-row justify-between items-center bg-[#FFB165] p-10 rounded-t-lg w-4/5">
+            <div className="flex flex-row justify-between items-center bg-[#FFB165] p-10 rounded-t-lg w-4/5 md:w-3/5">
                 <h1 className="text-4xl font-bold">My Profile</h1>
                 <HighlightOffIcon onClick={ onClose } sx={{ cursor: 'pointer' }}/>
             </div>
-            <div className="flex flex-col md:flex-row justify-between bg-white pl-5 md:pl-10 pr-5 md:pr-10 rounded-b-lg w-4/5">
+            <div className="flex flex-col md:flex-row justify-between bg-white pl-5 md:pl-10 pr-5 md:pr-10 rounded-b-lg w-4/5 md:w-3/5">
               <div className="flex flex-col mt-10 w-full md:w-1/2">
                 <div className="flex flex-row gap-5 items-center">
                   <SettingsIcon />
@@ -208,12 +208,12 @@ function ProfilePop( { onClose } ) {
                   </AccordionDetails>
                 </Accordion>
               </div>
-              <div>
+              {/* <div>
                 <div className="flex flex-row gap-5 mt-10 items-center w-full">
                   <PaletteIcon />
                   <h3 className="text-3xl font-bold">Theme Color</h3>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </motion.div>
