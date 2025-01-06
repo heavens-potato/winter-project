@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Box, TextField, IconButton, Button, Paper, Divider, Select, MenuItem, Typography, useTheme } from '@mui/material';
+import { Box, TextField, IconButton, Button, Paper, Divider, Select, MenuItem, Typography, useTheme } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -8,6 +8,7 @@ import { doc, setDoc, getDoc, onSnapshot, collection } from "firebase/firestore"
 import { auth, db } from './firebase'; // Import auth from firebase.js
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Navbar from './Navbar';
+import ApplicationPopup from './ApplicationPopup';
 
 const columns = [
   { field: 'positionTitle', headerName: 'Position', width: 175 },
@@ -180,131 +181,13 @@ function Dashboard() {
           </Button>
 
           {/* Add Application Popup */}
-        <form
-          onSubmit={handleSubmit}
-          >
-
-          <Dialog 
-            open={openDialog} 
-            maxWidth="md" 
-            fullWidth
-            PaperProps={{
-                sx: {
-                  borderRadius: '20px',
-                  overflow: 'hidden',
-                }
-              }}
-              > 
-            <DialogTitle sx={{ fontSize: 28, fontWeight: 'bold'}}>Add New Job</DialogTitle>
-                <DialogContent sx={{ borderRadius: '20px' }}>
-                    <Box
-                        sx={{
-                        display: 'grid',
-                        gridTemplateColumns: '1fr 1fr',
-                        alignItems: 'center',
-                        flexDirection: 'column',
-                        gap: 2,
-                        padding: 2,
-                        }}
-                    >
-                        <TextField label="Position Title" fullWidth variant="outlined" required />
-                        <TextField label="Company Name" fullWidth variant="outlined" required />
-                        <TextField label="Location" fullWidth variant="outlined" />
-                        <TextField label="Application Date" type="date" fullWidth variant="outlined" InputLabelProps={{ shrink: true }} />
-                        <TextField label="Salary" fullWidth variant="outlined" />
-                        <Select
-                            defaultValue=""
-                            fullWidth
-                            displayEmpty
-                            variant="outlined"
-                            required
-                            sx={{ backgroundColor: 'white' }}
-                            >
-                            <MenuItem value="" disabled>Resume Uploaded</MenuItem>
-                            <MenuItem value="Default">Default</MenuItem>
-                            <MenuItem value="Version 1">Version 1</MenuItem>
-                            <MenuItem value="Version 2">Version 2</MenuItem>
-                            <MenuItem value="Version 3">Version 3</MenuItem>
-                        </Select>
-                        <Select
-                            defaultValue=""
-                            fullWidth
-                            displayEmpty
-                            variant="outlined"
-                            required
-                            sx={{ backgroundColor: 'white' }}
-                            >
-                            <MenuItem value="" disabled>Status</MenuItem>
-                            <MenuItem value="Applied">Applied</MenuItem>
-                            <MenuItem value="Interview">Interview</MenuItem>
-                            <MenuItem value="Offer">Offer</MenuItem>
-                            <MenuItem value="Rejected">Rejected</MenuItem>
-                        </Select>
-                        <Select
-                            defaultValue=""
-                            fullWidth
-                            displayEmpty
-                            variant="outlined"
-                            required
-                            sx={{ backgroundColor: 'white' }}
-                            >
-                            <MenuItem value="" disabled>Cover Letter</MenuItem>
-                            <MenuItem value="None">None</MenuItem>
-                            <MenuItem value="Version 1">Version 1</MenuItem>
-                            <MenuItem value="Version 2">Version 2</MenuItem>
-                            <MenuItem value="Version 3">Version 3</MenuItem>
-                        </Select>
-                        <Box sx={{ gridColumn: 'span 2' }}>
-                            <TextField
-                                label="Description"
-                                fullWidth
-                                multiline
-                                rows={4}
-                                variant="outlined"
-                                />
-                        </Box>
-                    </Box>
-                </DialogContent>
-                <DialogActions 
-                    sx={{ 
-                      display: 'flex',
-                        justifyContent: 'flex-end',
-                        gap: 2, 
-                        padding: '0 2rem 2rem 2rem'
-                      }}
-                >
-                    <Button onClick={handleDialogClose} 
-                        variant="outlined"
-                        sx={{ 
-                          fontSize: 18,
-                            borderColor: (theme) => theme.palette.primary.main, 
-                            color: (theme) => theme.palette.primary.main, 
-                            '&:hover': {
-                              backgroundColor: (theme) => theme.palette.secondary.main,
-                              color: 'black',
-                            }
-                          }}
-                    >
-                            Cancel
-                    </Button>
-                    <Button
-                        type="submit" 
-                        variant="contained" 
-                        sx={{ 
-                          fontSize: 18,
-                          backgroundColor: (theme) => theme.palette.primary.light, 
-                          color: (theme) => theme.palette.primary.dark,  
-                          '&:hover': {
-                            backgroundColor: (theme) => theme.palette.primary.dark,
-                            color: (theme) => theme.palette.primary.white,  
-                          },
-                            }}
-                            >
-                            Add
-                    </Button>
-                </DialogActions>
-            </Dialog>
-          </form>
+          <ApplicationPopup
+            open={openDialog}
+            handleClose={handleDialogClose}
+            handleSubmit={handleSubmit}
+            title="Add New Job"
+            actionButton="Add"
+          />
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '20px', gap: 6 }}>
