@@ -151,12 +151,6 @@ function Navbar() {
                 My Profile
               </Button>
 
-
-
-              {/* ADD CLOSE BUTTON FOR PROFILE POP UP */}
-
-
-
               {openProfilePopup && (
                 <div 
                     style={{ 
