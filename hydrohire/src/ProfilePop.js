@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TextField, Dialog, DialogTitle, DialogContent, IconButton, AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { TextField, Dialog, DialogTitle, DialogContent, IconButton, AppBar, Toolbar, Typography, Button, Box, InputLabel, OutlinedInput, InputAdornment, FormControl } from '@mui/material';
 import PaletteIcon from '@mui/icons-material/Palette';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
@@ -8,8 +8,29 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+
+function checkPasswordStrength(password) {
+  const passwordRegex = new RegExp (/^(?=.*[@$!%*?&])(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d@$!%?&]{8,}$/);
+  return passwordRegex.test(password);
+}
+
+function validateEmail(email) {
+  const emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+  return emailRegex.test(email);
+}
 
 function ProfilePop( { onClose } ) {
+    const [showPassword, setShowPassword] = React.useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
+
+      const handleSubmit = async (event) => {
+        
+      }
 
     return (
         <motion.div 
@@ -65,13 +86,125 @@ function ProfilePop( { onClose } ) {
                   >
                     <Typography>Change Password</Typography>
                   </AccordionSummary>
-                  <AccordionDetails sx={{
-                    width: '350px',
-                  }}>
-                    <Typography>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                      sit amet blandit leo lobortis eget.
-                    </Typography>
+                  <AccordionDetails sx={{ paddingBottom: 5 }}>
+                  <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 0, width: '350px', margin: '0 auto' }}
+                  >
+
+                    {/* Old Password Input */}
+                    <h4 className="text-xl font-bold mt-4 mb-2">Old Password</h4>
+                    <FormControl variant="outlined" fullWidth >
+                    <InputLabel htmlFor="outlined-adornment-password">Old Password</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? 'text' : 'password'}
+                        name="oldPassword"
+                        endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                            aria-label={
+                                showPassword ? 'hide password' : 'display password'
+                            }
+                            onClick={handleClickShowPassword}
+                            edge="end"
+                            >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                        }
+                        label="Old Password"
+                    />
+                    </FormControl>
+
+
+                    {/* New Password Input */}
+                    <h4 className="text-xl font-bold mt-4 mb-2">New Password</h4>
+                    <FormControl variant="outlined" fullWidth required>
+                    <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? 'text' : 'password'}
+                        name="newPassword"
+                        endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                            aria-label={
+                                showPassword ? 'hide password' : 'display password'
+                            }
+                            onClick={handleClickShowPassword}
+                            edge="end"
+                            >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                        }
+                        label="New Password"
+                    />
+                    </FormControl>
+
+                    {/* Confirm New Password Input */}
+                    <h4 className="text-xl font-bold mt-4 mb-2">Confirm New Password</h4>
+                    <FormControl variant="outlined" fullWidth required>
+                    <InputLabel htmlFor="outlined-adornment-confirm-password">Confirm New Password</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-confirm-password"
+                        type={showConfirmPassword ? 'text' : 'password'}
+                        name="confirmNewPassword"
+                        placeholder="Passwords must match"
+                        endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                            aria-label={
+                                showConfirmPassword ? 'hide password' : 'display password'
+                            }
+                            onClick={handleClickShowConfirmPassword}
+                            edge="end"
+                            >
+                            {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                        }
+                        label="Confirm New Password"
+                      />
+                    </FormControl>
+
+
+                    {/* Update Button */}
+                    <Button
+                    variant="contained"
+                    type="submit"
+                    fullWidth
+                    sx={{
+                        fontSize: 20,
+                        backgroundColor: (theme) => theme.palette.primary.main, 
+                        color: (theme) => theme.palette.primary.white,  
+                        '&:hover': {
+                          backgroundColor: (theme) => theme.palette.primary.dark,
+                          color: (theme) => theme.palette.primary.white,  
+
+                        },
+                        marginTop: 4,
+                        marginBottom: 4,
+                        borderRadius: 2,
+                    }}
+                    >
+                    UPDATE PASSWORD
+                  </Button>
+ 
+                  {/* Error & Success Message Display */}
+                    {errorMessage && (
+                    <Typography color="error" align="center">
+                        {errorMessage}
+                      </Typography>
+                    )}
+                    {successMessage && (
+                      <Typography color="success.main" align="center">
+                        {successMessage}
+                      </Typography>
+                    )}             
+                  </Box>      
                   </AccordionDetails>
                 </Accordion>
               </div>

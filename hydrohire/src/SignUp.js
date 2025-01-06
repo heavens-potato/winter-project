@@ -35,7 +35,6 @@ function SignUp() {
     const displayInput = event.target.displayName.value;
 
     
-
     if(!validateEmail(email)) {
       setErrorMessage('Invalid Email');
       return;
