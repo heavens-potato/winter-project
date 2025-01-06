@@ -4,9 +4,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
-import { doc, setDoc, getDoc, onSnapshot, collection } from "firebase/firestore";
+import { doc, setDoc, getDoc, onSnapshot, collection, addDoc } from "firebase/firestore";
 import { auth, db } from './firebase'; // Import auth from firebase.js
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Navbar from './Navbar';
 import ApplicationPopup from './ApplicationPopup';
 
@@ -75,6 +74,32 @@ function Dashboard() {
     } else {
         setRows(prevRows => [...prevRows, { id: Date.now().toString(), ...updatedAppData }]);
     }
+    const addData = async () =>{
+      try{
+        let user = auth.currentUser;
+        const uid = user.uid;
+        let parentDocRef = doc(db, 'applications', uid);
+        let docSnap = await getDoc(parentDocRef);
+        if (!docSnap.exists()) {
+          await setDoc(doc(db, "applications", uid), {});
+          parentDocRef = doc(db, 'applications', uid);
+          docSnap = await getDoc(parentDocRef);
+        }
+          const subCollectionRef = collection(docSnap.ref, 'apps');
+          await addDoc(subCollectionRef, {
+            jobTitle: updatedAppData.positionTitle,
+            companyName: updatedAppData.companyName,
+            location: updatedAppData.location,
+            appDate: updatedAppData.appDate,
+            salary: updatedAppData.salary,
+            status: updatedAppData.status,
+            notes: updatedAppData.description,
+          })
+        } catch(error) {
+            console.error("Error Adding Doc from Popup:");
+        }
+    };
+    addData();            
     console.log("Add works!");
     setOpenDialog(false);
   }
