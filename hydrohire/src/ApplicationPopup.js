@@ -143,22 +143,6 @@ const ApplicationPopup = ({
                         onChange={handleInputChange}
                     />
                     <Select
-                        value={formData.resumeVersion}
-                        fullWidth
-                        displayEmpty
-                        variant="outlined"
-                        required
-                        name="resumeVersion"
-                        onChange={handleInputChange}
-                        sx={{ backgroundColor: 'white' }}
-                    >
-                        <MenuItem value="" disabled>Resume Uploaded</MenuItem>
-                        <MenuItem value="Default">Default</MenuItem>
-                        <MenuItem value="Version 1">Version 1</MenuItem>
-                        <MenuItem value="Version 2">Version 2</MenuItem>
-                        <MenuItem value="Version 3">Version 3</MenuItem>
-                    </Select>
-                    <Select
                         value={formData.status}
                         fullWidth
                         displayEmpty
@@ -173,22 +157,6 @@ const ApplicationPopup = ({
                         <MenuItem value="Interview">Interview</MenuItem>
                         <MenuItem value="Offer">Offer</MenuItem>
                         <MenuItem value="Rejected">Rejected</MenuItem>
-                    </Select>
-                    <Select
-                        value={formData.coverLetterVersion}
-                        fullWidth
-                        displayEmpty
-                        variant="outlined"
-                        required
-                        name="coverLetterVersion"
-                        onChange={handleInputChange}
-                        sx={{ backgroundColor: 'white' }}
-                    >
-                        <MenuItem value="" disabled>Cover Letter</MenuItem>
-                        <MenuItem value="None">None</MenuItem>
-                        <MenuItem value="Version 1">Version 1</MenuItem>
-                        <MenuItem value="Version 2">Version 2</MenuItem>
-                        <MenuItem value="Version 3">Version 3</MenuItem>
                     </Select>
                     <Box sx={{ gridColumn: 'span 2' }}>
                         <TextField
