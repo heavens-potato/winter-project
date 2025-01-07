@@ -69,11 +69,19 @@ function ProfilePop({ onClose }) {
       }
       await user.reload();
       if (user.emailVerified) {
-        await updateEmail(user, email);
-        console.log("Email updated successfully.");
-        message += `Email updated successfully to ${email} `;
+        try {
+          await updateEmail(user, email);
+          console.log("Email updated successfully.");
+          message += `Email updated successfully to ${email} `;
+        } catch (error) {
+          console.error("Error updating email:", error);
+          setErrorMessage('Failed to update email. Please try again later.');
+          return;
+        }
       } else {
         console.log("Email not yet verified.");
+        setErrorMessage('Please verify your email before proceeding.');
+        return;
       }
       if (displayName !== user.displayName) {
         await updateProfile(user, { displayName });
