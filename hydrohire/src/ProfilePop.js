@@ -50,10 +50,12 @@ function ProfilePop({ onClose }) {
   
     try {
       let message = '';
+
       if (!user) {
         setErrorMessage('Not logged in.');
         return;
       }
+
       if (email !== user.email) {
         try {
           await sendEmailVerification(user); 
@@ -67,6 +69,7 @@ function ProfilePop({ onClose }) {
         }
         return; 
       }
+
       await user.reload();
       if (user.emailVerified) {
         try {
@@ -78,11 +81,15 @@ function ProfilePop({ onClose }) {
           setErrorMessage('Failed to update email. Please try again later.');
           return;
         }
+
       } else {
         console.log("Email not yet verified.");
         setErrorMessage('Please verify your email before proceeding.');
         return;
       }
+
+      console.log(user.displayName);
+
       if (displayName !== user.displayName) {
         await updateProfile(user, { displayName });
         console.log("Display name updated");
@@ -92,19 +99,28 @@ function ProfilePop({ onClose }) {
         message += 'Display name updated successfully.';
         console.log("Display name updated in Firestore");
       }
+
       setSuccessMessage(message || 'No changes made.');
+
     } catch (error) {
+
       if (error.code === 'auth/requires-recent-login') {
         setErrorMessage('Please login again to update your profile.');
+        
       } else if (error.code === 'auth/invalid-email') {
         setErrorMessage('The provided email address is invalid.');
+
       } else if (error.code === 'auth/email-already-in-use') {
         setErrorMessage('This email address is already in use.');
+
       } else if (error.code === 'auth/operation-not-allowed') {
         setErrorMessage('Please verify the new email before changing your current one.');
+
       } else {
         setErrorMessage('An error occurred while updating your profile.');
+
       }
+
       console.log("Error with email/display name update");
       console.error('Error with email/display name update:', error.message);
     }
@@ -160,7 +176,7 @@ function ProfilePop({ onClose }) {
             <h4 className="text-xl font-bold mt-4 mb-2">Email</h4>
             <TextField label="Email" type="email" variant="outlined" fullWidth name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <h4 className="text-xl font-bold mt-4 mb-2">Display Name</h4>
-            <TextField label="Display Name" type="text" variant="outlined" fullWidth name="displayName" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
+            <TextField label="Display Name" type="text" variant="outlined" fullWidth name="displayName" value={user.displayName} onChange={(e) => setDisplayName(e.target.value)} />
             <Button
               onClick={handleSave}
               variant="contained"
