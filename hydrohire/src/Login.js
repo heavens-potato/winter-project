@@ -13,6 +13,10 @@ function validateEmail(email) {
 }
 
 function Login() {
+  React.useEffect(() => {
+    document.title = 'HydroHire - Log In';
+  }, []);
+
   const [showPassword, setShowPassword] = React.useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();

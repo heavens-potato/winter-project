@@ -19,6 +19,10 @@ function validateEmail(email) {
 }
 
 function SignUp() {
+  React.useEffect(() => {
+    document.title = 'HydroHire - Sign Up';
+  }, []);
+
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const [errorMessage, setErrorMessage] = useState('');

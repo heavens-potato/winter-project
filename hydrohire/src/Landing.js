@@ -9,6 +9,10 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 
 function Landing() {
+  React.useEffect(() => {
+    document.title = 'HydroHire';
+  }, []);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
