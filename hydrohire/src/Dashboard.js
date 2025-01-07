@@ -36,15 +36,6 @@ const columns = [
   },
 ];
 
-// Sample data
-let rows = [
-  { id: '1', positionTitle: 'Software Engineer', companyName: 'Tech Corp', location: 'San Francisco, CA', appDate: '2024-01-15', salary: '120000/yr', description: 'Excited about the role.', status: 'Applied' },
-  { id: '2', positionTitle: 'Data Analyst', companyName: 'Innovate LLC', location: 'New York, NY', appDate: '2024-01-20', salary: '90000/yr', description: 'Scheduled for next week.', status: 'Interview' },
-  { id: '3', positionTitle: 'Product Manager', companyName: 'Buildit Inc.', location: 'Austin, TX', appDate: '2024-01-10', salary: '110000/yr', description: 'Pending final decision.', status: 'Offer' },
-  { id: '4', positionTitle: 'UI/UX Designer', companyName: 'DesignPro', location: 'Seattle, WA', appDate: '2024-01-12', salary: '123480/yr', description: 'Position filled.', status: 'Rejected' },
-  { id: '5', positionTitle: 'Backend Developer', companyName: 'CodeWorld', location: 'Boston, MA', appDate: '2024-01-18', salary: '95000/yr', description: 'Submitted resume and cover letter.', status: 'Applied' },
-];
-
 function Dashboard() {
   const [pageSize, setPageSize] = React.useState(5);
   const [search, setSearch] = React.useState('');
@@ -225,8 +216,8 @@ function Dashboard() {
             open={openDialog}
             handleClose={handleDialogClose}
             handleSubmit={handleSubmit}
-            title="Add New Job"
-            actionButton="Add"
+            title={selectedApp ? "Edit Job Application" : "Add New Job"}
+            actionButton={selectedApp ? "Update" : "Add"}
             appData={selectedApp}
           />
         </Box>
