@@ -75,9 +75,9 @@ const ApplicationPopup = ({
     };
 
     return (
-        <Dialog 
-            open={open} 
-            maxWidth="md" 
+        <Dialog
+            open={open}
+            maxWidth="md"
             fullWidth
             PaperProps={{
                 sx: {
@@ -85,8 +85,8 @@ const ApplicationPopup = ({
                     overflow: 'hidden',
                 }
             }}
-        > 
-            <DialogTitle sx={{ fontSize: 28, fontWeight: 'bold'}}>{title}</DialogTitle>
+        >
+            <DialogTitle sx={{ fontSize: 28, fontWeight: 'bold' }}>{title}</DialogTitle>
             <DialogContent sx={{ borderRadius: '20px' }}>
                 <Box
                     sx={{
@@ -172,21 +172,21 @@ const ApplicationPopup = ({
                     </Box>
                 </Box>
             </DialogContent>
-            <DialogActions 
-                sx={{ 
+            <DialogActions
+                sx={{
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr',
-                    gap: 2, 
+                    gap: 2,
                     padding: '0 2.5rem 2.5rem 2.5rem'
                 }}
             >
-                <Button 
-                    onClick={handleDialogClose} 
+                <Button
+                    onClick={handleDialogClose}
                     variant="outlined"
-                    sx={{ 
+                    sx={{
                         fontSize: 18,
-                        borderColor: (theme) => theme.palette.primary.light, 
-                        color: (theme) => theme.palette.primary.light, 
+                        borderColor: (theme) => theme.palette.primary.light,
+                        color: (theme) => theme.palette.primary.light,
                         '&:hover': {
                             backgroundColor: (theme) => theme.palette.primary.light,
                             color: (theme) => theme.palette.primary.white,
@@ -197,15 +197,15 @@ const ApplicationPopup = ({
                 </Button>
                 <Button
                     onClick={handleFormSubmit}
-                    type="submit" 
-                    variant="contained" 
-                    sx={{ 
+                    type="submit"
+                    variant="contained"
+                    sx={{
                         fontSize: 18,
-                        backgroundColor: (theme) => theme.palette.primary.light, 
-                        color: (theme) => theme.palette.primary.dark,  
+                        backgroundColor: (theme) => theme.palette.primary.light,
+                        color: (theme) => theme.palette.primary.dark,
                         '&:hover': {
                             backgroundColor: (theme) => theme.palette.primary.dark,
-                            color: (theme) => theme.palette.primary.white,  
+                            color: (theme) => theme.palette.primary.white,
                         },
                     }}
                 >

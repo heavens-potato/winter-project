@@ -62,7 +62,7 @@ function Navbar() {
       } else {
         setIsLoggedIn(false);
       }
-    }); 
+    });
     return () => unsubscribe();
   }, []);
 
@@ -70,190 +70,191 @@ function Navbar() {
     <AppBar position="static" sx={{ boxShadow: 'none', height: '101px', padding: '0' }}>
       <Toolbar
         sx={{
-            height: '100%',
-            padding: '0',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+          height: '100%',
+          padding: '0',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}
       >
         {/* Title */}
-        <Typography 
-            variant="h6"
-            sx={{ 
-                flexGrow: 1, 
-                color: '#313541', 
-                fontSize: 36, 
-                fontWeight: 'bold', 
-                padding: '1rem', }}>
+        <Typography
+          variant="h6"
+          sx={{
+            flexGrow: 1,
+            color: '#313541',
+            fontSize: 36,
+            fontWeight: 'bold',
+            padding: '1rem',
+          }}>
           hydroHire
         </Typography>
-              
+
         {isMobile ? (
           //if the screen is of mobile width, render the hamburger icon
           <>
-          <IconButton 
-            size="large" 
-            edge="start" 
-            color="inherit" 
-            aria-label="menu" 
-            sx={{ mr: 2 }} 
-            onClick={ openResponsiveNav }
-          >
-            <MenuIcon />
-          </IconButton>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={openResponsiveNav}
+            >
+              <MenuIcon />
+            </IconButton>
 
-          {showResponsiveNav && (
-          <div 
-            style={{ 
-              position: 'fixed', 
-              top: 0, 
-              left: 0, 
-              width: '100%',  
-              height: '100%', 
-              backgroundColor: 'rgba(0, 0, 0, 0.5)', 
-              zIndex: 998,
-            }} 
-          >
-            <ResponsiveNav  onClose={ closeResponsiveNav } />
-          </div>
-          )}
+            {showResponsiveNav && (
+              <div
+                style={{
+                  position: 'fixed',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  zIndex: 998,
+                }}
+              >
+                <ResponsiveNav onClose={closeResponsiveNav} />
+              </div>
+            )}
           </>
         ) : (
 
           // If the screen is above mobile width, render the full navbar 
           <Box sx={{ display: 'flex', gap: 6, padding: '1rem' }}>
-          <Button component={Link} to="/about" sx={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>
-            About
-          </Button>
-          <Button component={Link} to="/contact" sx={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>
-            Contact
-          </Button>
-          {isLoggedIn ? (
-            <>
-              {/* My Profile Button */}
-              <Button
-                onClick={ openProfilePop }
-                sx={{
-                  color: 'black',
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                  border: '3px solid black',
-                  borderRadius: '30px',
-                  padding: '0.5rem 1.5rem',
-                  backgroundColor: 'transparent',
-                  '&:hover': {
-                    backgroundColor: 'white',
+            <Button component={Link} to="/about" sx={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>
+              About
+            </Button>
+            <Button component={Link} to="/contact" sx={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>
+              Contact
+            </Button>
+            {isLoggedIn ? (
+              <>
+                {/* My Profile Button */}
+                <Button
+                  onClick={openProfilePop}
+                  sx={{
                     color: 'black',
-                  },
-                }}
-              >
-                My Profile
-              </Button>
-
-              {openProfilePopup && (
-                <div 
-                    style={{ 
-                        position: 'fixed', 
-                        top: 0, 
-                        left: 0, 
-                        width: '100%',  
-                        height: '100%', 
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
-                        zIndex: 999999,
-                    }} 
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    border: '3px solid black',
+                    borderRadius: '30px',
+                    padding: '0.5rem 1.5rem',
+                    backgroundColor: 'transparent',
+                    '&:hover': {
+                      backgroundColor: 'white',
+                      color: 'black',
+                    },
+                  }}
                 >
-                    <ProfilePop onClose = { closeProfilePop }/> 
-                </div>
+                  My Profile
+                </Button>
+
+                {openProfilePopup && (
+                  <div
+                    style={{
+                      position: 'fixed',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                      zIndex: 999999,
+                    }}
+                  >
+                    <ProfilePop onClose={closeProfilePop} />
+                  </div>
                 )}
 
-              {/* Dashboard Button */}
-              <Button
-                component={Link}
-                to="/dashboard"
-                sx={{
-                  color: 'white',
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                  backgroundColor: 'black',
-                  border: '3px solid black',
-                  borderRadius: '30px',
-                  padding: '0.5rem 1.5rem',
-                  '&:hover': {
-                    backgroundColor: 'white',
-                    color: 'black',
-                  },
-                }}
-              >
-                Dashboard
-              </Button>
+                {/* Dashboard Button */}
+                <Button
+                  component={Link}
+                  to="/dashboard"
+                  sx={{
+                    color: 'white',
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    backgroundColor: 'black',
+                    border: '3px solid black',
+                    borderRadius: '30px',
+                    padding: '0.5rem 1.5rem',
+                    '&:hover': {
+                      backgroundColor: 'white',
+                      color: 'black',
+                    },
+                  }}
+                >
+                  Dashboard
+                </Button>
 
-              {/* Logout Button */}
-              <Button
-                onClick={handleLogout}
-                sx={{
-                  color: 'white',
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                  backgroundColor: 'transparent',
-                  border: '3px solid black',
-                  borderRadius: '30px',
-                  padding: '0.5rem 1.5rem',
-                  '&:hover': {
-                    backgroundColor: 'white',
-                    color: 'black',
-                  },
-                }}
-              >
-                Logout
-              </Button>
-            </>
-          ) : (
-            <>
-              {/* Sign Up Button */}
-              <Button
-                component={Link}
-                to="/signup"
-                sx={{
-                  color: 'white',
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                  backgroundColor: 'black',
-                  border: '3px solid black',
-                  borderRadius: '30px',
-                  padding: '0.5rem 1.5rem',
-                  '&:hover': {
-                    backgroundColor: 'white',
-                    color: 'black',
-                  },
-                }}
-              >
-                Sign Up
-              </Button>
+                {/* Logout Button */}
+                <Button
+                  onClick={handleLogout}
+                  sx={{
+                    color: 'white',
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    backgroundColor: 'transparent',
+                    border: '3px solid black',
+                    borderRadius: '30px',
+                    padding: '0.5rem 1.5rem',
+                    '&:hover': {
+                      backgroundColor: 'white',
+                      color: 'black',
+                    },
+                  }}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                {/* Sign Up Button */}
+                <Button
+                  component={Link}
+                  to="/signup"
+                  sx={{
+                    color: 'white',
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    backgroundColor: 'black',
+                    border: '3px solid black',
+                    borderRadius: '30px',
+                    padding: '0.5rem 1.5rem',
+                    '&:hover': {
+                      backgroundColor: 'white',
+                      color: 'black',
+                    },
+                  }}
+                >
+                  Sign Up
+                </Button>
 
-              {/* Log In Button */}
-              <Button
-                component={Link}
-                to="/login"
-                sx={{
-                  color: 'black',
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                  border: '3px solid black',
-                  borderRadius: '30px',
-                  padding: '0.5rem 1.5rem',
-                  backgroundColor: 'transparent',
-                  '&:hover': {
-                    backgroundColor: 'white',
+                {/* Log In Button */}
+                <Button
+                  component={Link}
+                  to="/login"
+                  sx={{
                     color: 'black',
-                  },
-                }}
-              >
-                Log In
-              </Button>
-            </>
-          )}
-        </Box>
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    border: '3px solid black',
+                    borderRadius: '30px',
+                    padding: '0.5rem 1.5rem',
+                    backgroundColor: 'transparent',
+                    '&:hover': {
+                      backgroundColor: 'white',
+                      color: 'black',
+                    },
+                  }}
+                >
+                  Log In
+                </Button>
+              </>
+            )}
+          </Box>
         )}
       </Toolbar>
     </AppBar>

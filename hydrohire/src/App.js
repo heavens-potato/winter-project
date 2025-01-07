@@ -43,7 +43,7 @@ function AppContent() {
   const location = useLocation();
 
   return (
-    <>      
+    <>
       <Routes>
         {/* Landing Home Page */}
         <Route path="/" element={<Landing />}></Route>
