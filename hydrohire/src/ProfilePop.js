@@ -39,11 +39,11 @@ function ProfilePop( { onClose } ) {
         className="flex items-center justify-center h-screen w-screen overflow-scroll"
         >
           <div className="flex flex-col items-center justify-center w-screen">
-            <div className="flex flex-row justify-between items-center bg-[#FFB165] p-10 w-4/5 md:w-3/5" style={{ borderRadius: '20px 20px 0 0' }}>
+            <div className="flex flex-row justify-between items-center bg-[#FFB165] p-10 rounded-t-lg w-4/5 lg:w-3/5">
                 <h1 className="text-4xl font-bold">My Profile</h1>
                 <HighlightOffIcon onClick={ onClose } sx={{ cursor: 'pointer' }}/>
             </div>
-            <div className="flex flex-col md:flex-row justify-between bg-white pl-5 md:pl-10 pr-5 md:pr-10 w-4/5 md:w-3/5" style={{ borderRadius: '0 0 20px 20px' }}>
+            <div className="flex flex-col md:flex-row justify-between bg-white pl-5 md:pl-10 pr-5 md:pr-10 rounded-b-lg w-4/5 lg:w-3/5">
               <div className="flex flex-col mt-10 w-full md:w-1/2">
                 <div className="flex flex-row gap-5 items-center">
                   <SettingsIcon />
