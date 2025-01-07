@@ -10,7 +10,7 @@ import { auth } from './firebase';
 
 function Landing() {
   React.useEffect(() => {
-    document.title = 'HydroHire';
+    document.title = 'hydroHire';
   }, []);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);

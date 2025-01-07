@@ -20,7 +20,7 @@ function validateEmail(email) {
 
 function SignUp() {
   React.useEffect(() => {
-    document.title = 'HydroHire - Sign Up';
+    document.title = 'hydroHire - Sign Up';
   }, []);
 
   const [showPassword, setShowPassword] = React.useState(false);

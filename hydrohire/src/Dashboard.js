@@ -11,7 +11,7 @@ import ApplicationPopup from './ApplicationPopup';
 
 function Dashboard() {
   React.useEffect(() => {
-    document.title = 'HydroHire - Dashboard';
+    document.title = 'hydroHire - Dashboard';
   }, []);
 
   const columns = [
