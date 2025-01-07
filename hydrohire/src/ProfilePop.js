@@ -39,11 +39,11 @@ function ProfilePop( { onClose } ) {
         className="flex items-center justify-center h-screen w-screen overflow-scroll"
         >
           <div className="flex flex-col items-center justify-center w-screen">
-            <div className="flex flex-row justify-between items-center bg-[#FFB165] p-10 rounded-t-lg w-4/5 md:w-3/5">
+            <div className="flex flex-row justify-between items-center bg-[#FFB165] p-10 w-4/5 md:w-3/5" style={{ borderRadius: '20px 20px 0 0' }}>
                 <h1 className="text-4xl font-bold">My Profile</h1>
                 <HighlightOffIcon onClick={ onClose } sx={{ cursor: 'pointer' }}/>
             </div>
-            <div className="flex flex-col md:flex-row justify-between bg-white pl-5 md:pl-10 pr-5 md:pr-10 rounded-b-lg w-4/5 md:w-3/5">
+            <div className="flex flex-col md:flex-row justify-between bg-white pl-5 md:pl-10 pr-5 md:pr-10 w-4/5 md:w-3/5" style={{ borderRadius: '0 0 20px 20px' }}>
               <div className="flex flex-col mt-10 w-full md:w-1/2">
                 <div className="flex flex-row gap-5 items-center">
                   <SettingsIcon />
@@ -72,7 +72,11 @@ function ProfilePop( { onClose } ) {
                 >
                 SAVE
                 </Button>
-                <Accordion elevation={0}>
+                <Accordion elevation={0}
+                  sx={{
+                    paddingBottom: 4,
+                  }}
+                >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon sx ={{ color: 'white' }}/>}
                     aria-controls="panel-content"
@@ -81,12 +85,11 @@ function ProfilePop( { onClose } ) {
                       color: 'white',
                       backgroundColor: (theme) => theme.palette.primary.dark,
                       borderRadius: 2,
-                      marginBottom: 10,
                     }}
                   >
                     <Typography>Change Password</Typography>
                   </AccordionSummary>
-                  <AccordionDetails sx={{ paddingBottom: 5}}>
+                  <AccordionDetails>
                   <Box
                     component="form"
                     onSubmit={handleSubmit}
