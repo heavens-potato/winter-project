@@ -223,7 +223,7 @@ function ProfilePop({ onClose }) {
 
                   {/* Old Password Input */}
                   <h4 className="text-xl font-bold mt-4 mb-2">Old Password</h4>
-                  <FormControl variant="outlined" fullWidth >
+                  <FormControl variant="outlined" fullWidth required>
                     <InputLabel htmlFor="outlined-adornment-password">Old Password</InputLabel>
                     <OutlinedInput
                       type={showPassword ? 'text' : 'password'}
