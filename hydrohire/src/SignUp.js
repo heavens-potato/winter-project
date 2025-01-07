@@ -6,6 +6,7 @@ import { auth, db } from './firebase'; // Import auth from firebase.js
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { motion } from 'framer-motion';
 import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom';
 
 function checkPasswordStrength(password) {
   const passwordRegex = new RegExp(/^(?=.*[@$!%*?&])(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d@$!%?&]{8,}$/);
@@ -22,6 +23,7 @@ function SignUp() {
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
@@ -41,7 +43,6 @@ function SignUp() {
     }
 
     if (!checkPasswordStrength(password)) {
-      console.log("dasdfasf");
       setErrorMessage('Password must have at least 1 lowercase letter, uppercase letter, number, and special character');
       return;
     }
@@ -58,8 +59,9 @@ function SignUp() {
         displayName: displayInput,
       });
       setErrorMessage("");
-      setSuccessMessage("Hooray!");
+      setSuccessMessage("Successfully created an account!");
       console.log('SignUp Success!');
+      navigate('/dashboard');
     } catch (error) {
       setErrorMessage('Failed to login.');
       console.log('Failure');
