@@ -4,39 +4,39 @@ import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
-import { doc, setDoc, getDoc, onSnapshot, collection, addDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, onSnapshot, collection, addDoc, deleteDoc } from "firebase/firestore";
 import { auth, db } from './firebase'; // Import auth from firebase.js
 import Navbar from './Navbar';
 import ApplicationPopup from './ApplicationPopup';
 
-const columns = [
-  { field: 'positionTitle', headerName: 'Position', width: 175 },
-  { field: 'companyName', headerName: 'Company', width: 150 },
-  { field: 'location', headerName: 'Location', width: 150 },
-  { field: 'appDate', headerName: 'App Date', width: 150 },
-  { field: 'salary', headerName: 'Salary', width: 150 },
-  { field: 'description', headerName: 'Description', width: 250, flex: 1 },
-  { field: 'status', headerName: 'Status', width: 150, editable: true },
-  { 
-    field: 'actions', 
-    headerName: 'Actions', 
-    width: 100, 
-    renderCell: (params) => (
-      <Box sx={{ display: 'flex', gap: '8px' }}>
-        {/* Edit Icon */}
-        <IconButton onClick={() => params.row.handleEditClick(params.row)}>
-          <EditIcon />
-        </IconButton>
-        {/* Delete Icon */}
-        <IconButton onClick={() => console.log(`Delete ${params.id}`)}>
-          <DeleteIcon />
-        </IconButton>
-      </Box>
-    ) 
-  },
-];
-
 function Dashboard() {
+  const columns = [
+    { field: 'positionTitle', headerName: 'Position', width: 175 },
+    { field: 'companyName', headerName: 'Company', width: 150 },
+        { field: 'location', headerName: 'Location', width: 150 },
+        { field: 'appDate', headerName: 'App Date', width: 150 },
+        { field: 'salary', headerName: 'Salary', width: 150 },
+        { field: 'description', headerName: 'Description', width: 250, flex: 1 },
+        { field: 'status', headerName: 'Status', width: 150, editable: true },
+        { 
+          field: 'actions', 
+          headerName: 'Actions', 
+          width: 100, 
+          renderCell: (params) => (
+            <Box sx={{ display: 'flex', gap: '8px' }}>
+              {/* Edit Icon */}
+              <IconButton onClick={() => params.row.handleEditClick(params.row)}>
+                <EditIcon />
+              </IconButton>
+              {/* Delete Icon */}
+              <IconButton onClick={() => handleDelete(params.row.id)}>
+                <DeleteIcon />
+              </IconButton>
+            </Box>
+          ) 
+        },
+      ];
+
   const [pageSize, setPageSize] = React.useState(5);
   const [search, setSearch] = React.useState('');
   const [status, setStatus] = React.useState('');
@@ -66,7 +66,7 @@ function Dashboard() {
         setRows(prevRows => [...prevRows, { id: Date.now().toString(), ...updatedAppData }]);
     }
     const addData = async () =>{
-      try{
+      try {
         let user = auth.currentUser;
         const uid = user.uid;
         let parentDocRef = doc(db, 'applications', uid);
@@ -93,6 +93,28 @@ function Dashboard() {
     addData();            
     console.log("Add works!");
     setOpenDialog(false);
+  }
+
+  const handleDelete = async (id) => {
+    try {
+        const user = auth.currentUser;
+        const uid = user.uid;
+        const parentDocRef = doc(db, 'applications', uid);
+        const docSnap = await getDoc(parentDocRef);
+        if (!docSnap.exists()) {
+            console.log("Parent document doesn't exist");
+            return;
+        }
+
+        const subCollectionRef = collection(docSnap.ref, 'apps');
+        const docRef = doc(subCollectionRef, id);
+        await deleteDoc(docRef);
+        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+        console.log(`Deleted application with ID: ${id}`);
+        
+    } catch (error) {
+        console.error("Error deleting document:", error);
+    }
   }
 
   const handleSearchChange = (event) => {
@@ -216,8 +238,8 @@ function Dashboard() {
             open={openDialog}
             handleClose={handleDialogClose}
             handleSubmit={handleSubmit}
-            title={selectedApp ? "Edit Job Application" : "Add New Job"}
-            actionButton={selectedApp ? "Update" : "Add"}
+            title={selectedApp ? "Edit This Application" : "Add New Job"}
+            actionButton={selectedApp ? "Save" : "Add"}
             appData={selectedApp}
           />
         </Box>
