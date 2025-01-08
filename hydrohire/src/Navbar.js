@@ -11,21 +11,22 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import PaletteIcon from '@mui/icons-material/Palette';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ProfilePop from './ProfilePop';
+import PersonIcon from '@mui/icons-material/Person';
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const theme = useTheme();
+
+  //Responsive breakpoint
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+
   const [showResponsiveNav, setShowResponsiveNav] = useState(false);
   const [openProfilePopup, setOpenProfilePopup] = useState(false);
-
-  const navigate = useNavigate();
 
   const handleMobileClick = () => {
     setShowResponsiveNav(!showResponsiveNav);
     console.log("responsive nav handled.");
   };
-
 
   const openResponsiveNav = () => {
     setShowResponsiveNav(true);
@@ -41,18 +42,6 @@ function Navbar() {
 
   const closeProfilePop = () => {
     setOpenProfilePopup(false);
-  }
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      console.log('Logged out');
-      if (window.location.pathname === '/dashboard') {
-        navigate('/');
-      }
-    } catch (error) {
-      console.error('Error logging out:', error.message);
-    }
   }
 
   useEffect(() => {
@@ -132,26 +121,6 @@ function Navbar() {
             </Button>
             {isLoggedIn ? (
               <>
-                {/* My Profile Button */}
-                <Button
-                  onClick={openProfilePop}
-                  sx={{
-                    color: 'black',
-                    fontSize: '20px',
-                    fontWeight: 'bold',
-                    border: '3px solid black',
-                    borderRadius: '30px',
-                    padding: '0.5rem 1.5rem',
-                    backgroundColor: 'transparent',
-                    '&:hover': {
-                      backgroundColor: 'white',
-                      color: 'black',
-                    },
-                  }}
-                >
-                  My Profile
-                </Button>
-
                 {openProfilePopup && (
                   <div
                     style={{
@@ -189,26 +158,25 @@ function Navbar() {
                   Dashboard
                 </Button>
 
-                {/* Logout Button */}
-                <Button
-                  onClick={handleLogout}
+                {/* My Profile Button */}
+                <PersonIcon
+                  onClick={openProfilePop}
                   sx={{
+                    alignItems: 'center',
                     color: 'white',
-                    fontSize: '20px',
-                    fontWeight: 'bold',
-                    backgroundColor: 'transparent',
+                    backgroundColor: 'black',
+                    fontSize: '50px',
                     border: '3px solid black',
                     borderRadius: '30px',
-                    padding: '0.5rem 1.5rem',
+                    cursor: 'pointer',
                     '&:hover': {
                       backgroundColor: 'white',
                       color: 'black',
                     },
                   }}
-                >
-                  Logout
-                </Button>
+                />
               </>
+
             ) : (
               <>
                 {/* Sign Up Button */}

@@ -126,7 +126,7 @@ function ResponsiveNav({ onClose }) {
                         </Button>
 
                         {/* Logout Button */}
-                        <Button
+                        {/* <Button
                             onClick={handleLogout}
                             sx={{
                                 color: 'white',
@@ -143,7 +143,7 @@ function ResponsiveNav({ onClose }) {
                             }}
                         >
                             Logout
-                        </Button>
+                        </Button> */}
                     </>
                 ) : (
                     <>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { TextField, IconButton, Typography, Button, Box, InputLabel, OutlinedInput, InputAdornment, FormControl } from '@mui/material';
-// import PaletteIcon from '@mui/icons-material/Palette';
+import PaletteIcon from '@mui/icons-material/Palette';
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { motion } from 'framer-motion';
@@ -23,9 +25,14 @@ function validateEmail(email) {
 }
 
 function ProfilePop({ onClose }) {
+  //Firebase getters
   const auth = getAuth();
   const db = getFirestore();
+
+  //Get current user
   const user = auth.currentUser;
+
+  //States for updating email, display name, and password
   const [email, setEmail] = useState(user?.email || '');
   const [displayName, setDisplayName] = useState(user?.displayName || '');
   const [oldPassword, setOldPassword] = useState('');
@@ -33,8 +40,13 @@ function ProfilePop({ onClose }) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+
+  //States for error message
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+
+  //navigate object
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
@@ -42,12 +54,12 @@ function ProfilePop({ onClose }) {
   const handleSave = async () => {
     setErrorMessage('');
     setSuccessMessage('');
-  
+
     if (!validateEmail(email)) {
       setErrorMessage('Invalid email');
       return;
     }
-  
+
     try {
       let message = '';
 
@@ -58,16 +70,16 @@ function ProfilePop({ onClose }) {
 
       if (email !== user.email) {
         try {
-          await sendEmailVerification(user); 
+          await sendEmailVerification(user);
           setErrorMessage('A verification email has been sent to your email. Please verfiy before proceeding.');
           message += `Email updated successfully to ${email}. `;
           console.log("Verification email sent to update email.");
         } catch (error) {
-            console.error("Error sending verification email:", error);
-            setErrorMessage('Failed to send verification email. Please try again later.');
-            return; 
+          console.error("Error sending verification email:", error);
+          setErrorMessage('Failed to send verification email. Please try again later.');
+          return;
         }
-        return; 
+        return;
       }
 
       await user.reload();
@@ -93,7 +105,7 @@ function ProfilePop({ onClose }) {
       if (displayName !== user.displayName) {
         await updateProfile(user, { displayName });
         console.log("Display name updated");
-        
+
         const userDocRef = doc(db, 'users', user.uid);
         await updateDoc(userDocRef, { displayName });
         message += 'Display name updated successfully.';
@@ -106,7 +118,7 @@ function ProfilePop({ onClose }) {
 
       if (error.code === 'auth/requires-recent-login') {
         setErrorMessage('Please login again to update your profile.');
-        
+
       } else if (error.code === 'auth/invalid-email') {
         setErrorMessage('The provided email address is invalid.');
 
@@ -124,7 +136,7 @@ function ProfilePop({ onClose }) {
       console.log("Error with email/display name update");
       console.error('Error with email/display name update:', error.message);
     }
-  };  
+  };
 
   const handlePasswordChange = async (event) => {
     event.preventDefault();
@@ -156,6 +168,18 @@ function ProfilePop({ onClose }) {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      console.log('Logged out');
+      if (window.location.pathname === '/dashboard') {
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('Error logging out:', error.message);
+    }
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -163,12 +187,14 @@ function ProfilePop({ onClose }) {
       className="flex items-center justify-center h-screen w-screen overflow-scroll"
     >
       <div className="flex flex-col items-center justify-center w-screen">
-        <div className="flex flex-row justify-between items-center bg-[#FFB165] p-10 rounded-t-lg w-4/5 lg:w-3/5" style={{ borderRadius: '20px 20px 0 0' }}>
+        <div className="flex flex-row justify-between items-center bg-[#FFB165] p-3 md:p-10 rounded-t-lg w-4/5 lg:w-3/5" style={{ borderRadius: '20px 20px 0 0' }}>
           <h1 className="text-4xl font-bold">My Profile</h1>
           <HighlightOffIcon onClick={onClose} sx={{ cursor: 'pointer' }} />
         </div>
-        <div className="flex flex-col md:flex-row justify-between bg-white pl-5 md:pl-10 pr-5 md:pr-10 rounded-b-lg w-4/5 lg:w-3/5" style={{ borderRadius: '0 0 20px 20px' }}>
-          <div className="flex flex-col mt-10 w-full md:w-1/2">
+        <div className="flex flex-col md:flex-row space-evenly bg-white pl-5 md:pl-10 pr-5 md:pr-10 gap-5 rounded-b-lg w-4/5 lg:w-3/5" style={{ borderRadius: '0 0 20px 20px' }}>
+
+          {/* Right half container */}
+          <div className="flex flex-col mt-5 md:mt-10 w-full md:w-1/2">
             <div className="flex flex-row gap-5 items-center">
               <SettingsIcon />
               <h3 className="text-3xl font-bold">Edit Profile</h3>
@@ -199,7 +225,7 @@ function ProfilePop({ onClose }) {
             </Button>
             <Accordion elevation={0}
               sx={{
-                paddingBottom: 4,
+                paddingBottom: { xs: 0, md: 4 }
               }}
             >
               <AccordionSummary
@@ -341,12 +367,41 @@ function ProfilePop({ onClose }) {
               </AccordionDetails>
             </Accordion>
           </div>
-          {/* <div>
-                <div className="flex flex-row gap-5 mt-10 items-center w-full">
-                  <PaletteIcon />
-                  <h3 className="text-3xl font-bold">Theme Color</h3>
-                </div>
-              </div> */}
+
+          {/* Right half container */}
+          <div className="flex flex-col justify-between h-full w-full md:w-1/2 mb-10">
+            {/* Palette controls */}
+            <div>
+              <div className="flex flex-row gap-5 mt-10 items-center pb-0 md:pb-40">
+                <PaletteIcon />
+                <h3 className="text-3xl font-bold">Theme Color</h3>
+              </div>
+
+              {/* Button container */}
+              <div className="pt-40 md:pt-40 w-full items-center flex justify-center md:justify-end">
+                {/* Logout Button */}
+                <Button
+                  onClick={handleLogout}
+                  sx={{
+                    color: '#8B0000',
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    backgroundColor: 'transparent',
+                    border: '3px solid #8B0000',
+                    borderRadius: '30px',
+                    padding: '0.5rem 1.5rem',
+                    '&:hover': {
+                      backgroundColor: 'black',
+                      color: 'white',
+                      border: '3px solid black'
+                    },
+                  }}
+                >
+                  Logout
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>
