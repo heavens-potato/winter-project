@@ -71,15 +71,15 @@ function ProfilePop({ onClose }) {
       if (email !== user.email) {
         try {
           await sendEmailVerification(user);
-          setErrorMessage('A verification email has been sent to your email. Please verfiy before proceeding.');
+          setErrorMessage('A verification email has been sent to your email. Please verify before proceeding.');
           message += `Email updated successfully to ${email}. `;
           console.log("Verification email sent to update email.");
+          return;
         } catch (error) {
           console.error("Error sending verification email:", error);
           setErrorMessage('Failed to send verification email. Please try again later.');
           return;
         }
-        return;
       }
 
       await user.reload();
