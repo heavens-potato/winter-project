@@ -64,11 +64,11 @@ function Dashboard() {
   }
 
   const handleSubmit = (event, updatedAppData) => {
-    if (selectedApp) {
-      setRows(rows.map(row => row.id === selectedApp.id ? { ...row, ...updatedAppData } : row));
-    } else {
-      setRows(prevRows => [...prevRows, { id: Date.now().toString(), ...updatedAppData }]);
-    }
+    // if (selectedApp) {
+    //   setRows(rows.map(row => row.id === selectedApp.id ? { ...row, ...updatedAppData } : row));
+    // } else {
+    //   setRows(prevRows => [...prevRows, { id: Date.now().toString(), ...updatedAppData }]);
+    // }
     const addData = async () => {
       try {
         let user = auth.currentUser;
