@@ -87,22 +87,22 @@ function Dashboard() {
           await updateDoc(docRef, {
             appDate: updatedAppData.appDate,
             companyName: updatedAppData.companyName,
-            jobTitle: updatedAppData.positionTitle,
+            positionTitle: updatedAppData.positionTitle,
             location: updatedAppData.location,
-            notes: updatedAppData.description,
+            description: updatedAppData.description,
             salary: updatedAppData.salary,
             status: updatedAppData.status,
           });
         } else {
           const subCollectionRef = collection(docSnap.ref, 'apps');
           await addDoc(subCollectionRef, {
-            jobTitle: updatedAppData.positionTitle,
-            companyName: updatedAppData.companyName,
-            location: updatedAppData.location,
             appDate: updatedAppData.appDate,
+            companyName: updatedAppData.companyName,
+            positionTitle: updatedAppData.positionTitle,
+            location: updatedAppData.location,
+            description: updatedAppData.description,
             salary: updatedAppData.salary,
             status: updatedAppData.status,
-            notes: updatedAppData.description,
           });
         }
       } catch (error) {
@@ -161,28 +161,6 @@ function Dashboard() {
               handleEditClick: handleEditClick,
             }));
             setRows(dataArray);
-            console.log(dataArray);
-            for (let i = 0; i < rows.length; i++) {
-              // rows.push(dataArray[i]);
-              if (i < dataArray.length) {
-                rows[i].id = dataArray[i].id;
-                rows[i].positionTitle = dataArray[i].jobTitle;
-                rows[i].appDate = dataArray[i].appDate;
-                rows[i].companyName = dataArray[i].companyName;
-                rows[i].location = dataArray[i].location;
-                rows[i].salary = dataArray[i].salary;
-                rows[i].description = dataArray[i].notes;
-                rows[i].status = dataArray[i].status;
-              } else {
-                rows[i].positionTitle = "";
-                rows[i].appDate = "";
-                rows[i].companyName = "";
-                rows[i].location = "";
-                rows[i].salary = 0;
-                rows[i].description = "";
-                rows[i].status = "";
-              }
-            }
           });
           return unsubscribe;
         } else {
