@@ -17,6 +17,8 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const theme = useTheme();
 
+  let user = auth.currentUser;
+
   //Responsive breakpoint
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
 

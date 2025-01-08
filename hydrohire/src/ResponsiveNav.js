@@ -124,26 +124,6 @@ function ResponsiveNav({ onClose }) {
                         >
                             Dashboard
                         </Button>
-
-                        {/* Logout Button */}
-                        {/* <Button
-                            onClick={handleLogout}
-                            sx={{
-                                color: 'white',
-                                fontSize: '20px',
-                                fontWeight: 'bold',
-                                backgroundColor: 'transparent',
-                                border: '3px solid black',
-                                borderRadius: '30px',
-                                padding: '0.5rem 1.5rem',
-                                '&:hover': {
-                                    backgroundColor: 'white',
-                                    color: 'black',
-                                },
-                            }}
-                        >
-                            Logout
-                        </Button> */}
                     </>
                 ) : (
                     <>

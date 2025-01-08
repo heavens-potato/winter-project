@@ -10,6 +10,9 @@ import Navbar from './Navbar';
 import ApplicationPopup from './ApplicationPopup';
 
 function Dashboard() {
+  //Get current user to display their name and application CRUD operations
+  let user = auth.currentUser;
+
   React.useEffect(() => {
     document.title = 'hydroHire - Dashboard';
   }, []);
@@ -116,7 +119,6 @@ function Dashboard() {
 
   const handleDelete = async (id) => {
     try {
-      const user = auth.currentUser;
       const uid = user.uid;
       const parentDocRef = doc(db, 'applications', uid);
       const docSnap = await getDoc(parentDocRef);
@@ -178,6 +180,10 @@ function Dashboard() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Navbar />
+      {/* Greeting based on user display name */}
+      <div className="mx-[20px] mt-[30px]">
+        <h1 className="text-[28px] md:text-5xl font-bold">Hi {user.displayName}!</h1>
+      </div>
       <Paper sx={{ width: 'calc(100% - 40px)', margin: '20px auto', padding: '10px', borderRadius: '8px' }}>
         {/* Application Overview */}
         <Box sx={{ marginBottom: '35px' }}>
