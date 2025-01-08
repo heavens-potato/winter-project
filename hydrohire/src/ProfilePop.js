@@ -179,9 +179,9 @@ function ProfilePop({ onClose }) {
               <SettingsIcon />
               <h3 className="text-3xl font-bold">Edit Profile</h3>
             </div>
-            <h4 className="text-xl font-bold mt-4 mb-2">Email</h4>
+            <h4 className="text-xl font-bold mt-4 mb-2" />
             <TextField label="Email" type="email" variant="outlined" fullWidth name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <h4 className="text-xl font-bold mt-4 mb-2">Display Name</h4>
+            <h4 className="text-xl font-bold mt-4 mb-2" />
             <TextField label="Display Name" type="text" variant="outlined" fullWidth name="displayName" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
             <Button
               onClick={handleSave}
@@ -228,7 +228,7 @@ function ProfilePop({ onClose }) {
                 >
 
                   {/* Old Password Input */}
-                  <h4 className="text-xl font-bold mt-4 mb-2">Old Password</h4>
+                  <h4 className="text-xl font-bold mt-4 mb-2" />
                   <FormControl variant="outlined" fullWidth required>
                     <InputLabel htmlFor="outlined-adornment-password">Old Password</InputLabel>
                     <OutlinedInput
@@ -255,7 +255,7 @@ function ProfilePop({ onClose }) {
 
 
                   {/* New Password Input */}
-                  <h4 className="text-xl font-bold mt-4 mb-2">New Password</h4>
+                  <h4 className="text-xl font-bold mt-4 mb-2" />
                   <FormControl variant="outlined" fullWidth required>
                     <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
                     <OutlinedInput
@@ -282,7 +282,7 @@ function ProfilePop({ onClose }) {
                   </FormControl>
 
                   {/* Confirm New Password Input */}
-                  <h4 className="text-xl font-bold mt-4 mb-2">Confirm New Password</h4>
+                  <h4 className="text-xl font-bold mt-4 mb-2" />
                   <FormControl variant="outlined" fullWidth required>
                     <InputLabel htmlFor="outlined-adornment-confirm-password">Confirm New Password</InputLabel>
                     <OutlinedInput
