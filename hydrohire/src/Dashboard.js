@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
-import { doc, setDoc, getDoc, onSnapshot, collection, addDoc, deleteDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, onSnapshot, collection, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from './firebase'; // Import auth from firebase.js
 import Navbar from './Navbar';
 import ApplicationPopup from './ApplicationPopup';
@@ -80,18 +80,33 @@ function Dashboard() {
           parentDocRef = doc(db, 'applications', uid);
           docSnap = await getDoc(parentDocRef);
         }
-        const subCollectionRef = collection(docSnap.ref, 'apps');
-        await addDoc(subCollectionRef, {
-          jobTitle: updatedAppData.positionTitle,
-          companyName: updatedAppData.companyName,
-          location: updatedAppData.location,
-          appDate: updatedAppData.appDate,
-          salary: updatedAppData.salary,
-          status: updatedAppData.status,
-          notes: updatedAppData.description,
-        });
+        if(selectedApp){
+          console.log(selectedApp.id);
+          const docRef = doc(docSnap.ref, 'apps', selectedApp.id);
+          console.log("doc god");
+          await updateDoc(docRef, {
+            appDate: updatedAppData.appDate,
+            companyName: updatedAppData.companyName,
+            jobTitle: updatedAppData.positionTitle,
+            location: updatedAppData.location,
+            notes: updatedAppData.description,
+            salary: updatedAppData.salary,
+            status: updatedAppData.status,
+          });
+        } else {
+          const subCollectionRef = collection(docSnap.ref, 'apps');
+          await addDoc(subCollectionRef, {
+            jobTitle: updatedAppData.positionTitle,
+            companyName: updatedAppData.companyName,
+            location: updatedAppData.location,
+            appDate: updatedAppData.appDate,
+            salary: updatedAppData.salary,
+            status: updatedAppData.status,
+            notes: updatedAppData.description,
+          });
+        }
       } catch (error) {
-        console.error("Error Adding Doc from Popup:");
+        console.error("Error Adding/Editing Doc from Popup:");
       }
     };
     addData();
@@ -150,6 +165,7 @@ function Dashboard() {
             for (let i = 0; i < rows.length; i++) {
               // rows.push(dataArray[i]);
               if (i < dataArray.length) {
+                rows[i].id = dataArray[i].id;
                 rows[i].positionTitle = dataArray[i].jobTitle;
                 rows[i].appDate = dataArray[i].appDate;
                 rows[i].companyName = dataArray[i].companyName;
