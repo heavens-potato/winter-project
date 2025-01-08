@@ -91,11 +91,11 @@ const ApplicationPopup = ({
                 <Box
                     sx={{
                         display: 'grid',
-                        gridTemplateColumns: '1fr 1fr',
+                        gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
                         alignItems: 'center',
                         flexDirection: 'column',
                         gap: 2,
-                        padding: 2,
+                        padding: { xs: 0, md: 2 },
                     }}
                 >
                     <TextField
@@ -158,7 +158,7 @@ const ApplicationPopup = ({
                         <MenuItem value="Offer">Offer</MenuItem>
                         <MenuItem value="Rejected">Rejected</MenuItem>
                     </Select>
-                    <Box sx={{ gridColumn: 'span 2' }}>
+                    <Box sx={{ gridColumn: {xs: 'auto', md: 'span 2'} }}>
                         <TextField
                             label="Description"
                             fullWidth
@@ -177,7 +177,7 @@ const ApplicationPopup = ({
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr',
                     gap: 2,
-                    padding: '0 2.5rem 2.5rem 2.5rem'
+                    padding: {xs: '0 1.5rem 1.5rem 1.5rem', md: '0 2.5rem 2.5rem 2.5rem' }
                 }}
             >
                 <Button
