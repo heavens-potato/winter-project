@@ -54,62 +54,52 @@ function ProfilePop({ onClose }) {
   const handleSave = async () => {
     setErrorMessage('');
     setSuccessMessage('');
-
+  
     if (!validateEmail(email)) {
       setErrorMessage('Invalid email');
       return;
     }
-
+  
     try {
-      let message = '';
-
       if (!user) {
         setErrorMessage('Not logged in.');
         return;
       }
-
+  
       if (displayName !== user.displayName) {
         await updateProfile(user, { displayName });
         console.log("Display name updated");
-
+  
         const userDocRef = doc(db, 'users', user.uid);
         await updateDoc(userDocRef, { displayName });
-        message += 'Display name updated successfully.';
         console.log("Display name updated in Firestore");
       }
-
+  
       if (email !== user.email) {
         try {
-          await sendEmailVerification(user);
+          const continueUrl = `${window.location.origin}/dashboard`;
+          await sendEmailVerification(user, { url: continueUrl });
           setErrorMessage('A verification email has been sent to your email. Please verify before proceeding.');
-          message += `Email updated successfully to ${email}. `;
           console.log("Verification email sent to update email.");
+  
           await user.reload();
           if (user.emailVerified) {
             try {
               await updateEmail(user, email);
               console.log("Email updated successfully.");
-              message += `Email updated successfully to ${email} `;
+              setSuccessMessage('Email updated successfully.');
             } catch (error) {
               console.error("Error updating email:", error);
               setErrorMessage('Failed to update email. Please try again later.');
-              return;
             }
           } else {
             console.log("Email not yet verified.");
             setErrorMessage('Please verify your email before proceeding.');
-            return;
           }
-          console.log(user.displayName);
-          setSuccessMessage(message || 'No changes made.');
-          return;
         } catch (error) {
           console.error("Error sending verification email:", error);
           setErrorMessage('Failed to send verification email. Please try again later.');
-          return;
         }
-      } else {
-        return;
       }
     } catch (error) {
       if (error.code === 'auth/requires-recent-login') {
@@ -126,7 +116,7 @@ function ProfilePop({ onClose }) {
       console.log("Error with email/display name update");
       console.error('Error with email/display name update:', error.message);
     }
-  };
+  };  
 
   const handlePasswordChange = async (event) => {
     event.preventDefault();
