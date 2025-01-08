@@ -8,8 +8,20 @@ import { doc, setDoc, getDoc, onSnapshot, collection, addDoc, deleteDoc, updateD
 import { auth, db } from './firebase'; // Import auth from firebase.js
 import Navbar from './Navbar';
 import ApplicationPopup from './ApplicationPopup';
+import { ThemeProvider, useMediaQuery } from '@mui/system';
+
+//Accordion imports for responsive filter panel
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import { Filter } from '@mui/icons-material';
 
 function Dashboard() {
+  //Responsive breakpoint
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   //Get current user to display their name and application CRUD operations
   let user = auth.currentUser;
 
@@ -18,17 +30,18 @@ function Dashboard() {
   }, []);
 
   const columns = [
-    { field: 'positionTitle', headerName: 'Position', width: 175 },
-    { field: 'companyName', headerName: 'Company', width: 150 },
-    { field: 'location', headerName: 'Location', width: 150 },
-    { field: 'appDate', headerName: 'App Date', width: 150, filterable: false },
-    { field: 'salary', headerName: 'Salary', width: 150, filterable: false },
-    { field: 'description', headerName: 'Description', width: 250, flex: 1, filterable: false },
-    { field: 'status', headerName: 'Status', width: 150, editable: true, filterable: false },
+    { field: 'positionTitle', headerName: 'Position', width: isMobile ? 130 : 175, minWidth: 130 },
+    { field: 'companyName', headerName: 'Company', width: isMobile ? 150 : 175, minWidth: 150 },
+    { field: 'location', headerName: 'Location', width: isMobile ? 140 : 150, minWidth: 140 },
+    { field: 'appDate', headerName: 'App Date', width: isMobile ? 140 : 150, filterable: false, minWidth: 140 },
+    { field: 'salary', headerName: 'Salary', width: isMobile ? 120 : 150, filterable: false, minWidth: 120 },
+    { field: 'description', headerName: 'Description', width: 160, minWidth: 160, flex: 1, filterable: false },
+    { field: 'status', headerName: 'Status', width: isMobile ? 120 : 150, minWidth: 120, editable: true, filterable: false },
     {
       field: 'actions',
       headerName: 'Actions',
-      width: 100,
+      width: isMobile ? 130 : 150,
+      minWidth: 30,
       renderCell: (params) => (
         <Box sx={{ display: 'flex', gap: '8px' }}>
           {/* Edit Icon */}
@@ -52,7 +65,6 @@ function Dashboard() {
   const [selectedApp, setSelectedApp] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [rows, setRows] = useState([]);
-  const theme = useTheme();
 
   const handleDialogOpen = () => setOpenDialog(true);
 
@@ -83,7 +95,7 @@ function Dashboard() {
           parentDocRef = doc(db, 'applications', uid);
           docSnap = await getDoc(parentDocRef);
         }
-        if(selectedApp){
+        if (selectedApp) {
           console.log(selectedApp.id);
           const docRef = doc(docSnap.ref, 'apps', selectedApp.id);
           console.log("doc god");
@@ -181,9 +193,9 @@ function Dashboard() {
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Navbar />
       {/* Greeting based on user display name */}
-      <div className="mx-[20px] mt-[30px]">
+      {/* <div className="mx-[20px] mt-[30px]">
         <h1 className="text-[28px] md:text-5xl font-bold">Hi {user.displayName}!</h1>
-      </div>
+      </div> */}
       <Paper sx={{ width: 'calc(100% - 40px)', margin: '20px auto', padding: '10px', borderRadius: '8px' }}>
         {/* Application Overview */}
         <Box sx={{ marginBottom: '35px' }}>
@@ -201,12 +213,12 @@ function Dashboard() {
           Job Application Tracker
         </Typography>
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <Box sx={{ display: 'flex', justifyContent: { xs: 'center', lg: 'space-between' }, alignItems: 'center', marginBottom: '20px' }}>
           {/* Search Bar */}
           <TextField
             variant="outlined"
             size="small"
-            placeholder="Search by position, company, or location"
+            placeholder={isMobile ? "Search for a job" : "Search by position, company, or location"}
             value={search}
             onChange={handleSearchChange}
             sx={{ flexGrow: 1, borderRadius: '40px', padding: '10px', '& .MuiOutlinedInput-root': { borderRadius: '20px', paddingLeft: '12px' } }}
@@ -218,22 +230,26 @@ function Dashboard() {
               ),
             }}
           />
-          {/* Add New Application Button */}
-          <Button
-            onClick={handleDialogOpen}
-            variant="contained"
-            sx={{
-              marginLeft: '20px',
-              fontSize: 18,
-              backgroundColor: (theme) => theme.palette.primary.light,
-              color: (theme) => theme.palette.primary.dark,
-              '&:hover': {
-                backgroundColor: (theme) => theme.palette.primary.dark,
-                color: (theme) => theme.palette.primary.white,
-              },
-            }}>
-            + Add New Application
-          </Button>
+
+          <ThemeProvider theme={theme}>
+            {/* Add application button, conditonally render button text content based on screen width */}
+            <Button
+              onClick={handleDialogOpen}
+              variant="contained"
+              sx={{
+                marginLeft: '20px',
+                fontSize: 18,
+                backgroundColor: (theme) => theme.palette.primary.light,
+                color: (theme) => theme.palette.primary.dark,
+                '&:hover': {
+                  backgroundColor: (theme) => theme.palette.primary.dark,
+                  color: (theme) => theme.palette.primary.white,
+                },
+              }}
+            >
+              {isMobile ? '+' : '+ Add New Application'}
+            </Button>
+          </ThemeProvider>
 
           {/* Add Application Popup */}
           <ApplicationPopup
@@ -246,73 +262,175 @@ function Dashboard() {
           />
         </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '20px', gap: 6 }}>
-          {/* Status Filter */}
-          <Select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            displayEmpty
-            size="small"
-            sx={{
-              minWidth: 180,
-              backgroundColor: 'white',
-              borderRadius: '10px',
-              height: '40px',
-              '& .MuiSelect-select': { padding: '10px' },
-            }}
-          >
-            <MenuItem value="" disabled>Select Status</MenuItem>
-            <MenuItem value="Applied">Applied</MenuItem>
-            <MenuItem value="Screening">Screening</MenuItem>
-            <MenuItem value="Interview">Interview</MenuItem>
-            <MenuItem value="Offer">Offer</MenuItem>
-            <MenuItem value="Rejected">Rejected</MenuItem>
-          </Select>
+        {/* If the screen width is mobile, render the collapsible filter menu */}
+        {isMobile ? (
+          <>
+            <Accordion elevation={0}>
+              <AccordionSummary
+                expandIcon={<FilterListIcon sx={{ color: (theme) => theme.palette.primary.dark }} />}
+                aria-controls="panel-content"
+                id="panel-header"
+                sx={{
+                  color: (theme) => theme.palette.primary.dark,
+                  backgroundColor: 'white',
+                  borderRadius: 2,
+                }}
+              >
+                <Typography>Filter Applications</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '20px', gap: 2 }}>
+                  <Select
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                    displayEmpty
+                    size="small"
+                    sx={{
+                      width: '100%',
+                      backgroundColor: 'white',
+                      borderRadius: '10px',
+                      height: '40px',
+                      '& .MuiSelect-select': { padding: '10px' },
+                    }}
+                  >
+                    <MenuItem value="" disabled>Select Status</MenuItem>
+                    <MenuItem value="Applied">Applied</MenuItem>
+                    <MenuItem value="Screening">Screening</MenuItem>
+                    <MenuItem value="Interview">Interview</MenuItem>
+                    <MenuItem value="Offer">Offer</MenuItem>
+                    <MenuItem value="Rejected">Rejected</MenuItem>
+                  </Select>
 
-          {/* Date Filter */}
-          <TextField
-            variant="outlined"
-            size="small"
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            sx={{
-              minWidth: 180,
-              backgroundColor: 'white',
-              borderRadius: '10px',
-              height: '40px',
-              '& .MuiOutlinedInput-root': {
-                borderRadius: '10px',
-              },
-              '& .MuiOutlinedBase-root': {
-                borderRadius: '10px',
-              }
-            }}
-          />
+                  {/* Date Filter */}
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    sx={{
+                      width: '100%',
+                      backgroundColor: 'white',
+                      borderRadius: '10px',
+                      height: '40px',
+                      '& .MuiOutlinedInput-root': {
+                        borderRadius: '10px',
+                      },
+                      '& .MuiOutlinedBase-root': {
+                        borderRadius: '10px',
+                      }
+                    }}
+                  />
 
-          {/* Columns Displayed */}
-          <Select
-            value={selectedColumns}
-            onChange={handleColumnsChange}
-            displayEmpty
-            multiple
-            size="small"
-            sx={{
-              minWidth: 180,
-              backgroundColor: 'white',
-              borderRadius: '10px',
-              height: '40px',
-              '& .MuiSelect-select': { padding: '10px' },
-            }}
-          >
-            <MenuItem value="" disabled>Columns Displayed</MenuItem>
-            {columns
-              .filter((column) => column.field !== 'actions')
-              .map((column) => (
-                <MenuItem key={column.field} value={column.field}>{column.headerName}</MenuItem>
-              ))}
-          </Select>
-        </Box>
+                  {/* Columns Displayed */}
+                  <Select
+                    value={selectedColumns.length > 0 ? selectedColumns : 'Columns Displayed'}
+                    onChange={handleColumnsChange}
+                    displayEmpty
+                    multiple
+                    size="small"
+                    sx={{
+                      width: '100%',
+                      backgroundColor: 'white',
+                      borderRadius: '10px',
+                      height: '40px',
+                      '& .MuiSelect-select': { padding: '10px' },
+                    }}
+                  >
+                    <MenuItem value="" disabled>Columns Displayed</MenuItem>
+                    {columns
+                      .filter((column) => column.field !== 'actions')
+                      .map((column) => (
+                        <MenuItem key={column.field} value={column.field}>{column.headerName}</MenuItem>
+                      ))}
+                  </Select>
+
+                  {/* Text to remind the user that they can sort by asc/desc by clicking column headers */}
+                  <div className="flex justify-center items-center pt-5">
+                    <h4>You can also tap on column headers to sort in ascending or descending order!</h4>
+                  </div>
+                </Box>
+              </AccordionDetails>
+            </Accordion>
+          </>
+        ) : (
+
+          // If the screen isn't mobile, render the default filter menu
+          <>
+            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: '20px', gap: 6 }}>
+              <Select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                displayEmpty
+                size="small"
+                sx={{
+                  minWidth: 180,
+                  backgroundColor: 'white',
+                  borderRadius: '10px',
+                  height: '40px',
+                  '& .MuiSelect-select': { padding: '10px' },
+                }}
+              >
+                <MenuItem value="" disabled>Select Status</MenuItem>
+                <MenuItem value="Applied">Applied</MenuItem>
+                <MenuItem value="Screening">Screening</MenuItem>
+                <MenuItem value="Interview">Interview</MenuItem>
+                <MenuItem value="Offer">Offer</MenuItem>
+                <MenuItem value="Rejected">Rejected</MenuItem>
+              </Select>
+
+              {/* Date Filter */}
+              <TextField
+                variant="outlined"
+                size="small"
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                sx={{
+                  minWidth: 180,
+                  backgroundColor: 'white',
+                  borderRadius: '10px',
+                  height: '40px',
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: '10px',
+                  },
+                  '& .MuiOutlinedBase-root': {
+                    borderRadius: '10px',
+                  }
+                }}
+              />
+
+              {/* Columns Displayed */}
+              <Select
+                value={selectedColumns}
+                onChange={handleColumnsChange}
+                displayEmpty
+                multiple
+                size="small"
+                sx={{
+                  minWidth: 180,
+                  backgroundColor: 'white',
+                  borderRadius: '10px',
+                  height: '40px',
+                  '& .MuiSelect-select': { padding: '10px' },
+                }}
+              >
+                <MenuItem value="" disabled>Columns Displayed</MenuItem>
+                {columns
+                  .filter((column) => column.field !== 'actions')
+                  .map((column) => (
+                    <MenuItem key={column.field} value={column.field}>{column.headerName}</MenuItem>
+                  ))}
+              </Select>
+            </Box>
+
+            {/* Text to remind the user that they can sort by asc/desc by clicking column headers */}
+            <div className="flex justify-center items-center pb-5">
+              <h4>You can also click on column headers to sort in ascending or descending order!</h4>
+            </div>
+          </>
+        )}
+
 
         {/* DataGrid */}
         <div style={{ height: 400, width: '100%' }}>
@@ -330,8 +448,8 @@ function Dashboard() {
             }
           />
         </div>
-      </Paper>
-    </Box>
+      </Paper >
+    </Box >
   );
 }
 
