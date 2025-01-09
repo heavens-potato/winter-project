@@ -371,7 +371,7 @@ function Dashboard() {
 
           // If the screen isn't mobile, render the default filter menu
           <>
-            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: '20px', gap: 6 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: '20px', marginLeft: '10px', gap: 6 }}>
               <Select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
@@ -436,12 +436,12 @@ function Dashboard() {
                     <MenuItem key={column.field} value={column.field}>{column.headerName}</MenuItem>
                   ))}
               </Select>
-            </Box>
 
-            {/* Text to remind the user that they can sort by asc/desc by clicking column headers */}
-            <div className="flex justify-center items-center pb-5">
-              <h4>You can also click on column headers to sort in ascending or descending order!</h4>
-            </div>
+              {/* Text to remind the user that they can sort by asc/desc by clicking column headers */}
+              <div className="flex justify-center items-center text-center w-1/4">
+                <h4>You can also click on column headers to sort in ascending or descending order!</h4>
+              </div>
+            </Box>
           </>
         )}
 
@@ -461,7 +461,7 @@ function Dashboard() {
               params.indexRelativeToCurrentPage % 2 === 0 ? `bg-${theme.palette.primary.white}` : `bg-[${theme.palette.secondary.light}]`
             }
             filterModel={filterModel}
-            onFilterModelChange={(newFilterModel) => setFilterModel(newFilterModel)} 
+            onFilterModelChange={(newFilterModel) => setFilterModel(newFilterModel)}
           />
         </div>
       </Paper >
