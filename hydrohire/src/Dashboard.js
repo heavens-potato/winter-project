@@ -134,14 +134,18 @@ function Dashboard() {
       const uid = user.uid;
       const parentDocRef = doc(db, 'applications', uid);
       const docSnap = await getDoc(parentDocRef);
+
       if (!docSnap.exists()) {
         console.log("Parent document doesn't exist");
         return;
       }
+
       const subCollectionRef = collection(docSnap.ref, 'apps');
       const docRef = doc(subCollectionRef, id);
       await deleteDoc(docRef);
+
       setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+
       console.log(`Deleted application with ID: ${id}`);
     } catch (error) {
       console.error("Error deleting document:", error);
@@ -158,6 +162,19 @@ function Dashboard() {
   };
 
   const displayedColumns = columns.filter(column => selectedColumns.includes(column.field));
+
+  //Filter model prop for dashboard filtering, use a state so that the DataGrid updates each time the user changes a search field
+  const [filterModel, setFilterModel] = useState({
+    items: [
+      //Filter model for the selecting applications by date
+      { field: 'appDate', operator: 'equals', value: date },
+    ],
+  });
+
+  //handleChange for the filterModel
+  const handleFilterModelChange = (newFilterModel) => {
+    setFilterModel(newFilterModel);
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -185,7 +202,7 @@ function Dashboard() {
         return () => { }; // No-op unsubscribe
       }
     };
-    onAuthStateChanged(auth, (us) =>{
+    onAuthStateChanged(auth, (us) => {
       user = us;
       getData();
     })
@@ -443,11 +460,13 @@ function Dashboard() {
             onPageSizeChange={(newSize) => setPageSize(newSize)}
             disableSelectionOnClick
             rowsPerPageOptions={[5, 10, 20]}
-            checkboxSelection={false}
+            checkboxSelection={false} w
             selectionModel={null}
             getRowClassName={(params) =>
               params.indexRelativeToCurrentPage % 2 === 0 ? `bg-${theme.palette.primary.white}` : `bg-[${theme.palette.secondary.light}]`
             }
+            filterModel={filterModel}
+            onFilterModelChange={handleFilterModelChange} 
           />
         </div>
       </Paper >
