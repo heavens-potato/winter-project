@@ -171,11 +171,6 @@ function Dashboard() {
     ],
   });
 
-  //handleChange for the filterModel
-  const handleFilterModelChange = (newFilterModel) => {
-    setFilterModel(newFilterModel);
-  };
-
   useEffect(() => {
     const getData = async () => {
       try {
@@ -466,7 +461,7 @@ function Dashboard() {
               params.indexRelativeToCurrentPage % 2 === 0 ? `bg-${theme.palette.primary.white}` : `bg-[${theme.palette.secondary.light}]`
             }
             filterModel={filterModel}
-            onFilterModelChange={handleFilterModelChange} 
+            onFilterModelChange={(newFilterModel) => setFilterModel(newFilterModel)} 
           />
         </div>
       </Paper >
