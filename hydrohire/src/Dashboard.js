@@ -16,6 +16,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Filter } from '@mui/icons-material';
+import { onAuthStateChanged } from 'firebase/auth';
 
 function Dashboard() {
   //Responsive breakpoint
@@ -86,7 +87,6 @@ function Dashboard() {
     // }
     const addData = async () => {
       try {
-        let user = auth.currentUser;
         const uid = user.uid;
         let parentDocRef = doc(db, 'applications', uid);
         let docSnap = await getDoc(parentDocRef);
@@ -162,7 +162,6 @@ function Dashboard() {
   useEffect(() => {
     const getData = async () => {
       try {
-        let user = auth.currentUser;
         const uid = user.uid;
         const parentDocRef = doc(db, 'applications', uid);
         const docSnap = await getDoc(parentDocRef);
@@ -186,7 +185,10 @@ function Dashboard() {
         return () => { }; // No-op unsubscribe
       }
     };
-    getData();
+    onAuthStateChanged(auth, (us) =>{
+      user = us;
+      getData();
+    })
   }, []);
 
   return (
