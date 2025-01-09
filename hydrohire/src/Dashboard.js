@@ -33,7 +33,7 @@ function Dashboard() {
     { field: 'positionTitle', headerName: 'Position', width: isMobile ? 130 : 175, minWidth: 130 },
     { field: 'companyName', headerName: 'Company', width: isMobile ? 150 : 175, minWidth: 150 },
     { field: 'location', headerName: 'Location', width: isMobile ? 140 : 150, minWidth: 140 },
-    { field: 'appDate', headerName: 'App Date', width: isMobile ? 140 : 150, filterable: false, minWidth: 140 },
+    { field: 'appDate', headerName: 'App Date', width: isMobile ? 140 : 150, minWidth: 140 },
     { field: 'salary', headerName: 'Salary', width: isMobile ? 120 : 150, filterable: false, minWidth: 120 },
     { field: 'description', headerName: 'Description', width: 160, minWidth: 160, flex: 1, filterable: false },
     { field: 'status', headerName: 'Status', width: isMobile ? 120 : 150, minWidth: 120, editable: true, filterable: false },
@@ -164,10 +164,10 @@ function Dashboard() {
 
   const displayedColumns = columns.filter(column => selectedColumns.includes(column.field));
 
-  //Filter model prop for dashboard filtering, use a state so that the DataGrid updates each time the user changes a search field
+  //Filter models are set here
   const [filterModel, setFilterModel] = useState({
     items: [
-      //Filter model for the selecting applications by date
+      //filter model for the application date
       { field: 'appDate', operator: 'equals', value: date },
     ],
   });
