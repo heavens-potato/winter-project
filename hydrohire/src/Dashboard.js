@@ -43,6 +43,8 @@ function Dashboard() {
       headerName: 'Actions',
       width: isMobile ? 130 : 150,
       minWidth: 30,
+      filterable: false,
+      sortable: false,
       renderCell: (params) => (
         <Box sx={{ display: 'flex', gap: '8px' }}>
           {/* Edit Icon */}
@@ -449,6 +451,7 @@ function Dashboard() {
         {/* DataGrid */}
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid
+            disableColumnSelector
             rows={rows}
             columns={displayedColumns}
             pageSize={pageSize}
