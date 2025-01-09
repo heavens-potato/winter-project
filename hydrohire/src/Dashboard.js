@@ -15,7 +15,6 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import FilterListIcon from '@mui/icons-material/FilterList';
-import { Filter } from '@mui/icons-material';
 import { onAuthStateChanged } from 'firebase/auth';
 
 function Dashboard() {
@@ -41,7 +40,9 @@ function Dashboard() {
     {
       field: 'actions',
       headerName: 'Actions',
+      sortable: false,
       width: isMobile ? 130 : 150,
+      filterable: false,
       minWidth: 30,
       renderCell: (params) => (
         <Box sx={{ display: 'flex', gap: '8px' }}>
@@ -445,7 +446,6 @@ function Dashboard() {
           </>
         )}
 
-
         {/* DataGrid */}
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid
@@ -454,6 +454,7 @@ function Dashboard() {
             pageSize={pageSize}
             onPageSizeChange={(newSize) => setPageSize(newSize)}
             disableSelectionOnClick
+            disableColumnSelector
             rowsPerPageOptions={[5, 10, 20]}
             checkboxSelection={false} w
             selectionModel={null}
