@@ -154,15 +154,11 @@ function Dashboard() {
         }
     }
 
-    const handleSearchChange = (event) => {
-        setSearch(event.target.value);
-        console.log(event.target);
-    };
-
     const handleColumnsChange = (event) => {
         setSelectedColumns(event.target.value);
     };
 
+    //status onchange function and status filtering logic
     const handleStatusChange = (event) => {
         const selectedStatus = event.target.value; // Get user selected status
         setStatus(selectedStatus); // Update state to reflect selected status
@@ -175,6 +171,7 @@ function Dashboard() {
         }
     };
 
+    //Date onchange function and date filtering logic
     const handleDateChange = (event) => {
       const selectedDate = event.target.value; //get user selected date
       setDate(selectedDate); //update state to reflected selected date
@@ -185,6 +182,12 @@ function Dashboard() {
         setRows(allRows.filter((row) => row.appDate === selectedDate)); // Filter based on selected date
       }
     }
+
+    //Search onChange function and search bar filtering logic
+    const handleSearchChange = (event) => {
+      setSearch(event.target.value);
+      console.log(event.target);
+    };
 
     useEffect(() => {
         const getData = async () => {
