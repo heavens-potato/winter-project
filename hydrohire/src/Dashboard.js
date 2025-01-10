@@ -185,8 +185,14 @@ function Dashboard() {
 
     //Search onChange function and search bar filtering logic
     const handleSearchChange = (event) => {
-      setSearch(event.target.value);
-      console.log(event.target);
+      const search = event.target.value;
+      setSearch(search);
+      
+      if(search === "") {
+        setRows(allRows);
+      } else {
+        setRows(allRows.filter((row) => row.positionTitle.includes(search) || row.companyName.includes(search) || row.location.includes(search)));
+      }
     };
 
     useEffect(() => {
