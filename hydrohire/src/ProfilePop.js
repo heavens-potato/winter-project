@@ -25,7 +25,7 @@ function validateEmail(email) {
 }
 
 function ProfilePop({ onClose }) {
-  //Firebase getters
+  // Firebase getters
   const auth = getAuth();
   const db = getFirestore();
 
@@ -54,34 +54,35 @@ function ProfilePop({ onClose }) {
   const handleSave = async () => {
     setErrorMessage('');
     setSuccessMessage('');
-  
+
     if (!validateEmail(email)) {
       setErrorMessage('Invalid email');
       return;
     }
-  
+
     try {
       if (!user) {
         setErrorMessage('Not logged in.');
         return;
       }
-  
+
       if (displayName !== user.displayName) {
         await updateProfile(user, { displayName });
         console.log("Display name updated");
-  
+
         const userDocRef = doc(db, 'users', user.uid);
         await updateDoc(userDocRef, { displayName });
         console.log("Display name updated in Firestore");
+        setSuccessMessage('Display name updated successfully.');
       }
-  
+
       if (email !== user.email) {
         try {
           const continueUrl = `${window.location.origin}/dashboard`;
           await sendEmailVerification(user, { url: continueUrl });
           setErrorMessage('A verification email has been sent to your email. Please verify before proceeding.');
           console.log("Verification email sent to update email.");
-  
+
           await user.reload();
           if (user.emailVerified) {
             try {
@@ -116,7 +117,7 @@ function ProfilePop({ onClose }) {
       console.log("Error with email/display name update");
       console.error('Error with email/display name update:', error.message);
     }
-  };  
+  };
 
   const handlePasswordChange = async (event) => {
     event.preventDefault();
@@ -331,21 +332,20 @@ function ProfilePop({ onClose }) {
                   >
                     UPDATE PASSWORD
                   </Button>
-
-                  {/* Error & Success Message Display */}
-                  {errorMessage && (
-                    <Typography color="error" align="center">
-                      {errorMessage}
-                    </Typography>
-                  )}
-                  {successMessage && (
-                    <Typography color="success.main" align="center">
-                      {successMessage}
-                    </Typography>
-                  )}
                 </Box>
               </AccordionDetails>
             </Accordion>
+            {/* Error & Success Message Display */}
+            {errorMessage && (
+              <Typography color="error" align="center">
+                {errorMessage}
+              </Typography>
+            )}
+            {successMessage && (
+              <Typography color="success.main" align="center">
+                {successMessage}
+              </Typography>
+            )}
           </div>
 
           {/* Right half container */}
