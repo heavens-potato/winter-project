@@ -175,6 +175,17 @@ function Dashboard() {
         }
     };
 
+    const handleDateChange = (event) => {
+      const selectedDate = event.target.value; //get user selected date
+      setDate(selectedDate); //update state to reflected selected date
+
+      if(selectedDate === "") {
+        setRows(allRows);
+      } else {
+        setRows(allRows.filter((row) => row.appDate === selectedDate)); // Filter based on selected date
+      }
+    }
+
     useEffect(() => {
         const getData = async () => {
             try {
@@ -214,8 +225,7 @@ function Dashboard() {
     // Define initial filter model as a state variable
     const [filterModel, setFilterModel] = useState({
         items: [
-            //filter model for the application date
-            { field: 'appDate', operator: 'equals', value: date },
+
         ],
     });
 
@@ -224,11 +234,10 @@ function Dashboard() {
     useEffect(() => {
         setFilterModel({
             items: [
-                //filter model for the application date
-                { field: 'appDate', operator: 'equals', value: date },
+
             ],
         });
-    }, [date]);
+    }, []);
 
     useEffect(() => {
         const getData = async () => {
@@ -380,7 +389,7 @@ function Dashboard() {
                                         size="small"
                                         type="date"
                                         value={date}
-                                        onChange={(e) => setDate(e.target.value)}
+                                        onChange={handleDateChange}
                                         sx={{
                                             width: '100%',
                                             backgroundColor: 'white',
@@ -458,7 +467,7 @@ function Dashboard() {
                                 size="small"
                                 type="date"
                                 value={date}
-                                onChange={(e) => setDate(e.target.value)}
+                                onChange={handleDateChange}
                                 sx={{
                                     minWidth: 180,
                                     backgroundColor: 'white',
