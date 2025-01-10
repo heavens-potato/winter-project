@@ -355,7 +355,7 @@ function Dashboard() {
                                 <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '20px', gap: 2 }}>
                                     <Select
                                         value={status}
-                                        onChange={(e) => setStatus(e.target.value)}
+                                        onChange={handleStatusChange}
                                         displayEmpty
                                         size="small"
                                         sx={{
