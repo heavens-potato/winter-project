@@ -366,7 +366,7 @@ function Dashboard() {
                                             '& .MuiSelect-select': { padding: '10px' },
                                         }}
                                     >
-                                        <MenuItem value="none">Select Status</MenuItem>
+                                        <MenuItem value="">Select Status</MenuItem>
                                         <MenuItem value="Applied">Applied</MenuItem>
                                         <MenuItem value="Screening">Screening</MenuItem>
                                         <MenuItem value="Interview">Interview</MenuItem>
