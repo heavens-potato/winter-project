@@ -62,7 +62,7 @@ function Dashboard() {
   const [pageSize, setPageSize] = React.useState(5);
   const [search, setSearch] = React.useState('');
   const [status, setStatus] = React.useState('');
-  const [date, setDate] = React.useState('');
+  
   const [selectedColumns, setSelectedColumns] = React.useState(columns.map(col => col.field));
   const [selectedApp, setSelectedApp] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
@@ -164,13 +164,26 @@ function Dashboard() {
 
   const displayedColumns = columns.filter(column => selectedColumns.includes(column.field));
 
-  //Filter models are set here
+  const [date, setDate] = React.useState('');
+
+  //Define initial filter model as a state variable
   const [filterModel, setFilterModel] = useState({
     items: [
       //filter model for the application date
       { field: 'appDate', operator: 'equals', value: date },
     ],
   });
+
+  //Call setFilterModel every time any search input is changed - state changes are asynchronous 
+  //and a useEffect() is necessary to force the filter model to update with each input change
+  useEffect(() => {
+    setFilterModel({
+      items: [
+        //filter model for the application date
+        { field: 'appDate', operator: 'equals', value: date },
+      ],
+    });
+  }, [date]);
 
   useEffect(() => {
     const getData = async () => {
