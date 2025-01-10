@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, IconButton, Typography, Button, Box, InputLabel, OutlinedInput, InputAdornment, FormControl } from '@mui/material';
 import PaletteIcon from '@mui/icons-material/Palette';
-import { signOut } from 'firebase/auth';
+import { signOut, verifyBeforeUpdateEmail } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
@@ -78,29 +78,37 @@ function ProfilePop({ onClose }) {
 
       if (email !== user.email) {
         try {
-          const continueUrl = `${window.location.origin}/dashboard`;
-          await sendEmailVerification(user, { url: continueUrl });
-          setErrorMessage('A verification email has been sent to your email. Please verify before proceeding.');
-          console.log("Verification email sent to update email.");
-
-          await user.reload();
-          if (user.emailVerified) {
-            try {
-              await updateEmail(user, email);
-              console.log("Email updated successfully.");
-              setSuccessMessage('Email updated successfully.');
-            } catch (error) {
-              console.error("Error updating email:", error);
-              setErrorMessage('Failed to update email. Please try again later.');
-            }
-          } else {
-            console.log("Email not yet verified.");
-            setErrorMessage('Please verify your email before proceeding.');
-          }
+          const continueUrl = `${window.location.origin}/ProfilePopUp`;
+            setSuccessMessage('A verification email has been sent to your new email. Please verify to complete the update.');
+            await verifyBeforeUpdateEmail(user, email);
         } catch (error) {
-          console.error("Error sending verification email:", error);
-          setErrorMessage('Failed to send verification email. Please try again later.');
+          console.error("Error", error);
+          setErrorMessage('Failed to update email. Please try again later.');
         }
+        // try {
+        //   const continueUrl = `${window.location.origin}/dashboard`;
+        //   await sendEmailVerification(user, { url: continueUrl });
+        //   setErrorMessage('A verification email has been sent to your email. Please verify before proceeding.');
+        //   console.log("Verification email sent to update email.");
+
+        //   await user.reload();
+        //   if (user.emailVerified) {
+        //     try {
+        //       await updateEmail(user, email);
+        //       console.log("Email updated successfully.");
+        //       setSuccessMessage('Email updated successfully.');
+        //     } catch (error) {
+        //       console.error("Error updating email:", error);
+        //       setErrorMessage('Failed to update email. Please try again later.');
+        //     }
+        //   } else {
+        //     console.log("Email not yet verified.");
+        //     setErrorMessage('Please verify your email before proceeding.');
+        //   }
+        // } catch (error) {
+        //   console.error("Error sending verification email:", error);
+        //   setErrorMessage('Failed to send verification email. Please try again later.');
+        // }
       }
     } catch (error) {
       if (error.code === 'auth/requires-recent-login') {
