@@ -154,6 +154,7 @@ const ApplicationPopup = ({
                     >
                         <MenuItem value="" disabled>Status</MenuItem>
                         <MenuItem value="Applied">Applied</MenuItem>
+                        <MenuItem value="Screening">Screening</MenuItem>
                         <MenuItem value="Interview">Interview</MenuItem>
                         <MenuItem value="Offer">Offer</MenuItem>
                         <MenuItem value="Rejected">Rejected</MenuItem>
