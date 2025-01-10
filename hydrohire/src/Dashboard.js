@@ -191,7 +191,9 @@ function Dashboard() {
       if(search === "") {
         setRows(allRows);
       } else {
-        setRows(allRows.filter((row) => row.positionTitle.includes(search) || row.companyName.includes(search) || row.location.includes(search)));
+        setRows(allRows.filter((row) => row.positionTitle.toLowerCase().includes(search.toLowerCase()) || 
+                                        row.companyName.toLowerCase().includes(search.toLowerCase()) || 
+                                        row.location.toLowerCase().includes(search.toLowerCase())));
       }
     };
 
