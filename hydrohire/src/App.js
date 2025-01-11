@@ -98,8 +98,8 @@ function App() {
   const themePink = createTheme({
     palette: {
       primary: {
-        main: '#FF69B4', // Light pink
-        light: '#FF69B4', // Light pink
+        main: '#FF99CC', // Light pink
+        light: '#FF99CC', // Light pink
         dark: '#4D0026', // Dark pink
         white: '#FFFFFF', // White
       },
@@ -161,14 +161,35 @@ function App() {
   const themeElectricBlue = createTheme({
     palette: {
       primary: {
-        main: '#4DF6FF', // Electric Blue
-        light: '#4DF6FF', // Electric Blue
+        main: '#00DAE6', // Electric Blue
+        light: '#00DAE6', // Electric Blue
         dark: '#003033', // Dark electric blue
         white: '#FFFFFF', // White
       },
       secondary: {
         main: '#DFB48A', // Light Brown
         light: '#CCFCFF', // Whiteish electric blue
+      },
+      background: {
+        default: '#FFFFFF', // White
+      },
+    },
+    typography: {
+      fontFamily: '"Poppins", sans-serif',
+    },
+  });
+
+  const themePistachio = createTheme({
+    palette: {
+      primary: {
+        main: '#93C572', // Hunter green
+        light: '#93C572', // Hunter green
+        dark: '#2F481E', // Dark hunter green
+        white: '#FFFFFF', // White
+      },
+      secondary: {
+        main: '#DFB48A', // Light Brown
+        light: '#E3F0DB', // Whiteish hunter green
       },
       background: {
         default: '#FFFFFF', // White
@@ -187,7 +208,8 @@ function App() {
     pink: themePink,
     green: themeGreen,
     saffron: themeSaffron,
-    electricBlue: themeElectricBlue
+    electricBlue: themeElectricBlue,
+    pistachio: themePistachio,
   }
 
   //state variable to keep track of the current theme

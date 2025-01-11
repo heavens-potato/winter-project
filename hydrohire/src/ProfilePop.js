@@ -376,16 +376,17 @@ function ProfilePop({ onClose }) {
                   <h3 className="text-3xl font-bold">Theme Color</h3>
                 </div>
                 <div className="flex flex-row gap-2  mt-0 pt-0 top-0 justify-start">
-                  <CircleIcon onClick={() => setCurrentTheme('default')} sx={{color: '#2A324B', cursor: 'pointer' }} />
-                    {/* vertical line to divide default colors from custom colors */}
-                    <div style={{ borderRight: '2px solid', borderColor: (theme) => theme.palette.primary.dark}}/>
+                  <CircleIcon onClick={() => setCurrentTheme('default')} sx={{ color: '#2A324B', cursor: 'pointer' }} />
+                  {/* vertical line to divide default colors from custom colors */}
+                  <div style={{ borderRight: '2px solid', borderColor: (theme) => theme.palette.primary.dark }} />
+                  <CircleIcon onClick={() => setCurrentTheme('pink')} sx={{ color: '#FF99CC', cursor: 'pointer' }} />
                   <CircleIcon onClick={() => setCurrentTheme('orange')} sx={{ color: '#FFB165', cursor: 'pointer' }} />
+                  <CircleIcon onClick={() => setCurrentTheme('saffron')} sx={{ color: '#F4C430', cursor: 'pointer' }} />
+                  <CircleIcon onClick={() => setCurrentTheme('pistachio')} sx={{ color: '#93C572', cursor: 'pointer' }} />
+                  <CircleIcon onClick={() => setCurrentTheme('green')} sx={{ color: '#50C878', cursor: 'pointer' }} />
+                  <CircleIcon onClick={() => setCurrentTheme('electricBlue')} sx={{ color: '#00DAE6', cursor: 'pointer' }} />
                   <CircleIcon onClick={() => setCurrentTheme('lightBlue')} sx={{ color: '#6FA9CD', cursor: 'pointer' }} />
                   <CircleIcon onClick={() => setCurrentTheme('violet')} sx={{ color: '#CF9FFF', cursor: 'pointer' }} />
-                  <CircleIcon onClick={() => setCurrentTheme('pink')} sx={{ color: '#FF69B4', cursor: 'pointer' }} />
-                  <CircleIcon onClick={() => setCurrentTheme('green')} sx={{ color: '#50C878', cursor: 'pointer' }} />
-                  <CircleIcon onClick={() => setCurrentTheme('saffron')} sx={{ color: '#F4C430', cursor: 'pointer' }} />
-                  <CircleIcon onClick={() => setCurrentTheme('electricBlue')} sx={{ color: '#4DF6FF', cursor: 'pointer' }} />
                 </div>
               </div>
 
