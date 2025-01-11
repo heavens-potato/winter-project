@@ -30,13 +30,13 @@ function Dashboard() {
     }, []);
 
     const columns = [
-        { field: 'positionTitle', headerName: 'Position', width: isMobile ? 130 : 175, minWidth: 130, flex: 1 },
-        { field: 'companyName', headerName: 'Company', width: isMobile ? 150 : 175, minWidth: 150, flex: 1,  },
-        { field: 'location', headerName: 'Location', width: isMobile ? 140 : 150, minWidth: 140, flex: 1,  },
-        { field: 'appDate', headerName: 'App Date', width: isMobile ? 140 : 150, minWidth: 140, flex: 1,  },
-        { field: 'salary', headerName: 'Salary', width: isMobile ? 120 : 150, filterable: false, minWidth: 120, flex: 1, },
+        { field: 'positionTitle', headerName: 'Position', width: isMobile ? 130 : 175, minWidth: 130 },
+        { field: 'companyName', headerName: 'Company', width: isMobile ? 150 : 175, minWidth: 150 },
+        { field: 'location', headerName: 'Location', width: isMobile ? 140 : 150, minWidth: 140 },
+        { field: 'appDate', headerName: 'App Date', width: isMobile ? 140 : 150, minWidth: 140 },
+        { field: 'salary', headerName: 'Salary', width: isMobile ? 120 : 150, filterable: false, minWidth: 120 },
         { field: 'description', headerName: 'Description', width: isMobile ? 120 : 160, minWidth: 160, flex: 1, filterable: false },
-        { field: 'status', headerName: 'Status', width: isMobile ? 120 : 150, minWidth: 120, flex: 1, editable: true, filterable: false },
+        { field: 'status', headerName: 'Status', width: isMobile ? 120 : 150, minWidth: 120, editable: true, filterable: false },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -45,7 +45,7 @@ function Dashboard() {
             filterable: false,
             minWidth: 30,
             renderCell: (params) => (
-                <Box sx={{ display: 'flex', gap: '8px' }}>
+                <Box sx={{ display: 'flex', gap: '8px'}}>
                     {/* Edit Icon */}
                     <IconButton onClick={() => handleEditClick(params.row)}>
                         <EditIcon />
