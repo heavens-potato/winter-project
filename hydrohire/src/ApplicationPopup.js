@@ -147,10 +147,10 @@ const ApplicationPopup = ({
                         fullWidth
                         displayEmpty
                         variant="outlined"
-                        required
                         name="status"
                         onChange={handleInputChange}
                         sx={{ backgroundColor: 'white' }}
+                        required
                     >
                         <MenuItem value="" disabled>Status</MenuItem>
                         <MenuItem value="Applied">Applied</MenuItem>

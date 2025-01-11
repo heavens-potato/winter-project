@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material';
 import './output.css';
@@ -169,7 +169,16 @@ function App() {
   }
 
   //state variable to keep track of the current theme
-  const [currentTheme, setCurrentTheme] = useState('default');
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    //use the theme saved in local storage or default if there is none
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme || 'default';
+  });
+
+  //useEffect that adds the current theme into local storage
+  useEffect(() => {
+    localStorage.setItem('theme', currentTheme);
+  }, [currentTheme]);
 
   return (
 
