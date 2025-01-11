@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material';
 import './output.css';
@@ -7,6 +7,28 @@ import Landing from './Landing';
 import Login from './Login';
 import SignUp from './SignUp';
 import Dashboard from './Dashboard';
+
+const themeDefault = createTheme({
+  palette: {
+    primary: {
+      main: '#FFB165', // Light Orange
+      light: '#6FA9CD', // Light Blue
+      dark: '#2A324B', // Dark Blue
+      white: '#FFFFFF', // White
+    },
+    secondary: {
+      main: '#DFB48A', // Light Brown
+      light: '#FFD9B3', // Light Blue-gray
+
+    },
+    background: {
+      default: '#FFFFFF', // White
+    },
+  },
+  typography: {
+    fontFamily: '"Poppins", sans-serif',
+  },
+});
 
 const themeOrange = createTheme({
   palette: {
@@ -157,8 +179,10 @@ const themeRed = createTheme({
 });
 
 function App() {
+  const [theme, setTheme] = useState(themeDefault); 
+
   return (
-    <ThemeProvider theme={themeOrange}>
+    <ThemeProvider theme={theme}>
       <Router>
         <AppContent />
       </Router>

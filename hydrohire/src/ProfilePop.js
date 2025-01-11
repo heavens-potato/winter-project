@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, IconButton, Typography, Button, Box, InputLabel, OutlinedInput, InputAdornment, FormControl } from '@mui/material';
+import { TextField, IconButton, Typography, Button, Box, InputLabel, OutlinedInput, InputAdornment, FormControl, Select } from '@mui/material';
 import PaletteIcon from '@mui/icons-material/Palette';
 import { signOut, verifyBeforeUpdateEmail } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -82,8 +82,8 @@ function ProfilePop({ onClose }) {
       if (email !== user.email) {
         try {
           const continueUrl = `${window.location.origin}/ProfilePopUp`;
-            setSuccessMessage('A verification email has been sent to your new email. Please verify to complete the update.');
-            await verifyBeforeUpdateEmail(user, email);
+          setSuccessMessage('A verification email has been sent to your new email. Please verify to complete the update.');
+          await verifyBeforeUpdateEmail(user, email);
         } catch (error) {
           console.error("Error", error);
           setErrorMessage('Failed to update email. Please try again later.');
@@ -179,7 +179,7 @@ function ProfilePop({ onClose }) {
       className="flex items-center justify-center h-screen w-screen overflow-scroll"
     >
       <div className="flex flex-col items-center justify-center w-screen">
-        <div className="flex flex-row justify-between items-center p-3 md:p-10 rounded-t-lg w-4/5 lg:w-3/5" style={{ borderRadius: '20px 20px 0 0', backgroundColor: theme.palette.primary.main}}>
+        <div className="flex flex-row justify-between items-center p-3 md:p-10 rounded-t-lg w-4/5 lg:w-3/5" style={{ borderRadius: '20px 20px 0 0', backgroundColor: theme.palette.primary.main }}>
           <h2 className="text-4xl font-bold">Hi, {user.displayName}</h2>
           <HighlightOffIcon onClick={onClose} sx={{ cursor: 'pointer' }} />
         </div>
@@ -367,7 +367,7 @@ function ProfilePop({ onClose }) {
                 <PaletteIcon />
                 <h3 className="text-3xl font-bold">Theme Color</h3>
               </div>
-              
+
               {/* Button container */}
               <div className="pt-40 md:pt-40 w-full items-center flex justify-center md:justify-end">
                 {/* Logout Button */}
