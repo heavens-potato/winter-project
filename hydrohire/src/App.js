@@ -36,7 +36,7 @@ function App() {
       primary: {
         main: '#FFB165', // Light Orange
         light: '#FFB165', // Light Orange
-        dark: '#663300', // Dark Orange
+        dark: '#4D2600', // Dark Orange
         white: '#FFFFFF', // White
       },
       secondary: {
@@ -79,7 +79,7 @@ function App() {
       primary: {
         main: '#CF9FFF', // Light violet
         light: '#CF9FFF', // Light violet
-        dark: '#330066', // Dark Violet
+        dark: '#26004D', // Dark Violet
         white: '#FFFFFF', // White
       },
       secondary: {
@@ -100,7 +100,7 @@ function App() {
       primary: {
         main: '#FF69B4', // Light pink
         light: '#FF69B4', // Light pink
-        dark: '#660033', // Dark pink
+        dark: '#4D0026', // Dark pink
         white: '#FFFFFF', // White
       },
       secondary: {
@@ -121,7 +121,7 @@ function App() {
       primary: {
         main: '#50C878', // Green
         light: '#50C878', // Green
-        dark: '#184E2A', // Dark green
+        dark: '#0C2715', // Dark green
         white: '#FFFFFF', // White
       },
       secondary: {
@@ -142,7 +142,7 @@ function App() {
       primary: {
         main: '#F4C430', // Saffron
         light: '#F4C430', // Saffron
-        dark: '#614A05', // Dark saffron
+        dark: '#302503', // Dark saffron
         white: '#FFFFFF', // White
       },
       secondary: {
@@ -165,14 +165,14 @@ function App() {
     violet: themeViolet,
     pink: themePink,
     green: themeGreen,
-    saffron: themeSaffron
+    saffron: themeSaffron,
   }
 
   //state variable to keep track of the current theme
   const [currentTheme, setCurrentTheme] = useState(() => {
     //use the theme saved in local storage or default if there is none
     const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'default';
+    return savedTheme || 'defaultDark';
   });
 
   //useEffect that adds the current theme into local storage

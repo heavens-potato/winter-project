@@ -73,7 +73,7 @@ function Navbar() {
           variant="h6"
           sx={{
             flexGrow: 1,
-            color: '#313541',
+            color: (theme) => theme.palette.primary.dark,
             fontSize: 36,
             fontWeight: 'bold',
             padding: '1rem',
@@ -115,10 +115,10 @@ function Navbar() {
 
           // If the screen is above mobile width, render the full navbar 
           <Box sx={{ display: 'flex', gap: 6, padding: '1rem' }}>
-            <Button component={Link} to="/about" sx={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>
+            <Button component={Link} to="/about" sx={{ color: (theme) => theme.palette.primary.dark, fontSize: '20px', fontWeight: 'bold' }}>
               About
             </Button>
-            <Button component={Link} to="/contact" sx={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>
+            <Button component={Link} to="/contact" sx={{ color: (theme) => theme.palette.primary.dark, fontSize: '20px', fontWeight: 'bold' }}>
               Contact
             </Button>
             {isLoggedIn ? (
@@ -144,16 +144,17 @@ function Navbar() {
                   component={Link}
                   to="/dashboard"
                   sx={{
-                    color: 'white',
+                    color: (theme) => theme.palette.primary.white,
                     fontSize: '20px',
                     fontWeight: 'bold',
-                    backgroundColor: 'black',
-                    border: '3px solid black',
+                    backgroundColor: (theme) => theme.palette.primary.dark,
+                    border: '3px solid',
+                    borderColor: (theme) => theme.palette.primary.dark,
                     borderRadius: '30px',
                     padding: '0.5rem 1.5rem',
                     '&:hover': {
-                      backgroundColor: 'white',
-                      color: 'black',
+                      backgroundColor: (theme) => theme.palette.primary.white,
+                      color: (theme) => theme.palette.primary.dark,
                     },
                   }}
                 >
@@ -165,15 +166,16 @@ function Navbar() {
                   onClick={openProfilePop}
                   sx={{
                     alignItems: 'center',
-                    color: 'white',
-                    backgroundColor: 'black',
+                    color: (theme) => theme.palette.primary.white,
+                    backgroundColor: (theme) => theme.palette.primary.dark,
                     fontSize: '50px',
-                    border: '3px solid black',
+                    border: '3px solid',
+                    borderColor: (theme) => theme.palette.primary.dark,
                     borderRadius: '30px',
                     cursor: 'pointer',
                     '&:hover': {
-                      backgroundColor: 'white',
-                      color: 'black',
+                      backgroundColor: (theme) => theme.palette.primary.white,
+                      color: (theme) => theme.palette.primary.dark,
                     },
                   }}
                 />
