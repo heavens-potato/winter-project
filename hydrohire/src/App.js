@@ -18,7 +18,7 @@ const themeDefault = createTheme({
     },
     secondary: {
       main: '#DFB48A', // Light Brown
-      light: '#FFD9B3', // Light Blue-gray
+      light: '#D9EAF5', // Light Blue-gray
 
     },
     background: {
