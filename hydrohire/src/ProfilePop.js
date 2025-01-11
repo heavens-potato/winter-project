@@ -203,7 +203,7 @@ function ProfilePop({ onClose }) {
               sx={{
                 fontSize: 20,
                 backgroundColor: (theme) => theme.palette.primary.main,
-                color: 'white',
+                color: theme.palette.primary.white,
                 '&:hover': {
                   backgroundColor: (theme) => theme.palette.primary.dark,
                   color: (theme) => theme.palette.primary.white,
@@ -367,7 +367,7 @@ function ProfilePop({ onClose }) {
                 <PaletteIcon />
                 <h3 className="text-3xl font-bold">Theme Color</h3>
               </div>
-
+              
               {/* Button container */}
               <div className="pt-40 md:pt-40 w-full items-center flex justify-center md:justify-end">
                 {/* Logout Button */}

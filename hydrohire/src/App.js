@@ -8,10 +8,32 @@ import Login from './Login';
 import SignUp from './SignUp';
 import Dashboard from './Dashboard';
 
-const theme = createTheme({
+const themeOrange = createTheme({
   palette: {
     primary: {
       main: '#FFB165', // Light Orange
+      light: '#FFB165', // Light Orange
+      dark: '#663300', // Dark Orange
+      white: '#FFFFFF', // White
+    },
+    secondary: {
+      main: '#DFB48A', // Light Brown
+      light: '#FFD9B3', // Light Orange-gray
+
+    },
+    background: {
+      default: '#FFFFFF', // White
+    },
+  },
+  typography: {
+    fontFamily: '"Poppins", sans-serif',
+  },
+});
+
+const themeLightBlue = createTheme({
+  palette: {
+    primary: {
+      main: '#6FA9CD', // Light Blue
       light: '#6FA9CD', // Light Blue
       dark: '#2A324B', // Dark Blue
       white: '#FFFFFF', // White
@@ -29,9 +51,114 @@ const theme = createTheme({
   },
 });
 
+const themeViolet = createTheme({
+  palette: {
+    primary: {
+      main: '#CF9FFF', // Light violet
+      light: '#CF9FFF', // Light violet
+      dark: '#330066', // Dark Violet
+      white: '#FFFFFF', // White
+    },
+    secondary: {
+      main: '#DFB48A', // Light Brown
+      light: '#E6CCFF', // Light Blue-gray
+    },
+    background: {
+      default: '#FFFFFF', // White
+    },
+  },
+  typography: {
+    fontFamily: '"Poppins", sans-serif',
+  },
+});
+
+const themePink = createTheme({
+  palette: {
+    primary: {
+      main: '#FF69B4', // Light pink
+      light: '#FF69B4', // Light pink
+      dark: '#660033', // Dark pink
+      white: '#FFFFFF', // White
+    },
+    secondary: {
+      main: '#DFB48A', // Light Brown
+      light: '#FFCCE6', // Light Pink-white
+    },
+    background: {
+      default: '#FFFFFF', // White
+    },
+  },
+  typography: {
+    fontFamily: '"Poppins", sans-serif',
+  },
+});
+
+const themeGreen = createTheme({
+  palette: {
+    primary: {
+      main: '#50C878', // Green
+      light: '#50C878', // Green
+      dark: '#184E2A', // Dark green
+      white: '#FFFFFF', // White
+    },
+    secondary: {
+      main: '#DFB48A', // Light Brown
+      light: '#D8F3E1', // Whiteish Green
+    },
+    background: {
+      default: '#FFFFFF', // White
+    },
+  },
+  typography: {
+    fontFamily: '"Poppins", sans-serif',
+  },
+});
+
+const themeSaffron = createTheme({
+  palette: {
+    primary: {
+      main: '#F4C430', // Saffron
+      light: '#F4C430', // Saffron
+      dark: '#614A05', // Dark saffron
+      white: '#FFFFFF', // White
+    },
+    secondary: {
+      main: '#DFB48A', // Light Brown
+      light: '#FCF1CF', // Whiteish Saffron
+    },
+    background: {
+      default: '#FFFFFF', // White
+    },
+  },
+  typography: {
+    fontFamily: '"Poppins", sans-serif',
+  },
+});
+
+const themeRed = createTheme({
+  palette: {
+    primary: {
+      main: '#DE3163', // Red
+      light: '#DE3163', // Red
+      dark: '#614A05', // Dark saffron
+      white: '#FFFFFF', // White
+    },
+    secondary: {
+      main: '#DFB48A', // Light Brown
+      light: '#FCF1CF', // Whiteish Saffron
+    },
+    background: {
+      default: '#FFFFFF', // White
+    },
+  },
+  typography: {
+    fontFamily: '"Poppins", sans-serif',
+  },
+});
+
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeOrange}>
       <Router>
         <AppContent />
       </Router>

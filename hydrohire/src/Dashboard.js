@@ -537,7 +537,7 @@ function Dashboard() {
                         checkboxSelection={false} w
                         selectionModel={null}
                         getRowClassName={(params) =>
-                            params.indexRelativeToCurrentPage % 2 === 0 ? `bg-${theme.palette.primary.white}` : `bg-[${theme.palette.secondary.light}]`
+                            params.indexRelativeToCurrentPage % 2 === 0 ? `bg-${theme.palette.primary.main}` : `bg-[${theme.palette.secondary.light}]`
                         }
                         filterModel={filterModel}
                         onFilterModelChange={(newFilterModel) => setFilterModel(newFilterModel)}
