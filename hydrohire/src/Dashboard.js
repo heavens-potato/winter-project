@@ -30,9 +30,9 @@ function Dashboard() {
     }, []);
 
     const columns = [
-        { field: 'positionTitle', headerName: 'Position', width: isMobile ? 130 : 175, minWidth: 130 },
-        { field: 'companyName', headerName: 'Company', width: isMobile ? 150 : 175, minWidth: 150 },
-        { field: 'location', headerName: 'Location', width: isMobile ? 140 : 150, minWidth: 140 },
+        { field: 'positionTitle', headerName: 'Position', width: isMobile ? 130 : 175, flex: 1, minWidth: 130 },
+        { field: 'companyName', headerName: 'Company', width: isMobile ? 150 : 175, flex: 1, minWidth: 150 },
+        { field: 'location', headerName: 'Location', width: isMobile ? 140 : 150, flex: 1, minWidth: 140 },
         { field: 'appDate', headerName: 'App Date', width: isMobile ? 140 : 150, minWidth: 140 },
         { field: 'salary', headerName: 'Salary', width: isMobile ? 120 : 150, filterable: false, minWidth: 120 },
         { field: 'description', headerName: 'Description', width: isMobile ? 120 : 160, minWidth: 160, flex: 1, filterable: false },
