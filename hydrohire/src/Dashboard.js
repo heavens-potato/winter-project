@@ -20,6 +20,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 function Dashboard() {
     //Responsive breakpoint
     const theme = useTheme();
+
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     //Get current user to display their name and application CRUD operations
@@ -281,6 +282,8 @@ function Dashboard() {
             getData();
         })
     }, []);
+
+
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>

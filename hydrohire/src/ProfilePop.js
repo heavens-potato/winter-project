@@ -14,6 +14,9 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { getAuth, updateProfile, updatePassword, updateEmail, reauthenticateWithCredential, EmailAuthProvider, sendEmailVerification } from 'firebase/auth';
 import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 import { useTheme } from '@mui/material/styles';
+import { useContext } from 'react';
+import { ThemeContext } from './App';
+import CircleIcon from '@mui/icons-material/Circle';
 
 function checkPasswordStrength(password) {
   const passwordRegex = new RegExp(/^(?=.*[@$!%*?&])(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d@$!%?&]{8,}$/);
@@ -31,6 +34,9 @@ function ProfilePop({ onClose }) {
   const db = getFirestore();
 
   const theme = useTheme();
+
+  //import the theme context
+  const { currentTheme, setCurrentTheme } = useContext(ThemeContext);
 
   //get currentUser
   const user = auth.currentUser;
@@ -172,6 +178,7 @@ function ProfilePop({ onClose }) {
     }
   }
 
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -186,7 +193,7 @@ function ProfilePop({ onClose }) {
         <div className="flex flex-col md:flex-row space-evenly bg-white pl-5 md:pl-10 pr-5 md:pr-10 gap-5 rounded-b-lg w-4/5 lg:w-3/5" style={{ borderRadius: '0 0 20px 20px' }}>
 
           {/* Right half container */}
-          <div className="flex flex-col mt-5 md:mt-10 w-full md:w-1/2">
+          <div className="flex flex-col mt-5 md:mt-10 w-full md:w-1/2 md: mb-5">
             <div className="flex flex-row gap-5 items-center">
               <SettingsIcon />
               <h3 className="text-3xl font-bold">Edit Profile</h3>
@@ -225,7 +232,7 @@ function ProfilePop({ onClose }) {
                 aria-controls="panel-content"
                 id="panel-header"
                 sx={{
-                  color: 'white',
+                  color: (theme) => theme.palette.primary.white,
                   backgroundColor: (theme) => theme.palette.primary.dark,
                   borderRadius: 2,
                 }}
@@ -360,16 +367,27 @@ function ProfilePop({ onClose }) {
           </div>
 
           {/* Right half container */}
-          <div className="flex flex-col justify-between h-full w-full md:w-1/2 mb-10">
+          <div className="flex flex-col justify-between w-full md:w-1/2 mb-10">
             {/* Palette controls */}
-            <div>
-              <div className="flex flex-row gap-5 mt-10 items-center pb-0 md:pb-40">
-                <PaletteIcon />
-                <h3 className="text-3xl font-bold">Theme Color</h3>
+            <div className='flex flex-col h-full justify-between'>
+              <div className="flex flex-col pb-0 md:pb-50">
+                <div className="flex flex-row gap-5 mt-10 items-center pb-5 md:pb-10">
+                  <PaletteIcon />
+                  <h3 className="text-3xl font-bold">Theme Color</h3>
+                </div>
+                <div className="flex flex-row gap-2 ml-10 mt-0 pt-0 top-0 justify-start">
+                  <CircleIcon onClick={() => setCurrentTheme('default')} sx={{ color: '#2A324B', cursor: 'pointer' }} />
+                  <CircleIcon onClick={() => setCurrentTheme('orange')} sx={{ color: '#FFB165', cursor: 'pointer' }} />
+                  <CircleIcon onClick={() => setCurrentTheme('lightBlue')} sx={{ color: '#6FA9CD', cursor: 'pointer' }} />
+                  <CircleIcon onClick={() => setCurrentTheme('violet')} sx={{ color: '#CF9FFF', cursor: 'pointer' }} />
+                  <CircleIcon onClick={() => setCurrentTheme('pink')} sx={{ color: '#FF69B4', cursor: 'pointer' }} />
+                  <CircleIcon onClick={() => setCurrentTheme('green')} sx={{ color: '#50C878', cursor: 'pointer' }} />
+                  <CircleIcon onClick={() => setCurrentTheme('saffron')} sx={{ color: '#F4C430', cursor: 'pointer' }} />
+                </div>
               </div>
 
               {/* Button container */}
-              <div className="pt-40 md:pt-40 w-full items-center flex justify-center md:justify-end">
+              <div className="w-full items-center flex justify-center md:justify-end pt-20 md:pt-0">
                 {/* Logout Button */}
                 <Button
                   onClick={handleLogout}
