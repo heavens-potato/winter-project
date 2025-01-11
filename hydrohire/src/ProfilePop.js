@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, IconButton, Typography, Button, Box, InputLabel, OutlinedInput, InputAdornment, FormControl, Select } from '@mui/material';
 import PaletteIcon from '@mui/icons-material/Palette';
 import { signOut, verifyBeforeUpdateEmail } from 'firebase/auth';
@@ -32,12 +32,12 @@ function ProfilePop({ onClose }) {
 
   const theme = useTheme();
 
-  // Get current user
+  //get currentUser
   const user = auth.currentUser;
 
   // States for updating email, display name, and password
   const [email, setEmail] = useState(user?.email || '');
-  const [displayName, setDisplayName] = useState(user.displayName);
+  const [displayName, setDisplayName] = useState(user?.displayName || '');
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -180,7 +180,7 @@ function ProfilePop({ onClose }) {
     >
       <div className="flex flex-col items-center justify-center w-screen">
         <div className="flex flex-row justify-between items-center p-3 md:p-10 rounded-t-lg w-4/5 lg:w-3/5" style={{ borderRadius: '20px 20px 0 0', backgroundColor: theme.palette.primary.main }}>
-          <h2 className="text-4xl font-bold">Hi, {user.displayName}</h2>
+          <h2 className="text-4xl font-bold">Hi, {user.displayName || "there"}</h2>
           <HighlightOffIcon onClick={onClose} sx={{ cursor: 'pointer' }} />
         </div>
         <div className="flex flex-col md:flex-row space-evenly bg-white pl-5 md:pl-10 pr-5 md:pr-10 gap-5 rounded-b-lg w-4/5 lg:w-3/5" style={{ borderRadius: '0 0 20px 20px' }}>
