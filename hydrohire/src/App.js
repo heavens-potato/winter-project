@@ -58,7 +58,7 @@ function App() {
       primary: {
         main: '#6FA9CD', // Light Blue
         light: '#6FA9CD', // Light Blue
-        dark: '#2A324B', // Dark Blue
+        dark: '#0D1C26', // Dark Blue
         white: '#FFFFFF', // White
       },
       secondary: {
@@ -158,6 +158,27 @@ function App() {
     },
   });
 
+  const themeElectricBlue = createTheme({
+    palette: {
+      primary: {
+        main: '#4DF6FF', // Electric Blue
+        light: '#4DF6FF', // Electric Blue
+        dark: '#003033', // Dark electric blue
+        white: '#FFFFFF', // White
+      },
+      secondary: {
+        main: '#DFB48A', // Light Brown
+        light: '#CCFCFF', // Whiteish electric blue
+      },
+      background: {
+        default: '#FFFFFF', // White
+      },
+    },
+    typography: {
+      fontFamily: '"Poppins", sans-serif',
+    },
+  });
+
   const themes = {
     default: themeDefault,
     orange: themeOrange,
@@ -166,6 +187,7 @@ function App() {
     pink: themePink,
     green: themeGreen,
     saffron: themeSaffron,
+    electricBlue: themeElectricBlue
   }
 
   //state variable to keep track of the current theme
