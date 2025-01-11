@@ -13,6 +13,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { getAuth, updateProfile, updatePassword, updateEmail, reauthenticateWithCredential, EmailAuthProvider, sendEmailVerification } from 'firebase/auth';
 import { getFirestore, doc, updateDoc } from 'firebase/firestore';
+import { useTheme } from '@mui/material/styles';
 
 function checkPasswordStrength(password) {
   const passwordRegex = new RegExp(/^(?=.*[@$!%*?&])(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d@$!%?&]{8,}$/);
@@ -28,6 +29,8 @@ function ProfilePop({ onClose }) {
   // Firebase getters
   const auth = getAuth();
   const db = getFirestore();
+
+  const theme = useTheme();
 
   // Get current user
   const user = auth.currentUser;
@@ -176,7 +179,7 @@ function ProfilePop({ onClose }) {
       className="flex items-center justify-center h-screen w-screen overflow-scroll"
     >
       <div className="flex flex-col items-center justify-center w-screen">
-        <div className="flex flex-row justify-between items-center bg-[#FFB165] p-3 md:p-10 rounded-t-lg w-4/5 lg:w-3/5" style={{ borderRadius: '20px 20px 0 0' }}>
+        <div className="flex flex-row justify-between items-center p-3 md:p-10 rounded-t-lg w-4/5 lg:w-3/5" style={{ borderRadius: '20px 20px 0 0', backgroundColor: theme.palette.primary.main}}>
           <h2 className="text-4xl font-bold">Hi, {user.displayName}</h2>
           <HighlightOffIcon onClick={onClose} sx={{ cursor: 'pointer' }} />
         </div>

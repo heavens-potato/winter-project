@@ -6,8 +6,11 @@ import { auth } from './firebase';
 import { motion } from 'framer-motion';
 import ProfilePop from './ProfilePop';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { useTheme } from '@mui/material/styles';
 
 function ResponsiveNav({ onClose }) {
+    const theme = useTheme();
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
     const [openProfilePopup, setOpenProfilePopup] = useState(false);
@@ -45,7 +48,8 @@ function ResponsiveNav({ onClose }) {
 
     return (
         <motion.div
-            className="bg-[#FFB165] h-screen w-3/5 z-50 absolute right-0"
+            style={{ backgroundColor: theme.palette.primary.main}}
+            className="h-screen w-3/5 z-50 absolute right-0"
             initial={{ x: 100 }}
             animate={{ x: 0 }}
             exit={{ x: 100 }}
