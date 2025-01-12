@@ -204,11 +204,11 @@ function ProfilePop({ onClose }) {
       className="flex items-center justify-center h-screen w-screen overflow-scroll"
     >
       <div className="flex flex-col items-center justify-center w-screen">
-        <div className="flex flex-row justify-between items-center p-3 md:p-10 rounded-t-lg w-4/5 lg:w-3/5" style={{ borderRadius: '20px 20px 0 0', backgroundColor: theme.palette.primary.main }}>
+        <div className="flex flex-row justify-between items-center p-3 md:p-10 rounded-t-lg w-4/5 xl:w-3/5" style={{ borderRadius: '20px 20px 0 0', backgroundColor: theme.palette.primary.main }}>
           <h2 className="text-3xl font-bold">Hi, {user.displayName || "there"}</h2>
           <HighlightOffIcon onClick={onClose} sx={{ cursor: 'pointer' }} />
         </div>
-        <div className="flex flex-col md:flex-row space-evenly bg-white pl-5 md:pl-10 pr-5 md:pr-10 gap-5 rounded-b-lg w-4/5 lg:w-3/5" style={{ borderRadius: '0 0 20px 20px' }}>
+        <div className="flex flex-col md:flex-row space-evenly bg-white pl-5 md:pl-10 pr-5 md:pr-10 gap-5 rounded-b-lg w-4/5 xl:w-3/5" style={{ borderRadius: '0 0 20px 20px' }}>
 
           {/* Right half container */}
           <div className="flex flex-col mt-5 md:mt-10 w-full md:w-1/2 md: mb-5">
@@ -429,7 +429,7 @@ function ProfilePop({ onClose }) {
                 </motion.div>
 
                 <motion.div
-                  className="flex flex-row gap-2 md:gap-1 xl:gap-2  mt-0 pt-0 top-0 justify-start"
+                  className="flex flex-row gap-2 md:gap-1 xl:gap-2 mt-0 pt-0 top-0 justify-start"
                   variants={colorPickerParentVariants}
                   initial="hidden"
                   animate="visible"
