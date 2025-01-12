@@ -513,7 +513,7 @@ function Dashboard() {
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                transition={{ duration: 0.3, delay: 0.5 }}
+                                transition={{ duration: 0.3, delay: 0.7 }}
                             >
                                 <AccordionSummary
                                     expandIcon={<FilterListIcon sx={{ color: (theme) => theme.palette.primary.dark }} />}
