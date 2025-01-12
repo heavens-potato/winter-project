@@ -443,7 +443,8 @@ function Dashboard() {
                 {/* Job Application Tracker */}
                 <motion.div
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: 0.3 }}
                 >
                     <Typography variant="h4" sx={{ marginBottom: '20px', fontSize: 28, fontWeight: 'bold' }}>
@@ -453,7 +454,8 @@ function Dashboard() {
 
                 <motion.div
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: 0.4 }}
                 >
                     <Box sx={{ display: 'flex', justifyContent: { xs: 'center', lg: 'space-between' }, alignItems: 'center', marginBottom: '20px' }}>
@@ -512,7 +514,8 @@ function Dashboard() {
                         <Accordion elevation={0}>
                             <motion.div
                                 initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
                                 transition={{ duration: 0.3, delay: 0.7 }}
                             >
                                 <AccordionSummary
@@ -611,7 +614,8 @@ function Dashboard() {
                         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: '20px', marginLeft: '10px', gap: 6 }}>
                             <motion.div
                                 initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
                                 transition={{ duration: 0.3, delay: 0.5 }}
                             >
                                 <Select
@@ -639,7 +643,8 @@ function Dashboard() {
                             {/* Date Filter */}
                             <motion.div
                                 initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
                                 transition={{ duration: 0.3, delay: 0.6 }}
                             >
                                 <TextField
@@ -666,7 +671,8 @@ function Dashboard() {
                             {/* Columns Displayed */}
                             <motion.div
                                 initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
                                 transition={{ duration: 0.3, delay: 0.7 }}
                             >
                                 <Select
@@ -695,7 +701,8 @@ function Dashboard() {
                             {/* Text to remind the user that they can sort by asc/desc by clicking column headers */}
                             <motion.div
                                 initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
                                 transition={{ duration: 0.3, delay: 0.8 }}
                             >
                                 <div className="flex justify-center items-center text-center w-full">
@@ -711,7 +718,8 @@ function Dashboard() {
                 <motion.div
                     style={{ height: 400, width: '100%' }}
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: 0.9 }}
                 >
                     <DataGrid
