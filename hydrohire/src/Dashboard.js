@@ -13,7 +13,7 @@ import { ThemeProvider, useMediaQuery } from '@mui/system';
 import BarChartComponent from './BarChartComponent';
 import PieChartComponent from './PieChartComponent';
 
-//Accordion imports for responsive filter panel
+// Accordion imports for responsive filter panel
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -23,12 +23,12 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { motion } from 'framer-motion';
 
 function Dashboard() {
-    //Responsive breakpoint
+    // Responsive breakpoint
     const theme = useTheme();
 
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-    //Get current user to display their name and application CRUD operations
+    // Get current user to display their name and application CRUD operations
     let user = auth.currentUser;
 
     React.useEffect(() => {
@@ -98,7 +98,7 @@ function Dashboard() {
         setSelectedTab(newValue);
     };
 
-    const data = useMemo(() => [
+    const chartData = useMemo(() => [
         { name: 'Applied', value: counts.applied },
         { name: 'Screening', value: counts.screening },
         { name: 'Interview', value: counts.interview },
@@ -195,7 +195,7 @@ function Dashboard() {
         setSelectedColumns(event.target.value);
     };
 
-    //status onchange function and status filtering logic
+    // Status onchange function and status filtering logic
     const handleStatusChange = (event) => {
         const selectedStatus = event.target.value; // Get user selected status
         setStatus(selectedStatus); // Update state to reflect selected status
@@ -208,10 +208,10 @@ function Dashboard() {
         }
     };
 
-    //Date onchange function and date filtering logic
+    // Date onchange function and date filtering logic
     const handleDateChange = (event) => {
-        const selectedDate = event.target.value; //get user selected date
-        setDate(selectedDate); //update state to reflected selected date
+        const selectedDate = event.target.value; // Get user selected date
+        setDate(selectedDate); // Update state to reflected selected date
 
         if (selectedDate === "") {
             setRows(allRows);
@@ -220,7 +220,7 @@ function Dashboard() {
         }
     }
 
-    //Search onChange function and search bar filtering logic
+    // Search onChange function and search bar filtering logic
     const handleSearchChange = (event) => {
         const search = event.target.value;
         setSearch(search);
@@ -369,9 +369,9 @@ function Dashboard() {
                                 </Tabs>
                                 <Box sx={{ marginTop: '20px' }}>
                                     {selectedTab === 0 ? (
-                                        <BarChartComponent data={data} />
+                                        <BarChartComponent data={chartData} />
                                     ) : (
-                                        <PieChartComponent data={data} />
+                                        <PieChartComponent data={chartData} />
                                     )}
                                 </Box>
                             </Box>
@@ -386,7 +386,7 @@ function Dashboard() {
                                     <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#f5f5f5' }}>
                                         <Typography variant="h6">Total Applications</Typography>
                                         <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
-                                            {data.find(item => item.name === 'Total')?.total || 0}
+                                            {chartData.find(item => item.name === 'Total')?.total || 0}
                                         </Typography>
                                     </Card>
                                 </Grid>
@@ -395,7 +395,7 @@ function Dashboard() {
                                     <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#e3f2fd' }}>
                                         <Typography variant="h6">Applied</Typography>
                                         <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#0288d1' }}>
-                                            {data.find(item => item.name === 'Applied')?.total || 0}
+                                            {chartData.find(item => item.name === 'Applied')?.total || 0}
                                         </Typography>
                                     </Card>
                                 </Grid>
@@ -404,7 +404,7 @@ function Dashboard() {
                                     <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#e8f5e9' }}>
                                         <Typography variant="h6">Screening</Typography>
                                         <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#388e3c' }}>
-                                            {data.find(item => item.name === 'Screening')?.total || 0}
+                                            {chartData.find(item => item.name === 'Screening')?.total || 0}
                                         </Typography>
                                     </Card>
                                 </Grid>
@@ -413,7 +413,7 @@ function Dashboard() {
                                     <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#fff3e0' }}>
                                         <Typography variant="h6">Interview</Typography>
                                         <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#f57c00' }}>
-                                            {data.find(item => item.name === 'Interview')?.total || 0}
+                                            {chartData.find(item => item.name === 'Interview')?.total || 0}
                                         </Typography>
                                     </Card>
                                 </Grid>
@@ -422,7 +422,7 @@ function Dashboard() {
                                     <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#f1f8e9' }}>
                                         <Typography variant="h6">Offer</Typography>
                                         <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#4caf50' }}>
-                                            {data.find(item => item.name === 'Offer')?.total || 0}
+                                            {chartData.find(item => item.name === 'Offer')?.total || 0}
                                         </Typography>
                                     </Card>
                                 </Grid>
@@ -431,7 +431,7 @@ function Dashboard() {
                                     <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#ffebee' }}>
                                         <Typography variant="h6">Rejected</Typography>
                                         <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#d32f2f' }}>
-                                            {data.find(item => item.name === 'Rejected')?.total || 0}
+                                            {chartData.find(item => item.name === 'Rejected')?.total || 0}
                                         </Typography>
                                     </Card>
                                 </Grid>
