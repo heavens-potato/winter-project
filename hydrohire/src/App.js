@@ -182,14 +182,14 @@ function App() {
   const themePistachio = createTheme({
     palette: {
       primary: {
-        main: '#93C572', // Hunter green
-        light: '#93C572', // Hunter green
-        dark: '#2F481E', // Dark hunter green
+        main: '#93C572', // Pistachio
+        light: '#93C572', // Pistachio
+        dark: '#233616', // Dark pistachio
         white: '#FFFFFF', // White
       },
       secondary: {
         main: '#DFB48A', // Light Brown
-        light: '#E3F0DB', // Whiteish hunter green
+        light: '#E3F0DB', // Whiteish pistachio
       },
       background: {
         default: '#FFFFFF', // White

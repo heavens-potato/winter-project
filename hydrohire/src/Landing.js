@@ -45,7 +45,7 @@ function Landing() {
         <motion.div
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.3, type: 'spring', stiffness: 150, damping: 15 }}
+          transition={{ duration: 0.3, ease: 'easeInOut', type: 'spring', stiffness: 150, damping: 10 }}
           layout
         >
           <Grid container item xs={6} justifyContent="center" alignItems="center">
@@ -54,30 +54,37 @@ function Landing() {
         </motion.div>
 
         {/* Right Half */}
-        <motion.div
-          initial={{ x: 100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.3, delay: 0.3, type: 'spring', stiffness: 150, damping: 15 }}
-          layout
-        >
+        <div>
           <Grid container item xs={6} justifyContent="center" alignItems="center" sx={{ padding: 3 }}>
             <Box sx={{ width: '80%' }}>
               {/* Heading */}
-              <Typography variant="h3" sx={{ fontWeight: 'bold', textAlign: 'left' }}>
-                Take charge of your job hunt with hydroHire
-              </Typography>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.5 }}
+              >
+                <Typography variant="h3" sx={{ fontWeight: 'bold', textAlign: 'left' }}>
+                  Take charge of your job hunt with hydroHire
+                </Typography>
+              </motion.div>
 
               {/* Paragraph */}
-              <Typography variant="h6" sx={{ textAlign: 'left', marginTop: 2 }}>
-                Say goodbye to scattered spreadsheets and lost opportunities. Designed by college students, for college students, hydroHire is here to help you track, visualize, and optimize your job search in one seamless platform.
-              </Typography>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.6 }}
+              >
+                <Typography variant="h6" sx={{ textAlign: 'left', marginTop: 2 }}>
+                  Say goodbye to scattered spreadsheets and lost opportunities. Designed by college students, for college students, hydroHire is here to help you track, visualize, and optimize your job search in one seamless platform.
+                </Typography>
+              </motion.div>
 
               {/* Buttons */}
               <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: { md: 'space-evenly', lg: 'space-between' }, marginTop: 3, alignItems: 'center' }}>
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 0.8 }}
+                  transition={{ duration: 0.3, delay: 0.7 }}
                 >
                   {/* Sign Up Button */}
                   <Link to={isLoggedIn ? '/dashboard' : '/signup'} style={{ textDecoration: 'none', marginRight: { xs: 0, md: 2, lg: 2 } }}>
@@ -97,7 +104,7 @@ function Landing() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 1.2 }}
+                  transition={{ duration: 0.3, delay: 0.8 }}
                 >
                   <Link to={isLoggedIn ? '/dashboard' : '/login'} style={{ textDecoration: 'none' }}>
                     <Button
@@ -116,7 +123,7 @@ function Landing() {
               </Box>
             </Box>
           </Grid>
-        </motion.div>
+        </div>
       </Box>
 
       {/* 3 Features */}

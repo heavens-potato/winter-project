@@ -17,6 +17,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { onAuthStateChanged } from 'firebase/auth';
 
+import { motion } from 'framer-motion';
+
 function Dashboard() {
     //Responsive breakpoint
     const theme = useTheme();
@@ -46,7 +48,7 @@ function Dashboard() {
             filterable: false,
             minWidth: 30,
             renderCell: (params) => (
-                <Box sx={{ display: 'flex', gap: '8px'}}>
+                <Box sx={{ display: 'flex', gap: '8px' }}>
                     {/* Edit Icon */}
                     <IconButton onClick={() => handleEditClick(params.row)}>
                         <EditIcon />
@@ -174,28 +176,28 @@ function Dashboard() {
 
     //Date onchange function and date filtering logic
     const handleDateChange = (event) => {
-      const selectedDate = event.target.value; //get user selected date
-      setDate(selectedDate); //update state to reflected selected date
+        const selectedDate = event.target.value; //get user selected date
+        setDate(selectedDate); //update state to reflected selected date
 
-      if(selectedDate === "") {
-        setRows(allRows);
-      } else {
-        setRows(allRows.filter((row) => row.appDate === selectedDate)); // Filter based on selected date
-      }
+        if (selectedDate === "") {
+            setRows(allRows);
+        } else {
+            setRows(allRows.filter((row) => row.appDate === selectedDate)); // Filter based on selected date
+        }
     }
 
     //Search onChange function and search bar filtering logic
     const handleSearchChange = (event) => {
-      const search = event.target.value;
-      setSearch(search);
-      
-      if(search === "") {
-        setRows(allRows);
-      } else {
-        setRows(allRows.filter((row) => row.positionTitle.toLowerCase().includes(search.toLowerCase()) || 
-                                        row.companyName.toLowerCase().includes(search.toLowerCase()) || 
-                                        row.location.toLowerCase().includes(search.toLowerCase())));
-      }
+        const search = event.target.value;
+        setSearch(search);
+
+        if (search === "") {
+            setRows(allRows);
+        } else {
+            setRows(allRows.filter((row) => row.positionTitle.toLowerCase().includes(search.toLowerCase()) ||
+                row.companyName.toLowerCase().includes(search.toLowerCase()) ||
+                row.location.toLowerCase().includes(search.toLowerCase())));
+        }
     };
 
     useEffect(() => {
@@ -288,92 +290,134 @@ function Dashboard() {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <Navbar />
-            {/* Greeting based on user display name */}
-            {/* <div className="mx-[20px] mt-[30px]">
-        <h1 className="text-[28px] md:text-5xl font-bold">Hi {user.displayName}!</h1>
-      </div> */}
             <Paper sx={{ width: 'calc(100% - 40px)', margin: '20px auto', padding: '10px', borderRadius: '8px' }}>
+                {/* Greeting based on user display name */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <Typography variant="h4" sx={{ fontSize: 28, fontWeight: 'bold', marginBottom: '30px' }}>
+                        Hi, <span style={{ color: theme.palette.primary.light }}>{user?.displayName || "there"}</span>
+                    </Typography>
+                </motion.div>
+
                 {/* Application Overview */}
                 <Box sx={{ marginBottom: '35px' }}>
-                    <Typography variant="h4" sx={{ fontSize: 28, fontWeight: 'bold', marginBottom: '30px' }}>
-                        Application Overview
-                    </Typography>
-                    <Typography variant="body1" sx={{ fontSize: 16, color: 'text.secondary', marginBottom: '30px' }}>
-                        Start adding applications to receive insightful visualizations about your job application process.
-                    </Typography>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3, delay: 0.1 }}
+                    >
+                        <Typography variant="h4" sx={{ fontSize: 28, fontWeight: 'bold', marginBottom: '30px' }}>
+                            Application Overview
+                        </Typography>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3, delay: 0.2 }}
+                    >
+                        <Typography variant="body1" sx={{ fontSize: 16, color: 'text.secondary', marginBottom: '30px' }}>
+                            Start adding applications to receive insightful visualizations about your job application process.
+                        </Typography>
+                    </motion.div>
+
                     <Divider sx={{ width: '100%', margin: '0 auto' }} />
                 </Box>
 
+
+
                 {/* Job Application Tracker */}
-                <Typography variant="h4" sx={{ marginBottom: '20px', fontSize: 28, fontWeight: 'bold' }}>
-                    Job Application Tracker
-                </Typography>
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 0.3 }}
+                >
+                    <Typography variant="h4" sx={{ marginBottom: '20px', fontSize: 28, fontWeight: 'bold' }}>
+                        Job Application Tracker
+                    </Typography>
+                </motion.div>
 
-                <Box sx={{ display: 'flex', justifyContent: { xs: 'center', lg: 'space-between' }, alignItems: 'center', marginBottom: '20px' }}>
-                    {/* Search Bar */}
-                    <TextField
-                        variant="outlined"
-                        size="small"
-                        placeholder={isMobile ? "Search for a job" : "Search by position, company, or location"}
-                        value={search}
-                        onChange={handleSearchChange}
-                        sx={{ flexGrow: 1, borderRadius: '40px', padding: '10px', '& .MuiOutlinedInput-root': { borderRadius: '20px', paddingLeft: '12px' } }}
-                        InputProps={{
-                            startAdornment: (
-                                <IconButton position="start">
-                                    <SearchIcon />
-                                </IconButton>
-                            ),
-                        }}
-                    />
-
-                    <ThemeProvider theme={theme}>
-                        {/* Add application button, conditonally render button text content based on screen width */}
-                        <Button
-                            onClick={handleDialogOpen}
-                            variant="contained"
-                            sx={{
-                                marginLeft: '20px',
-                                fontSize: 18,
-                                backgroundColor: (theme) => theme.palette.primary.light,
-                                color: (theme) => theme.palette.primary.dark,
-                                '&:hover': {
-                                    backgroundColor: (theme) => theme.palette.primary.dark,
-                                    color: (theme) => theme.palette.primary.white,
-                                },
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 0.4 }}
+                >
+                    <Box sx={{ display: 'flex', justifyContent: { xs: 'center', lg: 'space-between' }, alignItems: 'center', marginBottom: '20px' }}>
+                        {/* Search Bar */}
+                        <TextField
+                            variant="outlined"
+                            size="small"
+                            placeholder={isMobile ? "Search for a job" : "Search by position, company, or location"}
+                            value={search}
+                            onChange={handleSearchChange}
+                            sx={{ flexGrow: 1, borderRadius: '40px', padding: '10px', '& .MuiOutlinedInput-root': { borderRadius: '20px', paddingLeft: '12px' } }}
+                            InputProps={{
+                                startAdornment: (
+                                    <IconButton position="start">
+                                        <SearchIcon />
+                                    </IconButton>
+                                ),
                             }}
-                        >
-                            {isMobile ? '+' : '+ Add New Application'}
-                        </Button>
-                    </ThemeProvider>
+                        />
 
-                    {/* Add Application Popup */}
-                    <ApplicationPopup
-                        open={openDialog}
-                        handleClose={handleDialogClose}
-                        handleSubmit={handleSubmit}
-                        title={selectedApp ? "Edit This Application" : "Add New Job"}
-                        actionButton={selectedApp ? "Save" : "Add"}
-                        appData={selectedApp}
-                    />
-                </Box>
+                        <ThemeProvider theme={theme}>
+                            {/* Add application button, conditonally render button text content based on screen width */}
+                            <Button
+                                onClick={handleDialogOpen}
+                                variant="contained"
+                                sx={{
+                                    marginLeft: '20px',
+                                    fontSize: 18,
+                                    backgroundColor: (theme) => theme.palette.primary.light,
+                                    color: (theme) => theme.palette.primary.dark,
+                                    '&:hover': {
+                                        backgroundColor: (theme) => theme.palette.primary.dark,
+                                        color: (theme) => theme.palette.primary.white,
+                                    },
+                                }}
+                            >
+                                {isMobile ? '+' : '+ Add New Application'}
+                            </Button>
+                        </ThemeProvider>
+
+                        {/* Add Application Popup */}
+                        <ApplicationPopup
+                            open={openDialog}
+                            handleClose={handleDialogClose}
+                            handleSubmit={handleSubmit}
+                            title={selectedApp ? "Edit This Application" : "Add New Job"}
+                            actionButton={selectedApp ? "Save" : "Add"}
+                            appData={selectedApp}
+                        />
+                    </Box>
+                </motion.div>
 
                 {/* If the screen width is mobile, render the collapsible filter menu */}
                 {isMobile ? (
                     <>
                         <Accordion elevation={0}>
-                            <AccordionSummary
-                                expandIcon={<FilterListIcon sx={{ color: (theme) => theme.palette.primary.dark }} />}
-                                aria-controls="panel-content"
-                                id="panel-header"
-                                sx={{
-                                    color: (theme) => theme.palette.primary.dark,
-                                    backgroundColor: 'white',
-                                    borderRadius: 2,
-                                }}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.3, delay: 0.5 }}
                             >
-                                <Typography>Filter Applications</Typography>
-                            </AccordionSummary>
+                                <AccordionSummary
+                                    expandIcon={<FilterListIcon sx={{ color: (theme) => theme.palette.primary.dark }} />}
+                                    aria-controls="panel-content"
+                                    id="panel-header"
+                                    sx={{
+                                        color: (theme) => theme.palette.primary.dark,
+                                        backgroundColor: 'white',
+                                        borderRadius: 2,
+                                    }}
+                                >
+                                    <Typography>Filter Applications</Typography>
+                                </AccordionSummary>
+                            </motion.div>
+
                             <AccordionDetails>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: '20px', gap: 2 }}>
                                     <Select
@@ -454,81 +498,111 @@ function Dashboard() {
                     // If the screen isn't mobile, render the default filter menu
                     <>
                         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: '20px', marginLeft: '10px', gap: 6 }}>
-                            <Select
-                                value={status}
-                                onChange={handleStatusChange}
-                                displayEmpty
-                                size="small"
-                                sx={{
-                                    minWidth: 180,
-                                    backgroundColor: 'white',
-                                    borderRadius: '10px',
-                                    height: '40px',
-                                    '& .MuiSelect-select': { padding: '10px' },
-                                }}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.3, delay: 0.5 }}
                             >
-                                <MenuItem value="">Select Status</MenuItem>
-                                <MenuItem value="Applied">Applied</MenuItem>
-                                <MenuItem value="Screening">Screening</MenuItem>
-                                <MenuItem value="Interview">Interview</MenuItem>
-                                <MenuItem value="Offer">Offer</MenuItem>
-                                <MenuItem value="Rejected">Rejected</MenuItem>
-                            </Select>
+                                <Select
+                                    value={status}
+                                    onChange={handleStatusChange}
+                                    displayEmpty
+                                    size="small"
+                                    sx={{
+                                        minWidth: 180,
+                                        backgroundColor: 'white',
+                                        borderRadius: '10px',
+                                        height: '40px',
+                                        '& .MuiSelect-select': { padding: '10px' },
+                                    }}
+                                >
+                                    <MenuItem value="">Select Status</MenuItem>
+                                    <MenuItem value="Applied">Applied</MenuItem>
+                                    <MenuItem value="Screening">Screening</MenuItem>
+                                    <MenuItem value="Interview">Interview</MenuItem>
+                                    <MenuItem value="Offer">Offer</MenuItem>
+                                    <MenuItem value="Rejected">Rejected</MenuItem>
+                                </Select>
+                            </motion.div>
 
                             {/* Date Filter */}
-                            <TextField
-                                variant="outlined"
-                                size="small"
-                                type="date"
-                                value={date}
-                                onChange={handleDateChange}
-                                sx={{
-                                    minWidth: 180,
-                                    backgroundColor: 'white',
-                                    borderRadius: '10px',
-                                    height: '40px',
-                                    '& .MuiOutlinedInput-root': {
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.3, delay: 0.6 }}
+                            >
+                                <TextField
+                                    variant="outlined"
+                                    size="small"
+                                    type="date"
+                                    value={date}
+                                    onChange={handleDateChange}
+                                    sx={{
+                                        minWidth: 180,
+                                        backgroundColor: 'white',
                                         borderRadius: '10px',
-                                    },
-                                    '& .MuiOutlinedBase-root': {
-                                        borderRadius: '10px',
-                                    }
-                                }}
-                            />
+                                        height: '40px',
+                                        '& .MuiOutlinedInput-root': {
+                                            borderRadius: '10px',
+                                        },
+                                        '& .MuiOutlinedBase-root': {
+                                            borderRadius: '10px',
+                                        }
+                                    }}
+                                />
+                            </motion.div>
 
                             {/* Columns Displayed */}
-                            <Select
-                                value={selectedColumns}
-                                onChange={handleColumnsChange}
-                                displayEmpty
-                                multiple
-                                size="small"
-                                sx={{
-                                    minWidth: 180,
-                                    backgroundColor: 'white',
-                                    borderRadius: '10px',
-                                    height: '40px',
-                                    '& .MuiSelect-select': { padding: '10px' },
-                                }}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.3, delay: 0.7 }}
                             >
-                                <MenuItem value="" disabled>Columns Displayed</MenuItem>
-                                {columns
-                                    .filter((column) => column.field !== 'actions')
-                                    .map((column) => (
-                                        <MenuItem key={column.field} value={column.field}>{column.headerName}</MenuItem>
-                                    ))}
-                            </Select>
+                                <Select
+                                    value={selectedColumns}
+                                    onChange={handleColumnsChange}
+                                    displayEmpty
+                                    multiple
+                                    size="small"
+                                    sx={{
+                                        minWidth: 180,
+                                        backgroundColor: 'white',
+                                        borderRadius: '10px',
+                                        height: '40px',
+                                        '& .MuiSelect-select': { padding: '10px' },
+                                    }}
+                                >
+                                    <MenuItem value="" disabled>Columns Displayed</MenuItem>
+                                    {columns
+                                        .filter((column) => column.field !== 'actions')
+                                        .map((column) => (
+                                            <MenuItem key={column.field} value={column.field}>{column.headerName}</MenuItem>
+                                        ))}
+                                </Select>
+                            </motion.div>
 
                             {/* Text to remind the user that they can sort by asc/desc by clicking column headers */}
-                            <div className="flex justify-center items-center text-center w-1/4">
-                                <h4>You can also click on column headers to sort in ascending or descending order!</h4>
-                            </div>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.3, delay: 0.8 }}
+                            >
+                                <div className="flex justify-center items-center text-center w-full">
+                                    <h4>You can also click on column headers to sort in ascending or descending order!</h4>
+                                </div>
+                            </motion.div>
+
                         </Box>
                     </>
                 )}
 
                 {/* DataGrid */}
-                <div style={{ height: 400, width: '100%' }}>
+                <motion.div
+                    style={{ height: 400, width: '100%' }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 0.9 }}
+                >
                     <DataGrid
                         rows={rows}
                         columns={displayedColumns}
@@ -545,7 +619,7 @@ function Dashboard() {
                         filterModel={filterModel}
                         onFilterModelChange={(newFilterModel) => setFilterModel(newFilterModel)}
                     />
-                </div>
+                </motion.div>
             </Paper >
         </Box >
     );
