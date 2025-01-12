@@ -722,13 +722,17 @@ function Dashboard() {
                         disableSelectionOnClick
                         disableColumnSelector
                         rowsPerPageOptions={[5, 10, 20]}
-                        checkboxSelection={false} w
+                        checkboxSelection={false}
                         selectionModel={null}
-                        getRowClassName={(params) =>
-                            params.indexRelativeToCurrentPage % 2 === 0 ? `bg-${theme.palette.primary.main}` : `bg-[${theme.palette.secondary.light}]`
-                        }
-                        filterModel={filterModel}
-                        onFilterModelChange={(newFilterModel) => setFilterModel(newFilterModel)}
+
+                        sx={{
+                            '& .MuiDataGrid-row:nth-of-type(odd)': {
+                                backgroundColor: 'white',
+                            },
+                            '& .MuiDataGrid-row:nth-of-type(even)': {
+                                backgroundColor: theme.palette.secondary.light,
+                            },
+                        }}
                     />
                 </motion.div>
             </Paper >
