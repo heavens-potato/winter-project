@@ -49,7 +49,7 @@ function Landing() {
           layout
         >
           <Grid container item xs={6} justifyContent="center" alignItems="center">
-            <img src={capybaraLogo} alt="Capybara" style={{ maxWidth: '80%' }} />
+            <img src={capybaraLogo} alt="Capybara" style={{ maxWidth: '70%' }} />
           </Grid>
         </motion.div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Typography, Box, Link, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
+import { TextField, Button, Typography, Box, Link, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, useTheme } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import capybaraLogo from './assets/img/Capybara.png';
 import { auth, db } from './firebase'; // Import auth from firebase.js
@@ -19,6 +19,8 @@ function validateEmail(email) {
 }
 
 function SignUp() {
+  const theme = useTheme();
+
   React.useEffect(() => {
     document.title = 'hydroHire - Sign Up';
   }, []);
@@ -74,7 +76,7 @@ function SignUp() {
   }
 
   return (
-    <div className="bg-[#D9EAF5] min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: theme.palette.secondary.light }}>
       <header className="flex flex-col items-center justify-center text-black text-[calc(10px+2vmin)] w-full max-w-4xl p-6">
         <motion.div
           initial={{ opacity: 0 }}
