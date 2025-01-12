@@ -185,7 +185,7 @@ function ProfilePop({ onClose }) {
       transition: {
         delay: 0.7,
         delayChildren: 0.8,
-        staggerChildren: 0.1
+        staggerChildren: 0.05
       }
     }
   }
@@ -507,7 +507,7 @@ function ProfilePop({ onClose }) {
                 className="w-full items-center flex justify-center md:justify-end pt-20 md:pt-0"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 1.9 }}
+                transition={{ duration: 0.3, delay: 1.4 }}
               >
                 {/* Logout Button */}
                 <Button
