@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { TextField, Button, Typography, Box, Link, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, useTheme } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import capybaraLogo from './assets/img/Capybara.png';
 import { auth, db } from './firebase'; // Import auth from firebase.js
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { motion } from 'framer-motion';
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +19,15 @@ function validateEmail(email) {
 }
 
 function SignUp() {
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        window.location.href = "/dashboard";
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   const theme = useTheme();
 
   React.useEffect(() => {

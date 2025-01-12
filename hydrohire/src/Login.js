@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Box, Link, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, useTheme } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import capybaraLogo from './assets/img/Capybara.png';
 import { auth } from './firebase'; // Import auth from firebase.js
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +13,15 @@ function validateEmail(email) {
 }
 
 function Login() {
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if(user) {
+        window.location.href = "/dashboard"; 
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   const theme = useTheme();
 
   React.useEffect(() => {
@@ -47,7 +56,7 @@ function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center"  style={{ backgroundColor: theme.palette.secondary.light }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: theme.palette.secondary.light }}>
       <header className="flex flex-col items-center justify-center text-black text-[calc(10px+2vmin)] w-full max-w-4xl p-6">
         <motion.div
           initial={{ opacity: 0 }}
