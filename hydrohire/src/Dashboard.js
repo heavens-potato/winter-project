@@ -42,7 +42,7 @@ function Dashboard() {
         { field: 'appDate', headerName: 'App Date', width: isMobile ? 140 : 150, minWidth: 140 },
         { field: 'salary', headerName: 'Salary', width: isMobile ? 120 : 150, filterable: false, minWidth: 120 },
         { field: 'description', headerName: 'Description', width: isMobile ? 120 : 160, minWidth: 160, flex: 1, filterable: false },
-        { field: 'status', headerName: 'Status', width: isMobile ? 120 : 150, minWidth: 120, editable: true, filterable: false },
+        { field: 'status', headerName: 'Status', width: isMobile ? 120 : 150, minWidth: 120, filterable: false },
         {
             field: 'actions',
             headerName: 'Actions',
