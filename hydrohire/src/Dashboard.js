@@ -26,7 +26,7 @@ function Dashboard() {
     // Responsive breakpoint
     const theme = useTheme();
 
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
 
     // Get current user to display their name and application CRUD operations
     let user = auth.currentUser;
