@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Box, TextField, IconButton, Button, Paper, Divider, Select, MenuItem, Typography, useTheme } from '@mui/material';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Card, Tab, Tabs, Box, TextField, IconButton, Button, Paper, Divider, Select, MenuItem, Typography, useTheme } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
+import Grid from '@mui/material/Grid2';
 import { doc, setDoc, getDoc, onSnapshot, collection, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from './firebase'; // Import auth from firebase.js
 import Navbar from './Navbar';
 import ApplicationPopup from './ApplicationPopup';
 import { ThemeProvider, useMediaQuery } from '@mui/system';
+import BarChartComponent from './BarChartComponent';
+import PieChartComponent from './PieChartComponent';
 
 //Accordion imports for responsive filter panel
 import Accordion from '@mui/material/Accordion';
@@ -71,6 +74,37 @@ function Dashboard() {
     const [openDialog, setOpenDialog] = useState(false);
     const [rows, setRows] = useState([]);
     const [allRows, setAllRows] = useState([]);
+
+    const [selectedTab, setSelectedTab] = useState(0);
+    const [counts, setCounts] = useState({
+        total: 0,
+        applied: 0,
+        screening: 0,
+        interview: 0,
+        offer: 0,
+        rejected: 0,
+    });
+
+    useEffect(() => {
+        const updatedCounts = rows.reduce((acc, row) => {
+            acc.total++;
+            acc[row.status] = (acc[row.status] || 0) + 1;
+            return acc;
+        }, { total: 0, applied: 0, screening: 0, interview: 0, offer: 0, rejected: 0 });
+        setCounts(updatedCounts);
+    }, [rows]);
+
+    const handleTabChange = (event, newValue) => {
+        setSelectedTab(newValue);
+    };
+
+    const data = useMemo(() => [
+        { name: 'Applied', value: counts.applied },
+        { name: 'Screening', value: counts.screening },
+        { name: 'Interview', value: counts.interview },
+        { name: 'Offer', value: counts.offer },
+        { name: 'Rejected', value: counts.rejected },
+    ], [counts]);
 
     const handleDialogOpen = () => setOpenDialog(true);
 
@@ -325,9 +359,86 @@ function Dashboard() {
                     </motion.div>
 
                     <Divider sx={{ width: '100%', margin: '0 auto' }} />
+                    <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }}>
+                        <Box flex={1} display="flex" flexDirection="column">
+                            {/* Charts */}
+                            <Box sx={{ width: '100%' }}>
+                                <Tabs value={selectedTab} onChange={handleTabChange} variant="fullWidth">
+                                    <Tab label="Bar Chart" />
+                                    <Tab label="Pie Chart" />
+                                </Tabs>
+                                <Box sx={{ marginTop: '20px' }}>
+                                    {selectedTab === 0 ? (
+                                        <BarChartComponent data={data} />
+                                    ) : (
+                                        <PieChartComponent data={data} />
+                                    )}
+                                </Box>
+                            </Box>
+                        </Box>
+                        <Box flex={1} sx={{ padding: '20px' }}>
+                            <Typography variant="h6" sx={{ marginBottom: '15px' }}>
+                                Key Metrics
+                            </Typography>
+                            <Grid container spacing={2}>
+                                {/* Total Applications */}
+                                <Grid item xs={12} sm={6} md={4}>
+                                    <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#f5f5f5' }}>
+                                        <Typography variant="h6">Total Applications</Typography>
+                                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
+                                            {data.find(item => item.name === 'Total')?.total || 0}
+                                        </Typography>
+                                    </Card>
+                                </Grid>
+                                {/* Applied */}
+                                <Grid item xs={12} sm={6} md={4}>
+                                    <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#e3f2fd' }}>
+                                        <Typography variant="h6">Applied</Typography>
+                                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#0288d1' }}>
+                                            {data.find(item => item.name === 'Applied')?.total || 0}
+                                        </Typography>
+                                    </Card>
+                                </Grid>
+                                {/* Screening */}
+                                <Grid item xs={12} sm={6} md={4}>
+                                    <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#e8f5e9' }}>
+                                        <Typography variant="h6">Screening</Typography>
+                                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#388e3c' }}>
+                                            {data.find(item => item.name === 'Screening')?.total || 0}
+                                        </Typography>
+                                    </Card>
+                                </Grid>
+                                {/* Interview */}
+                                <Grid item xs={12} sm={6} md={4}>
+                                    <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#fff3e0' }}>
+                                        <Typography variant="h6">Interview</Typography>
+                                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#f57c00' }}>
+                                            {data.find(item => item.name === 'Interview')?.total || 0}
+                                        </Typography>
+                                    </Card>
+                                </Grid>
+                                {/* Offer */}
+                                <Grid item xs={12} sm={6} md={4}>
+                                    <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#f1f8e9' }}>
+                                        <Typography variant="h6">Offer</Typography>
+                                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#4caf50' }}>
+                                            {data.find(item => item.name === 'Offer')?.total || 0}
+                                        </Typography>
+                                    </Card>
+                                </Grid>
+                                {/* Rejected */}
+                                <Grid item xs={12} sm={6} md={4}>
+                                    <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#ffebee' }}>
+                                        <Typography variant="h6">Rejected</Typography>
+                                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#d32f2f' }}>
+                                            {data.find(item => item.name === 'Rejected')?.total || 0}
+                                        </Typography>
+                                    </Card>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    </Box>
                 </Box>
-
-
 
                 {/* Job Application Tracker */}
                 <motion.div
