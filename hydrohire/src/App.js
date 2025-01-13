@@ -7,6 +7,7 @@ import Landing from './Landing';
 import Login from './Login';
 import SignUp from './SignUp';
 import Dashboard from './Dashboard';
+import About from './About'
 
 function App() {
   const themeDefault = createTheme({
@@ -252,6 +253,9 @@ function AppContent() {
 
         {/* Dashboard */}
         <Route path="/dashboard" element={<Dashboard />}></Route>
+
+        {/* About Page */}
+        <Route path="/about" element={<About />}></Route>
       </Routes>
     </>
   );
