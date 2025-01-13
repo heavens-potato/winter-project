@@ -5,11 +5,11 @@ const BarChartComponent = ({ data, barColor }) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <BarChart width={600} height={350} data={data}>
-        <XAxis dataKey="name" />
+        <XAxis dataKey="status" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="value" fill={barColor} />
+        <Bar dataKey="count" fill={barColor} />
       </BarChart>
     </div>
   );

@@ -97,13 +97,12 @@ function Dashboard() {
         setSelectedTab(newValue);
     };
 
-    const chartData = useMemo(() => [
-        { name: 'Applied', value: counts.applied },
-        { name: 'Screening', value: counts.screening },
-        { name: 'Interview', value: counts.interview },
-        { name: 'Offer', value: counts.offer },
-        { name: 'Rejected', value: counts.rejected },
-    ], [counts]);
+    const chartData = Object.entries(counts || {})
+        .filter(([status, count]) => count > 0)
+        .map(([status, count]) => ({
+            status: status.charAt(0).toUpperCase() + status.slice(1),
+            count,
+        }));
 
     const handleDialogOpen = () => setOpenDialog(true);
 
@@ -325,8 +324,8 @@ function Dashboard() {
                         </motion.div>
                     ) : (
                         <>
-                            <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }}>
-                                <Box flex={1} display="flex" flexDirection="column">
+                            <Box display="flex" flexDirection={{ xs: 'column', md: 'row', gap: '20px' }}>
+                                <Box flex={1} display="flex" flexDirection="column" sx={{ alignItems: 'center', justifyContent: 'center', padding: '10px' }}>
                                     {/* Charts */}
                                     <Box sx={{ width: '100%' }}>
                                         <Tabs value={selectedTab} onChange={handleTabChange} variant="fullWidth">
@@ -342,7 +341,7 @@ function Dashboard() {
                                         </Box>
                                     </Box>
                                 </Box>
-                                <div>
+                                <div flex={1}>
                                     {Object.entries(counts)
                                         .filter(([status, count]) => count > 0)
                                         .map(([status, count]) => (
