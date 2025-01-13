@@ -269,6 +269,7 @@ function Dashboard() {
                             ...doc.data(),
                             handleEditClick: handleEditClick,
                         }));
+                        setAllRows(dataArray); 
                         setRows(dataArray);
                     });
                     return unsubscribe;
