@@ -90,6 +90,8 @@ function ProfilePop({ onClose }) {
           const continueUrl = `${window.location.origin}/ProfilePopUp`;
           setSuccessMessage('A verification email has been sent to your new email. Please verify to complete the update.');
           await verifyBeforeUpdateEmail(user, email);
+          await signOut(auth);
+          navigate('/login');
         } catch (error) {
           console.error("Error", error);
           setErrorMessage('Failed to update email. Please try again later.');
