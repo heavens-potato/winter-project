@@ -1,7 +1,7 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 
-const BarChartComponent = ({ data }) => {
+const BarChartComponent = ({ data, barColor }) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <BarChart width={600} height={350} data={data}>
@@ -9,7 +9,7 @@ const BarChartComponent = ({ data }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="value" fill="#1976d2" />
+        <Bar dataKey="value" fill={barColor} />
       </BarChart>
     </div>
   );

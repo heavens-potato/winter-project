@@ -338,9 +338,9 @@ function Dashboard() {
                                         </Tabs>
                                         <Box sx={{ marginTop: '20px' }}>
                                             {selectedTab === 0 ? (
-                                                <BarChartComponent data={chartData} />
+                                                <BarChartComponent data={chartData} barColor={theme.palette.primary.light} />
                                             ) : (
-                                                <PieChartComponent data={chartData} />
+                                                <PieChartComponent data={chartData} pieColor={theme.palette.primary.light} />
                                             )}
                                         </Box>
                                     </Box>
@@ -372,7 +372,7 @@ function Dashboard() {
                                                 marginLeft: '5px',
                                             }}
                                         >
-                                            {chartData.find(item => item.name === 'Applied')?.value || 0}
+                                            {counts.applied}
                                         </span>
                                     </Typography>
 
@@ -387,7 +387,7 @@ function Dashboard() {
                                                 marginLeft: '5px',
                                             }}
                                         >
-                                            {chartData.find(item => item.name === 'Screening')?.value || 0}
+                                            {chartData.find(item => item.name === 'screening')?.value || 0}
                                         </span>
                                     </Typography>
 
@@ -417,7 +417,7 @@ function Dashboard() {
                                                 marginLeft: '5px',
                                             }}
                                         >
-                                            {chartData.find(item => item.name === 'Offer')?.value || 0}
+                                            {chartData.find(item => item.name === 'offer')?.value || 0}
                                         </span>
                                     </Typography>
 
@@ -440,7 +440,7 @@ function Dashboard() {
                         </>
                     )}
                 </Box>
-                <Divider sx={{ width: '100%', margin: '0 auto', marginBottom: '20px' }} />
+                <Divider sx={{ width: '100%', margin: '0 auto', marginBottom: '30px' }} />
                 {/* Job Application Tracker */}
                 <motion.div
                     initial={{ opacity: 0 }}
