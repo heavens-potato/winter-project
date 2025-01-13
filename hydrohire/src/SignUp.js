@@ -19,14 +19,14 @@ function validateEmail(email) {
 }
 
 function SignUp() {
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        window.location.href = "/dashboard";
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       window.location.href = "/dashboard";
+  //     }
+  //   });
+  //   return () => unsubscribe();
+  // }, []);
 
   const theme = useTheme();
 
