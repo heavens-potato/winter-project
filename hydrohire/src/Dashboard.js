@@ -234,38 +234,6 @@ function Dashboard() {
         }
     };
 
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const uid = user.uid;
-                const parentDocRef = doc(db, 'applications', uid);
-                const docSnap = await getDoc(parentDocRef);
-                if (docSnap.exists()) {
-                    const subCollectionRef = collection(docSnap.ref, 'apps');
-                    const unsubscribe = onSnapshot(subCollectionRef, (querySnapshot) => {
-                        const dataArray = querySnapshot.docs.map((doc) => ({
-                            id: doc.id,
-                            ...doc.data(),
-                        }));
-                        setAllRows(dataArray); // Store all rows future filtering
-                        setRows(dataArray); // Display all rows initially
-                    });
-                    return unsubscribe;
-                } else {
-                    console.log("No such document!");
-                    return () => { }; // No-op unsubscribe
-                }
-            } catch (error) {
-                console.error("Error fetching data:");
-                return () => { }; // No-op unsubscribe
-            }
-        };
-        onAuthStateChanged(auth, (us) => {
-            user = us;
-            getData();
-        });
-    }, []);
-
     const displayedColumns = columns.filter(column => selectedColumns.includes(column.field));
 
     const [date, setDate] = React.useState('');
