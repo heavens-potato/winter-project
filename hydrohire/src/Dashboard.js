@@ -3,7 +3,7 @@ import { Tab, Tabs, Box, TextField, IconButton, Button, Paper, Divider, Select, 
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { DataGrid } from '@mui/x-data-grid';\
+import { DataGrid } from '@mui/x-data-grid';
 import { doc, setDoc, getDoc, onSnapshot, collection, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from './firebase'; // Import auth from firebase.js
 import Navbar from './Navbar';
