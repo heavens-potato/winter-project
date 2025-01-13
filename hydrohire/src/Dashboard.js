@@ -98,7 +98,7 @@ function Dashboard() {
     };
 
     const chartData = Object.entries(counts || {})
-        .filter(([status, count]) => count > 0)
+        .filter(([status, count]) => count > 0 && status.toLowerCase() !== "total")
         .map(([status, count]) => ({
             status: status.charAt(0).toUpperCase() + status.slice(1),
             count,
