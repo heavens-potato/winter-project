@@ -104,6 +104,14 @@ function Dashboard() {
             count,
         }));
 
+    const barColors = [
+        theme.palette.primary.main,
+        theme.palette.primary.light,
+        theme.palette.primary.dark,
+        theme.palette.secondary.main,
+        theme.palette.secondary.light
+    ];
+
     const handleDialogOpen = () => setOpenDialog(true);
 
     const handleEditClick = (appData) => {
@@ -334,9 +342,9 @@ function Dashboard() {
                                         </Tabs>
                                         <Box sx={{ marginTop: '20px' }}>
                                             {selectedTab === 0 ? (
-                                                <BarChartComponent data={chartData} barColor={theme.palette.primary.light} />
+                                                <BarChartComponent data={chartData} barColors={barColors} />
                                             ) : (
-                                                <PieChartComponent data={chartData} pieColor={theme.palette.primary.light} />
+                                                <PieChartComponent data={chartData} pieColors={barColors} />
                                             )}
                                         </Box>
                                     </Box>
