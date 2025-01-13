@@ -216,7 +216,7 @@ function App() {
   const [currentTheme, setCurrentTheme] = useState(() => {
     //use the theme saved in local storage or default if there is none
     const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'defaultDark';
+    return savedTheme || 'themeDefault';
   });
 
   //useEffect that adds the current theme into local storage
