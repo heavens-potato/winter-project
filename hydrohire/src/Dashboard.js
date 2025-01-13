@@ -287,8 +287,6 @@ function Dashboard() {
         })
     }, []);
 
-
-
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <Navbar />
@@ -344,97 +342,16 @@ function Dashboard() {
                                         </Box>
                                     </Box>
                                 </Box>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '25px', padding: '20px' }}>
-                                    {/* Total Applications */}
-                                    <Typography variant="h6">
-                                        Total Applications:
-                                        <span
-                                            style={{
-                                                color: theme.palette.primary.light,
-                                                fontSize: '1.5rem',
-                                                fontWeight: 'bold',
-                                                marginLeft: '5px',
-                                            }}
-                                        >
-                                            {counts.total}
-                                        </span>
-                                    </Typography>
-
-                                    {/* Applied */}
-                                    <Typography variant="h6">
-                                        Applied:
-                                        <span
-                                            style={{
-                                                color: theme.palette.primary.light,
-                                                fontSize: '1.5rem',
-                                                fontWeight: 'bold',
-                                                marginLeft: '5px',
-                                            }}
-                                        >
-                                            {counts.applied}
-                                        </span>
-                                    </Typography>
-
-                                    {/* Screening */}
-                                    <Typography variant="h6">
-                                        Screening:
-                                        <span
-                                            style={{
-                                                color: theme.palette.primary.light,
-                                                fontSize: '1.5rem',
-                                                fontWeight: 'bold',
-                                                marginLeft: '5px',
-                                            }}
-                                        >
-                                            {chartData.find(item => item.name === 'screening')?.value || 0}
-                                        </span>
-                                    </Typography>
-
-                                    {/* Interview */}
-                                    <Typography variant="h6">
-                                        Interview:
-                                        <span
-                                            style={{
-                                                color: theme.palette.primary.light,
-                                                fontSize: '1.5rem',
-                                                fontWeight: 'bold',
-                                                marginLeft: '5px',
-                                            }}
-                                        >
-                                            {chartData.find(item => item.name === 'Interview')?.value || 0}
-                                        </span>
-                                    </Typography>
-
-                                    {/* Offer */}
-                                    <Typography variant="h6">
-                                        Offer:
-                                        <span
-                                            style={{
-                                                color: theme.palette.primary.light,
-                                                fontSize: '1.5rem',
-                                                fontWeight: 'bold',
-                                                marginLeft: '5px',
-                                            }}
-                                        >
-                                            {chartData.find(item => item.name === 'offer')?.value || 0}
-                                        </span>
-                                    </Typography>
-
-                                    {/* Rejected */}
-                                    <Typography variant="h6">
-                                        Rejected:
-                                        <span
-                                            style={{
-                                                color: theme.palette.primary.light,
-                                                fontSize: '1.5rem',
-                                                fontWeight: 'bold',
-                                                marginLeft: '5px',
-                                            }}
-                                        >
-                                            {chartData.find(item => item.name === 'Rejected')?.value || 0}
-                                        </span>
-                                    </Typography>
-                                </Box>
+                                <div>
+                                    {Object.entries(counts)
+                                        .filter(([status, count]) => count > 0)
+                                        .map(([status, count]) => (
+                                            <div key={status} style={{ fontSize: '1.5rem', padding: '15px' }}>
+                                                <span style={{ color: theme.palette.primary.light, fontWeight: 900, fontSize: 25 }}>{count}</span>
+                                                {` ${status.charAt(0).toUpperCase() + status.slice(1)}`}
+                                            </div>
+                                        ))}
+                                </div>
                             </Box>
                         </>
                     )}
