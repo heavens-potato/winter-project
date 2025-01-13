@@ -483,7 +483,7 @@ function ProfilePop({ onClose }) {
                     variants={colorPickerChildrenVariants}
                     whileHover={{ scale: 1.1 }}
                   >
-                    <CircleIcon onClick={() => setCurrentTheme('electricBlue')} sx={{ color: '#00DAE6', cursor: 'pointer' }} />
+                    <CircleIcon onClick={() => setCurrentTheme('electricBlue')} sx={{ color: '#00C2CC', cursor: 'pointer' }} />
                   </motion.div>
 
                   <motion.div

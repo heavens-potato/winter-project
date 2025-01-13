@@ -161,8 +161,8 @@ function App() {
   const themeElectricBlue = createTheme({
     palette: {
       primary: {
-        main: '#00DAE6', // Electric Blue
-        light: '#00DAE6', // Electric Blue
+        main: '#00C2CC', // Electric Blue
+        light: '#00C2CC', // Electric Blue
         dark: '#003033', // Dark electric blue
         white: '#FFFFFF', // White
       },
