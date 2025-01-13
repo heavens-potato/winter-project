@@ -105,11 +105,11 @@ function Dashboard() {
         }));
 
     const barColors = [
-        theme.palette.primary.main,
-        theme.palette.primary.light,
-        theme.palette.primary.dark,
-        theme.palette.secondary.main,
-        theme.palette.secondary.light
+        '#93C572', //Offer - pistachio
+        '#00C2CC', //Applied - electric blue
+        '#FF99CC', //Rejected - pink
+        '#CF9FFF', //Screening - purple
+        '#F4C430'  //Interview - saffron
     ];
 
     const handleDialogOpen = () => setOpenDialog(true);
