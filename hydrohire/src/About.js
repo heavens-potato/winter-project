@@ -1,10 +1,14 @@
 import Navbar from "./Navbar";
+import AboutCard from "./AboutCard";
 
 function About(){
   return (
     <>
       <Navbar/>
-      <h1>Hello World</h1>
+      <div>
+        <AboutCard></AboutCard>
+        <AboutCard></AboutCard>
+      </div>
     </>
   );
 }
