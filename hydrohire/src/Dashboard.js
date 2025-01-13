@@ -269,7 +269,7 @@ function Dashboard() {
                             ...doc.data(),
                             handleEditClick: handleEditClick,
                         }));
-                        setAllRows(dataArray); 
+                        setAllRows(dataArray);
                         setRows(dataArray);
                     });
                     return unsubscribe;
@@ -316,99 +316,131 @@ function Dashboard() {
                             Application Overview
                         </Typography>
                     </motion.div>
+                    {counts.total === 0 ? (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3, delay: 0.2 }}
+                        >
+                            <Typography variant="body1" sx={{ fontSize: 16, color: 'text.secondary', marginBottom: '30px' }}>
+                                Start adding applications to receive insightful visualizations about your job application process.
+                            </Typography>
+                        </motion.div>
+                    ) : (
+                        <>
+                            <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }}>
+                                <Box flex={1} display="flex" flexDirection="column">
+                                    {/* Charts */}
+                                    <Box sx={{ width: '100%' }}>
+                                        <Tabs value={selectedTab} onChange={handleTabChange} variant="fullWidth">
+                                            <Tab label="Bar Chart" />
+                                            <Tab label="Pie Chart" />
+                                        </Tabs>
+                                        <Box sx={{ marginTop: '20px' }}>
+                                            {selectedTab === 0 ? (
+                                                <BarChartComponent data={chartData} />
+                                            ) : (
+                                                <PieChartComponent data={chartData} />
+                                            )}
+                                        </Box>
+                                    </Box>
+                                </Box>
+                                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '25px', padding: '20px' }}>
+                                    {/* Total Applications */}
+                                    <Typography variant="h6">
+                                        Total Applications:
+                                        <span
+                                            style={{
+                                                color: theme.palette.primary.light,
+                                                fontSize: '1.5rem',
+                                                fontWeight: 'bold',
+                                                marginLeft: '5px',
+                                            }}
+                                        >
+                                            {counts.total}
+                                        </span>
+                                    </Typography>
 
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.3, delay: 0.2 }}
-                    >
-                        <Typography variant="body1" sx={{ fontSize: 16, color: 'text.secondary', marginBottom: '30px' }}>
-                            Start adding applications to receive insightful visualizations about your job application process.
-                        </Typography>
-                    </motion.div>
+                                    {/* Applied */}
+                                    <Typography variant="h6">
+                                        Applied:
+                                        <span
+                                            style={{
+                                                color: theme.palette.primary.light,
+                                                fontSize: '1.5rem',
+                                                fontWeight: 'bold',
+                                                marginLeft: '5px',
+                                            }}
+                                        >
+                                            {chartData.find(item => item.name === 'Applied')?.value || 0}
+                                        </span>
+                                    </Typography>
 
-                    <Divider sx={{ width: '100%', margin: '0 auto' }} />
-                    <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }}>
-                        <Box flex={1} display="flex" flexDirection="column">
-                            {/* Charts */}
-                            <Box sx={{ width: '100%' }}>
-                                <Tabs value={selectedTab} onChange={handleTabChange} variant="fullWidth">
-                                    <Tab label="Bar Chart" />
-                                    <Tab label="Pie Chart" />
-                                </Tabs>
-                                <Box sx={{ marginTop: '20px' }}>
-                                    {selectedTab === 0 ? (
-                                        <BarChartComponent data={chartData} />
-                                    ) : (
-                                        <PieChartComponent data={chartData} />
-                                    )}
+                                    {/* Screening */}
+                                    <Typography variant="h6">
+                                        Screening:
+                                        <span
+                                            style={{
+                                                color: theme.palette.primary.light,
+                                                fontSize: '1.5rem',
+                                                fontWeight: 'bold',
+                                                marginLeft: '5px',
+                                            }}
+                                        >
+                                            {chartData.find(item => item.name === 'Screening')?.value || 0}
+                                        </span>
+                                    </Typography>
+
+                                    {/* Interview */}
+                                    <Typography variant="h6">
+                                        Interview:
+                                        <span
+                                            style={{
+                                                color: theme.palette.primary.light,
+                                                fontSize: '1.5rem',
+                                                fontWeight: 'bold',
+                                                marginLeft: '5px',
+                                            }}
+                                        >
+                                            {chartData.find(item => item.name === 'Interview')?.value || 0}
+                                        </span>
+                                    </Typography>
+
+                                    {/* Offer */}
+                                    <Typography variant="h6">
+                                        Offer:
+                                        <span
+                                            style={{
+                                                color: theme.palette.primary.light,
+                                                fontSize: '1.5rem',
+                                                fontWeight: 'bold',
+                                                marginLeft: '5px',
+                                            }}
+                                        >
+                                            {chartData.find(item => item.name === 'Offer')?.value || 0}
+                                        </span>
+                                    </Typography>
+
+                                    {/* Rejected */}
+                                    <Typography variant="h6">
+                                        Rejected:
+                                        <span
+                                            style={{
+                                                color: theme.palette.primary.light,
+                                                fontSize: '1.5rem',
+                                                fontWeight: 'bold',
+                                                marginLeft: '5px',
+                                            }}
+                                        >
+                                            {chartData.find(item => item.name === 'Rejected')?.value || 0}
+                                        </span>
+                                    </Typography>
                                 </Box>
                             </Box>
-                        </Box>
-                        <Box flex={1} sx={{ padding: '20px' }}>
-                            <Typography variant="h6" sx={{ marginBottom: '15px' }}>
-                                Key Metrics
-                            </Typography>
-                            <Grid container spacing={2}>
-                                {/* Total Applications */}
-                                <Grid item xs={12} sm={6} md={4}>
-                                    <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#f5f5f5' }}>
-                                        <Typography variant="h6">Total Applications</Typography>
-                                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
-                                            {chartData.find(item => item.name === 'Total')?.total || 0}
-                                        </Typography>
-                                    </Card>
-                                </Grid>
-                                {/* Applied */}
-                                <Grid item xs={12} sm={6} md={4}>
-                                    <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#e3f2fd' }}>
-                                        <Typography variant="h6">Applied</Typography>
-                                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#0288d1' }}>
-                                            {chartData.find(item => item.name === 'Applied')?.total || 0}
-                                        </Typography>
-                                    </Card>
-                                </Grid>
-                                {/* Screening */}
-                                <Grid item xs={12} sm={6} md={4}>
-                                    <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#e8f5e9' }}>
-                                        <Typography variant="h6">Screening</Typography>
-                                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#388e3c' }}>
-                                            {chartData.find(item => item.name === 'Screening')?.total || 0}
-                                        </Typography>
-                                    </Card>
-                                </Grid>
-                                {/* Interview */}
-                                <Grid item xs={12} sm={6} md={4}>
-                                    <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#fff3e0' }}>
-                                        <Typography variant="h6">Interview</Typography>
-                                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#f57c00' }}>
-                                            {chartData.find(item => item.name === 'Interview')?.total || 0}
-                                        </Typography>
-                                    </Card>
-                                </Grid>
-                                {/* Offer */}
-                                <Grid item xs={12} sm={6} md={4}>
-                                    <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#f1f8e9' }}>
-                                        <Typography variant="h6">Offer</Typography>
-                                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#4caf50' }}>
-                                            {chartData.find(item => item.name === 'Offer')?.total || 0}
-                                        </Typography>
-                                    </Card>
-                                </Grid>
-                                {/* Rejected */}
-                                <Grid item xs={12} sm={6} md={4}>
-                                    <Card variant="outlined" sx={{ padding: '15px', textAlign: 'center', backgroundColor: '#ffebee' }}>
-                                        <Typography variant="h6">Rejected</Typography>
-                                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#d32f2f' }}>
-                                            {chartData.find(item => item.name === 'Rejected')?.total || 0}
-                                        </Typography>
-                                    </Card>
-                                </Grid>
-                            </Grid>
-                        </Box>
-                    </Box>
+                        </>
+                    )}
                 </Box>
-
+                <Divider sx={{ width: '100%', margin: '0 auto', marginBottom: '20px' }} />
                 {/* Job Application Tracker */}
                 <motion.div
                     initial={{ opacity: 0 }}
