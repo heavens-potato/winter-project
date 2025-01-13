@@ -6,8 +6,14 @@ function About(){
     <>
       <Navbar/>
       <div>
-        <AboutCard></AboutCard>
-        <AboutCard></AboutCard>
+        <div>
+          <AboutCard name = 'Justin'></AboutCard>
+          <AboutCard name = 'Claire'></AboutCard>
+        </div>
+        <div>
+          <AboutCard name = 'Stephen'></AboutCard>
+          <AboutCard name = 'Alexis'></AboutCard>
+        </div>
       </div>
     </>
   );
