@@ -112,9 +112,9 @@ function Navbar() {
             <Button component={Link} to="/about" sx={{ color: (theme) => theme.palette.primary.dark, fontSize: '20px', fontWeight: 'bold' }}>
               About
             </Button>
-            {/* <Button component={Link} to="/contact" sx={{ color: (theme) => theme.palette.primary.dark, fontSize: '20px', fontWeight: 'bold' }}>
+            <Button component={Link} to="/contact" sx={{ color: (theme) => theme.palette.primary.dark, fontSize: '20px', fontWeight: 'bold' }}>
               Contact
-            </Button> */}
+            </Button>
             {isLoggedIn ? (
               <>
                 {openProfilePopup && (
