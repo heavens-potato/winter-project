@@ -431,7 +431,7 @@ function ProfilePop({ onClose }) {
                 </motion.div>
 
                 <motion.div
-                  className="flex flex-row gap-2 md:gap-1 xl:gap-2 mt-0 pt-0 top-0 justify-start"
+                  className="flex flex-row gap-2 md:gap-1 xl:gap-2 mt-0 pt-0 top-0 justify-start flex-wrap"
                   variants={colorPickerParentVariants}
                   initial="hidden"
                   animate="visible"
