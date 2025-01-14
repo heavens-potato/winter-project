@@ -372,7 +372,7 @@ function Dashboard() {
                                                     displayText = `offer${count === 1 ? '' : 's'} coming your way!`;
                                                     break;
                                                 case 'rejected':
-                                                    displayText = `rejection${count === 1 ? '' : 's'}`;
+                                                    displayText = `${count === 1 ? 'time' : 'times'} companies missed out on you`;
                                                     break;
                                                 default:
                                                     displayText = `${count === 1 ? 'job' : 'jobs'} without a status`;
