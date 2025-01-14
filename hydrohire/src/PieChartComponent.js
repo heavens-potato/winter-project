@@ -6,7 +6,7 @@ import { useMediaQuery } from '@mui/system';
 const PieChartComponent = ({ data, pieColors }) => {
 
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const chartWidth = isMobile ? 300 : 400;
     const chartHeight = isMobile ? 300 : 400;
 
@@ -25,7 +25,7 @@ const PieChartComponent = ({ data, pieColors }) => {
                     ))}
                 </Pie>
                 <Tooltip />
-                <Legend />
+                <Legend verticalAlign="bottom" />
             </PieChart>
         </div>
     );

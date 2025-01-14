@@ -6,9 +6,9 @@ import { useMediaQuery } from '@mui/system';
 const BarChartComponent = ({ data, barColors }) => {
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const chartWidth = isMobile ? 300 : 600;
-  const chartHeight = isMobile ? 250 : 400;
+  const chartHeight = isMobile ? 268 : 400;
   const xAxisFontSize = isMobile ? 10 : 15;
 
   const renderLegend = () => {
@@ -38,7 +38,7 @@ const BarChartComponent = ({ data, barColors }) => {
         <XAxis dataKey="status" style={{ fontSize: xAxisFontSize }} />
         <YAxis />
         <Tooltip />
-        <Legend content={renderLegend} />
+        <Legend verticalAlign="bottom" content={renderLegend} />
         <Bar dataKey="count" name="Status" fill={barColors[5]}>
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={barColors[index % barColors.length]} />

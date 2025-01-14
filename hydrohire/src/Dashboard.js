@@ -322,7 +322,7 @@ function Dashboard() {
                 </motion.div>
 
                 {/* Application Overview */}
-                <Box sx={{ marginBottom: '35px' }}>
+                <Box sx={{ marginBottom: '25px' }}>
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -354,7 +354,7 @@ function Dashboard() {
                                                 <Tab label="Pie Chart" />
                                             </Tabs>
                                         </Box>
-                                        <Box sx={{ width: '100%' }}>
+                                        <Box sx={{ width: '100%', height: { xs: '300px', md: '400px' } }}>
                                             {selectedTab === 0 ? (
                                                 <BarChartComponent data={chartData} barColors={barColors} />
                                             ) : (
@@ -363,14 +363,17 @@ function Dashboard() {
                                         </Box>
                                     </Box>
                                 </Box>
-                                <Box flex={1} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: { xs: '100%', md: '50%' } }}>
+                                <Box flex={1} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: { xs: '100%', md: '50%' }, gap: { xs: '0', md: '20px' } }}>
                                     {Object.entries(counts)
                                         .filter(([status, count]) => count > 0)
                                         .map(([status, count]) => {
                                             let displayText = '';
                                             switch (status.toLowerCase()) {
                                                 case 'total':
-                                                    displayText = `${count === 1 ? 'total application' : 'total applications'}`;
+                                                    displayText = (<span style={{ fontWeight: 900, fontSize: '1.7rem' }}>
+                                                        {count === 1 ? 'total application' : 'total applications'}
+                                                    </span>
+                                                    );
                                                     break;
                                                 case 'applied':
                                                     displayText = `${count === 1 ? 'job' : 'jobs'} awaiting action`;
@@ -396,23 +399,36 @@ function Dashboard() {
                                                     key={status}
                                                     style={{
                                                         fontSize: '1.5rem',
-                                                        padding: '15px',
                                                         display: 'flex',
                                                         alignItems: 'center',
                                                         justifyContent: 'center',
+                                                        ...(theme.breakpoints.down('sm') && {
+                                                            fontSize: '1rem'
+                                                        })
                                                     }}
                                                 >
                                                     <span
                                                         style={{
-                                                            color: theme.palette.primary.light,
+                                                            color: status === 'total' ? barColors[1] : theme.palette.primary.light,
                                                             fontWeight: 900,
-                                                            fontSize: 25,
+                                                            fontSize: status === 'total' ? '2rem' : '1.8rem',
                                                             marginRight: '10px',
                                                         }}
                                                     >
                                                         {count}
                                                     </span>
-                                                    <span>{displayText}</span>
+                                                    <span
+                                                        style={{
+                                                            fontSize: status === 'total' ? {xs: '1.5rem', md: '2rem'} : { xs: '1.25rem', md: '1.8rem' },
+                                                            textAlign: 'center',
+                                                            ...(theme.breakpoints.down('sm') && {
+                                                                fontSize: '1rem',
+                                                            }),
+                                                            margin: '0'
+                                                        }}
+                                                    >
+                                                        {displayText}
+                                                    </span>
                                                 </div>
                                             );
                                         })}
