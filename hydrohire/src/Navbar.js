@@ -59,17 +59,21 @@ function Navbar() {
         }}
       >
         {/* Title */}
-        <Typography
-          variant="h6"
-          sx={{
-            flexGrow: 1,
-            color: (theme) => theme.palette.primary.dark,
-            fontSize: 36,
-            fontWeight: 'bold',
-            padding: '1rem',
-          }}>
-          hydroHire
-        </Typography>
+        <Link to="/" underline="none">
+          <Typography
+            variant="h6"
+            sx={{
+              flexGrow: 1,
+              color: (theme) => theme.palette.primary.dark,
+              fontSize: 36,
+              fontWeight: 'bold',
+              padding: '1rem',
+              cursor: 'pointer'
+            }}
+          >
+            hydroHire
+          </Typography>
+        </Link>
 
         {isMobile ? (
           // If the screen is of mobile width, render the hamburger icon
