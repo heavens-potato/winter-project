@@ -328,7 +328,7 @@ function Dashboard() {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.3, delay: 0.1 }}
                     >
-                        <Typography variant="h4" sx={{ fontSize: 28, fontWeight: 'bold', marginBottom: '30px' }}>
+                        <Typography variant="h4" sx={{ fontSize: 28, fontWeight: 'bold', marginBottom: '2px' }}>
                             Application Overview
                         </Typography>
                     </motion.div>
@@ -388,10 +388,10 @@ function Dashboard() {
                                                     displayText = `offer${count === 1 ? '' : 's'} coming your way!`;
                                                     break;
                                                 case 'rejected':
-                                                    displayText = `job${count === 1 ? '' : 's'} you won't ever get`;
+                                                    displayText = `rejection${count === 1 ? '' : 's'}`;
                                                     break;
                                                 default:
-                                                    displayText = `Status: ${status.charAt(0).toUpperCase() + status.slice(1)}`;
+                                                    displayText = `${count === 1 ? 'job' : 'jobs'} without a status`;
                                             }
 
                                             return (

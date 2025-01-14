@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Select, MenuItem, Button, Box } from '@mui/material';
+import { FormControl, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Select, MenuItem, Button, Box, Typography } from '@mui/material';
 
 const ApplicationPopup = ({
     open,
@@ -54,8 +54,14 @@ const ApplicationPopup = ({
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
+    const [submitted, setSubmitted] = useState(false);
+
     const handleFormSubmit = (e) => {
         e.preventDefault();
+        setSubmitted(true);
+        if (!formData.positionTitle || !formData.companyName || !formData.status) {
+            return;
+        }
         handleSubmit(e, formData);
     };
 
@@ -72,6 +78,7 @@ const ApplicationPopup = ({
             coverLetterVersion: '',
             description: '',
         });
+        setSubmitted(false);
     };
 
     return (
@@ -88,7 +95,7 @@ const ApplicationPopup = ({
         >
             <DialogTitle sx={{ fontSize: 28, fontWeight: 'bold' }}>{title}</DialogTitle>
             <DialogContent sx={{ borderRadius: '20px' }}>
-                <Box
+                <FormControl
                     sx={{
                         display: 'grid',
                         gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
@@ -98,24 +105,48 @@ const ApplicationPopup = ({
                         padding: { xs: 0, md: 2 },
                     }}
                 >
-                    <TextField
-                        label="Position Title"
-                        fullWidth
-                        variant="outlined"
-                        required
-                        name="positionTitle"
-                        value={formData.positionTitle}
-                        onChange={handleInputChange}
-                    />
-                    <TextField
-                        label="Company Name"
-                        fullWidth
-                        variant="outlined"
-                        required
-                        name="companyName"
-                        value={formData.companyName}
-                        onChange={handleInputChange}
-                    />
+                    <FormControl required error={submitted && formData.positionTitle === ''}>
+                        <TextField
+                            label="Position Title"
+                            fullWidth
+                            variant="outlined"
+                            required
+                            name="positionTitle"
+                            value={formData.positionTitle}
+                            onChange={handleInputChange}
+                            onFocus={() => setSubmitted(false)}
+                            onBlur={() => setSubmitted(true)}
+                            sx={{
+                                ...(submitted && formData.positionTitle === '' && { borderColor: 'red', '& .MuiOutlinedInput-notchedOutline': { borderColor: 'red' } })
+                            }}
+                        />
+                        {submitted && formData.positionTitle === '' && (
+                            <Typography color="error" variant="body2">
+                                Please enter Position Title
+                            </Typography>
+                        )}
+                    </FormControl>
+                    <FormControl fullWidth required error={Boolean(formData.companyName)}>
+                        <TextField
+                            label="Company Name"
+                            fullWidth
+                            variant="outlined"
+                            required
+                            name="companyName"
+                            value={formData.companyName}
+                            onChange={handleInputChange}
+                            onFocus={() => setSubmitted(false)}
+                            onBlur={() => setSubmitted(true)}
+                            sx={{
+                                ...(submitted && formData.companyName === '' && { borderColor: 'red', '& .MuiOutlinedInput-notchedOutline': { borderColor: 'red' } })
+                            }}
+                        />
+                        {submitted && formData.companyName === '' && (
+                            <Typography color="error" variant="body2">
+                                Please enter Company Name
+                            </Typography>
+                        )}
+                    </FormControl>
                     <TextField
                         label="Location"
                         fullWidth
@@ -142,24 +173,31 @@ const ApplicationPopup = ({
                         value={formData.salary}
                         onChange={handleInputChange}
                     />
-                    <Select
-                        value={formData.status}
-                        fullWidth
-                        displayEmpty
-                        variant="outlined"
-                        name="status"
-                        onChange={handleInputChange}
-                        sx={{ backgroundColor: 'white' }}
-                        required
-                    >
-                        <MenuItem value="" disabled>Status</MenuItem>
-                        <MenuItem value="Applied">Applied</MenuItem>
-                        <MenuItem value="Screening">Screening</MenuItem>
-                        <MenuItem value="Interview">Interview</MenuItem>
-                        <MenuItem value="Offer">Offer</MenuItem>
-                        <MenuItem value="Rejected">Rejected</MenuItem>
-                    </Select>
-                    <Box sx={{ gridColumn: {xs: 'auto', md: 'span 2'} }}>
+                    <FormControl required error={submitted && formData.status === ''}>
+                        <Select
+                            value={formData.status}
+                            fullWidth
+                            displayEmpty
+                            variant="outlined"
+                            name="status"
+                            onChange={handleInputChange}
+                            onBlur={() => setSubmitted(true)}
+                            required
+                        >
+                            <MenuItem value="" disabled>Status</MenuItem>
+                            <MenuItem value="Applied">Applied</MenuItem>
+                            <MenuItem value="Screening">Screening</MenuItem>
+                            <MenuItem value="Interview">Interview</MenuItem>
+                            <MenuItem value="Offer">Offer</MenuItem>
+                            <MenuItem value="Rejected">Rejected</MenuItem>
+                        </Select>
+                        {submitted && formData.status === '' && (
+                            <Typography color="error" variant="body2">
+                                Please select a Status
+                            </Typography>
+                        )}
+                    </FormControl>
+                    <Box sx={{ gridColumn: { xs: 'auto', md: 'span 2' } }}>
                         <TextField
                             label="Description"
                             fullWidth
@@ -171,14 +209,14 @@ const ApplicationPopup = ({
                             onChange={handleInputChange}
                         />
                     </Box>
-                </Box>
+                </FormControl>
             </DialogContent>
             <DialogActions
                 sx={{
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr',
                     gap: 2,
-                    padding: {xs: '0 1.5rem 1.5rem 1.5rem', md: '0 2.5rem 2.5rem 2.5rem' }
+                    padding: { xs: '0 1.5rem 1.5rem 1.5rem', md: '0 2.5rem 2.5rem 2.5rem' }
                 }}
             >
                 <Button
