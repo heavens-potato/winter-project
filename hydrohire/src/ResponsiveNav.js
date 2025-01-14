@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { TextField, Dialog, DialogTitle, DialogContent, IconButton, AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { Link } from 'react-router-dom';
+import { Button, Box } from '@mui/material';
+import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import { motion } from 'framer-motion';
 import ProfilePop from './ProfilePop';
@@ -12,7 +12,6 @@ function ResponsiveNav({ onClose }) {
     const theme = useTheme();
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const navigate = useNavigate();
     const [openProfilePopup, setOpenProfilePopup] = useState(false);
 
     const openProfilePop = () => {
@@ -33,18 +32,6 @@ function ResponsiveNav({ onClose }) {
         });
         return () => unsubscribe();
     }, []);
-
-    const handleLogout = async () => {
-        try {
-            await signOut(auth);
-            console.log('Logged out');
-            if (window.location.pathname === '/dashboard') {
-                navigate('/');
-            }
-        } catch (error) {
-            console.error('Error logging out:', error.message);
-        }
-    }
 
     return (
         <motion.div
@@ -84,13 +71,6 @@ function ResponsiveNav({ onClose }) {
                         >
                             My Profile
                         </Button>
-
-
-
-                        {/* ADD CLOSE BUTTON FOR PROFILE POP UP */}
-
-
-
                         {openProfilePopup && (
                             <div
                                 style={{
@@ -106,8 +86,6 @@ function ResponsiveNav({ onClose }) {
                                 <ProfilePop onClose={closeProfilePop} />
                             </div>
                         )}
-
-
                         {/* Dashboard Button */}
                         <Button
                             component={Link}

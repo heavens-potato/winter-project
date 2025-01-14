@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tab, Tabs, Box, TextField, IconButton, Button, Paper, Divider, Select, MenuItem, Typography, useTheme } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
@@ -76,6 +76,7 @@ function Dashboard() {
     const [openDialog, setOpenDialog] = useState(false);
     const [rows, setRows] = useState([]);
     const [allRows, setAllRows] = useState([]);
+    const userRef = useRef(null);
 
     const [selectedTab, setSelectedTab] = useState(0);
     const [counts, setCounts] = useState({
@@ -256,27 +257,10 @@ function Dashboard() {
 
     const [date, setDate] = React.useState('');
 
-    // Define initial filter model as a state variable
-    const [filterModel, setFilterModel] = useState({
-        items: [
-
-        ],
-    });
-
-    // Call setFilterModel every time any search input is changed - state changes are asynchronous 
-    // and a useEffect() is necessary to force the filter model to update with each input change
-    useEffect(() => {
-        setFilterModel({
-            items: [
-
-            ],
-        });
-    }, []);
-
     useEffect(() => {
         const getData = async () => {
             try {
-                const uid = user.uid;
+                const uid = userRef.current?.uid; 
                 const parentDocRef = doc(db, 'applications', uid);
                 const docSnap = await getDoc(parentDocRef);
                 if (docSnap.exists()) {
@@ -301,7 +285,7 @@ function Dashboard() {
             }
         };
         onAuthStateChanged(auth, (us) => {
-            user = us;
+            userRef.current = us;
             getData();
         })
     }, []);

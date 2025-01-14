@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { TextField, IconButton, Typography, Button, Box, InputLabel, OutlinedInput, InputAdornment, FormControl, Select } from '@mui/material';
+import React, { useState } from 'react';
+import { TextField, IconButton, Typography, Button, Box, InputLabel, OutlinedInput, InputAdornment, FormControl } from '@mui/material';
 import PaletteIcon from '@mui/icons-material/Palette';
 import { signOut, verifyBeforeUpdateEmail } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { getAuth, updateProfile, updatePassword, updateEmail, reauthenticateWithCredential, EmailAuthProvider, sendEmailVerification } from 'firebase/auth';
+import { getAuth, updateProfile, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
 import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 import { useTheme } from '@mui/material/styles';
 import { useContext } from 'react';
@@ -35,10 +35,10 @@ function ProfilePop({ onClose }) {
 
   const theme = useTheme();
 
-  //import the theme context
-  const { currentTheme, setCurrentTheme } = useContext(ThemeContext);
+  // Import the theme context
+  const { setCurrentTheme } = useContext(ThemeContext);
 
-  //get currentUser
+  // Get currentUser
   const user = auth.currentUser;
 
   // States for updating email, display name, and password
@@ -87,7 +87,6 @@ function ProfilePop({ onClose }) {
 
       if (email !== user.email) {
         try {
-          const continueUrl = `${window.location.origin}/ProfilePopUp`;
           setSuccessMessage('A verification email has been sent to your new email. Please verify to complete the update.');
           await verifyBeforeUpdateEmail(user, email);
           await signOut(auth);
@@ -230,7 +229,7 @@ function ProfilePop({ onClose }) {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.4 }}
             >
-              <h4 className="text-xl font-bold mt-4 mb-2" />
+              <div style={{ marginTop: '1rem', marginBottom: '0.5rem' }} />
               <TextField label="Email" type="email" variant="outlined" fullWidth name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             </motion.div>
 
@@ -239,7 +238,7 @@ function ProfilePop({ onClose }) {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.5 }}
             >
-              <h4 className="text-xl font-bold mt-4 mb-2" />
+              <div style={{ marginTop: '1rem', marginBottom: '0.5rem' }} />
               <TextField label="Display Name" type="text" variant="outlined" fullWidth name="displayName" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
               <Button
                 onClick={handleSave}
@@ -293,7 +292,7 @@ function ProfilePop({ onClose }) {
                   >
 
                     {/* Old Password Input */}
-                    <h4 className="text-xl font-bold mt-4 mb-2" />
+                    <div style={{ marginTop: '1rem', marginBottom: '0.5rem' }} />
                     <FormControl variant="outlined" fullWidth required>
                       <InputLabel htmlFor="outlined-adornment-password">Old Password</InputLabel>
                       <OutlinedInput
@@ -320,7 +319,7 @@ function ProfilePop({ onClose }) {
 
 
                     {/* New Password Input */}
-                    <h4 className="text-xl font-bold mt-4 mb-2" />
+                    <div style={{ marginTop: '1rem', marginBottom: '0.5rem' }} />
                     <FormControl variant="outlined" fullWidth required>
                       <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
                       <OutlinedInput
@@ -347,7 +346,7 @@ function ProfilePop({ onClose }) {
                     </FormControl>
 
                     {/* Confirm New Password Input */}
-                    <h4 className="text-xl font-bold mt-4 mb-2" />
+                    <div style={{ marginTop: '1rem', marginBottom: '0.5rem' }} />
                     <FormControl variant="outlined" fullWidth required>
                       <InputLabel htmlFor="outlined-adornment-confirm-password">Confirm New Password</InputLabel>
                       <OutlinedInput
@@ -504,7 +503,7 @@ function ProfilePop({ onClose }) {
                 </motion.div>
               </div>
 
-              {/* Button container */}
+              {/* Button Container */}
               <motion.div
                 className="w-full items-center flex justify-center md:justify-end pt-20 md:pt-0"
                 initial={{ opacity: 0 }}

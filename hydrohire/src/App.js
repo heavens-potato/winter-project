@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material';
 import './output.css';
 import './input.css';
@@ -213,14 +213,14 @@ function App() {
     pistachio: themePistachio,
   }
 
-  //state variable to keep track of the current theme
+  // State variable to keep track of the current theme
   const [currentTheme, setCurrentTheme] = useState(() => {
-    //use the theme saved in local storage or default if there is none
+    // Use the theme saved in local storage or default if there is none
     const savedTheme = localStorage.getItem('theme');
     return savedTheme || 'default';
   });
 
-  //useEffect that adds the current theme into local storage
+  // useEffect that adds the current theme into local storage
   useEffect(() => {
     localStorage.setItem('theme', currentTheme);
   }, [currentTheme]);
@@ -239,8 +239,6 @@ function App() {
 }
 
 function AppContent() {
-  const location = useLocation();
-
   return (
     <>
       <Routes>
@@ -263,5 +261,5 @@ function AppContent() {
 
 export default App;
 
-//export the theme context
+// Export the theme context
 export const ThemeContext = createContext();

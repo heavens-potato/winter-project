@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { TextField, Dialog, DialogTitle, DialogContent, IconButton, AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { Link } from 'react-router-dom';
+import { IconButton, AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import { useMediaQuery } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
 import ResponsiveNav from './ResponsiveNav';
 import MenuIcon from '@mui/icons-material/Menu';
-import CancelIcon from '@mui/icons-material/Cancel';
-import PaletteIcon from '@mui/icons-material/Palette';
-import SettingsIcon from '@mui/icons-material/Settings';
 import ProfilePop from './ProfilePop';
 import PersonIcon from '@mui/icons-material/Person';
 
@@ -17,18 +14,11 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const theme = useTheme();
 
-  let user = auth.currentUser;
-
-  //Responsive breakpoint
+  // Responsive breakpoint
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
 
   const [showResponsiveNav, setShowResponsiveNav] = useState(false);
   const [openProfilePopup, setOpenProfilePopup] = useState(false);
-
-  const handleMobileClick = () => {
-    setShowResponsiveNav(!showResponsiveNav);
-    console.log("responsive nav handled.");
-  };
 
   const openResponsiveNav = () => {
     setShowResponsiveNav(true);
@@ -82,7 +72,7 @@ function Navbar() {
         </Typography>
 
         {isMobile ? (
-          //if the screen is of mobile width, render the hamburger icon
+          // If the screen is of mobile width, render the hamburger icon
           <>
             <IconButton
               size="large"
