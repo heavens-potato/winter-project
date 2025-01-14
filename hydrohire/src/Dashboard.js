@@ -11,6 +11,7 @@ import ApplicationPopup from './ApplicationPopup';
 import { ThemeProvider, useMediaQuery } from '@mui/system';
 import BarChartComponent from './BarChartComponent';
 import PieChartComponent from './PieChartComponent';
+import { darken, lighten } from '@mui/system';
 
 // Accordion imports for responsive filter panel
 import Accordion from '@mui/material/Accordion';
@@ -24,6 +25,8 @@ import { motion } from 'framer-motion';
 function Dashboard() {
     // Responsive breakpoint
     const theme = useTheme();
+    const darkenColor = (color, factor) => darken(color, factor);
+    const lightenColor = (color, factor) => lighten(color, factor);
 
     const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
 
@@ -105,11 +108,20 @@ function Dashboard() {
         }));
 
     const barColors = [
-        theme.palette.primary.main,
         theme.palette.primary.light,
+        darkenColor(theme.palette.primary.light, 0.25),
+        lightenColor(theme.palette.primary.dark, 0.25),
+        lightenColor(theme.palette.primary.dark, 0.5),
+        darkenColor(theme.palette.primary.dark, 0.3),
         theme.palette.primary.dark,
-        theme.palette.secondary.main,
-        theme.palette.secondary.light
+    ];
+
+    const pieColors = [
+        '#93C572',
+        '#00C2CC',
+        '#FF99CC',
+        '#CF9FFF',
+        '#F4C430' 
     ];
 
     const handleDialogOpen = () => setOpenDialog(true);
@@ -332,24 +344,26 @@ function Dashboard() {
                         </motion.div>
                     ) : (
                         <>
-                            <Box display="flex" flexDirection={{ xs: 'column', md: 'row', gap: '20px' }}>
-                                <Box flex={1} display="flex" flexDirection="column" sx={{ alignItems: 'center', justifyContent: 'center', padding: '10px' }}>
+                            <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }}>
+                                <Box flex={1} display="flex" flexDirection="column" sx={{ alignItems: 'center', justifyContent: 'center', padding: { xs: '0', md: '20px' }, width: { xs: '100%', md: '50%' } }}>
                                     {/* Charts */}
-                                    <Box sx={{ width: '100%' }}>
-                                        <Tabs value={selectedTab} onChange={handleTabChange} variant="fullWidth">
-                                            <Tab label="Bar Chart" />
-                                            <Tab label="Pie Chart" />
-                                        </Tabs>
-                                        <Box sx={{ marginTop: '20px' }}>
+                                    <Box flex={1} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                                        <Box sx={{ width: '100%' }}>
+                                            <Tabs value={selectedTab} onChange={handleTabChange} variant="fullWidth">
+                                                <Tab label="Bar Chart" />
+                                                <Tab label="Pie Chart" />
+                                            </Tabs>
+                                        </Box>
+                                        <Box sx={{ width: '100%' }}>
                                             {selectedTab === 0 ? (
                                                 <BarChartComponent data={chartData} barColors={barColors} />
                                             ) : (
-                                                <PieChartComponent data={chartData} pieColors={barColors} />
+                                                <PieChartComponent data={chartData} pieColors={pieColors} />
                                             )}
                                         </Box>
                                     </Box>
                                 </Box>
-                                <div flex={1}>
+                                <Box flex={1} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: { xs: '100%', md: '50%' } }}>
                                     {Object.entries(counts)
                                         .filter(([status, count]) => count > 0)
                                         .map(([status, count]) => (
@@ -358,7 +372,7 @@ function Dashboard() {
                                                 {` ${status.charAt(0).toUpperCase() + status.slice(1)}`}
                                             </div>
                                         ))}
-                                </div>
+                                </Box>
                             </Box>
                         </>
                     )}
