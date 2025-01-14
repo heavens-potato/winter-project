@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, IconButton, Typography, Button, Box, InputLabel, OutlinedInput, InputAdornment, FormControl } from '@mui/material';
+import { TextField, IconButton, Typography, Button, Box, InputLabel, OutlinedInput, InputAdornment, FormControl, Switch } from '@mui/material';
 import PaletteIcon from '@mui/icons-material/Palette';
 import { signOut, verifyBeforeUpdateEmail } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,7 @@ import { useTheme } from '@mui/material/styles';
 import { useContext } from 'react';
 import { ThemeContext } from './App';
 import CircleIcon from '@mui/icons-material/Circle';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 function checkPasswordStrength(password) {
   const passwordRegex = new RegExp(/^(?=.*[@$!%*?&])(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d@$!%?&]{8,}$/);
@@ -430,7 +431,7 @@ function ProfilePop({ onClose }) {
                 </motion.div>
 
                 <motion.div
-                  className="flex flex-row gap-2 md:gap-1 xl:gap-2 mt-0 pt-0 top-0 justify-start flex-wrap"
+                  className="flex flex-row gap-2 md:gap-1 xl:gap-2 mt-0 pt-0 top-0 justify-start flex-wrap pb-5 md:pb-10"
                   variants={colorPickerParentVariants}
                   initial="hidden"
                   animate="visible"
@@ -501,14 +502,29 @@ function ProfilePop({ onClose }) {
                     <CircleIcon onClick={() => setCurrentTheme('violet')} sx={{ color: '#CF9FFF', cursor: 'pointer' }} />
                   </motion.div>
                 </motion.div>
+
+                <motion.div
+                  className="w-full flex justify-center md:justify-start"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 1.4 }}
+                >
+                  <FormControlLabel
+                    control={
+                      <Switch name="high-contrast" />
+                    }
+                    label="High Contrast Graph Colors"
+                  />
+                </motion.div>
+
               </div>
 
               {/* Button Container */}
               <motion.div
-                className="w-full items-center flex justify-center md:justify-end pt-20 md:pt-0"
+                className="w-full items-center flex justify-center md:justify-end pt-5 lg:pt-20"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 1.4 }}
+                transition={{ duration: 0.3, delay: 1.5 }}
               >
                 {/* Logout Button */}
                 <Button
