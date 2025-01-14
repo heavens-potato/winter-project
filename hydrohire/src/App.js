@@ -234,7 +234,6 @@ function App() {
         </Router>
       </ThemeContext.Provider>
     </ThemeProvider>
-
   );
 }
 

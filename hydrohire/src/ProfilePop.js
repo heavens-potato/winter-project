@@ -209,10 +209,10 @@ function ProfilePop({ onClose }) {
           <h2 className="text-3xl font-bold">Hi, {user.displayName || "there"}</h2>
           <HighlightOffIcon onClick={onClose} sx={{ cursor: 'pointer' }} />
         </div>
-        <div className="flex flex-col md:flex-row space-evenly bg-white pl-5 md:pl-10 pr-5 md:pr-10 gap-5 rounded-b-lg w-4/5 xl:w-3/5" style={{ borderRadius: '0 0 20px 20px' }}>
+        <div className="flex flex-col md:flex-row space-evenly bg-white pl-5 md:pl-10 pr-5 md:pr-10 gap-0 md:gap-5 rounded-b-lg w-4/5 xl:w-3/5" style={{ borderRadius: '0 0 20px 20px' }}>
 
           {/* Right half container */}
-          <div className="flex flex-col mt-5 md:mt-10 w-full md:w-1/2 md: mb-5">
+          <div className="flex flex-col mt-5 md:mt-10 w-full md:w-1/2 md:mb-5 sm:mb-0">
 
             <motion.div
               className="flex flex-row gap-5 items-center"
