@@ -121,7 +121,7 @@ function Dashboard() {
         '#00C2CC',
         '#FF99CC',
         '#CF9FFF',
-        '#F4C430' 
+        '#F4C430'
     ];
 
     const handleDialogOpen = () => setOpenDialog(true);
@@ -366,12 +366,56 @@ function Dashboard() {
                                 <Box flex={1} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: { xs: '100%', md: '50%' } }}>
                                     {Object.entries(counts)
                                         .filter(([status, count]) => count > 0)
-                                        .map(([status, count]) => (
-                                            <div key={status} style={{ fontSize: '1.5rem', padding: '15px' }}>
-                                                <span style={{ color: theme.palette.primary.light, fontWeight: 900, fontSize: 25 }}>{count}</span>
-                                                {` ${status.charAt(0).toUpperCase() + status.slice(1)}`}
-                                            </div>
-                                        ))}
+                                        .map(([status, count]) => {
+                                            let displayText = '';
+                                            switch (status.toLowerCase()) {
+                                                case 'total':
+                                                    displayText = `${count === 1 ? 'total application' : 'total applications'}`;
+                                                    break;
+                                                case 'applied':
+                                                    displayText = `${count === 1 ? 'job' : 'jobs'} awaiting action`;
+                                                    break;
+                                                case 'screening':
+                                                    displayText = `screening ${count === 1 ? 'opportunity' : 'opportunities'}`;
+                                                    break;
+                                                case 'interview':
+                                                    displayText = `${count === 1 ? 'chance' : 'chances'} to interview`;
+                                                    break;
+                                                case 'offer':
+                                                    displayText = `offer${count === 1 ? '' : 's'} coming your way!`;
+                                                    break;
+                                                case 'rejected':
+                                                    displayText = `job${count === 1 ? '' : 's'} you won't ever get`;
+                                                    break;
+                                                default:
+                                                    displayText = `Status: ${status.charAt(0).toUpperCase() + status.slice(1)}`;
+                                            }
+
+                                            return (
+                                                <div
+                                                    key={status}
+                                                    style={{
+                                                        fontSize: '1.5rem',
+                                                        padding: '15px',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                    }}
+                                                >
+                                                    <span
+                                                        style={{
+                                                            color: theme.palette.primary.light,
+                                                            fontWeight: 900,
+                                                            fontSize: 25,
+                                                            marginRight: '10px',
+                                                        }}
+                                                    >
+                                                        {count}
+                                                    </span>
+                                                    <span>{displayText}</span>
+                                                </div>
+                                            );
+                                        })}
                                 </Box>
                             </Box>
                         </>
