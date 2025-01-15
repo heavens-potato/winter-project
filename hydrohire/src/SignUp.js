@@ -19,15 +19,6 @@ function validateEmail(email) {
 }
 
 function SignUp() {
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       window.location.href = "/dashboard";
-  //     }
-  //   });
-  //   return () => unsubscribe();
-  // }, []);
-
   const theme = useTheme();
 
   React.useEffect(() => {
@@ -81,7 +72,6 @@ function SignUp() {
       setErrorMessage('Failed to login.');
       console.log('Failure');
     }
-
   }
 
   return (

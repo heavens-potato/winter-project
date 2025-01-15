@@ -120,30 +120,6 @@ function ProfilePop({ onClose }) {
           console.error("Error", error);
           setErrorMessage('Failed to update email. Please try again later.');
         }
-        // try {
-        //   const continueUrl = `${window.location.origin}/dashboard`;
-        //   await sendEmailVerification(user, { url: continueUrl });
-        //   setErrorMessage('A verification email has been sent to your email. Please verify before proceeding.');
-        //   console.log("Verification email sent to update email.");
-
-        //   await user.reload();
-        //   if (user.emailVerified) {
-        //     try {
-        //       await updateEmail(user, email);
-        //       console.log("Email updated successfully.");
-        //       setSuccessMessage('Email updated successfully.');
-        //     } catch (error) {
-        //       console.error("Error updating email:", error);
-        //       setErrorMessage('Failed to update email. Please try again later.');
-        //     }
-        //   } else {
-        //     console.log("Email not yet verified.");
-        //     setErrorMessage('Please verify your email before proceeding.');
-        //   }
-        // } catch (error) {
-        //   console.error("Error sending verification email:", error);
-        //   setErrorMessage('Failed to send verification email. Please try again later.');
-        // }
       }
     } catch (error) {
       if (error.code === 'auth/requires-recent-login') {
@@ -438,7 +414,7 @@ function ProfilePop({ onClose }) {
             )}
           </div>
 
-          {/* Right half container */}
+          {/* Right Half */}
           <div className="flex flex-col justify-between w-full md:w-1/2 mb-10">
             {/* Palette controls */}
             <div className='flex flex-col h-full justify-between'>
@@ -467,7 +443,7 @@ function ProfilePop({ onClose }) {
                     <CircleIcon onClick={() => setCurrentTheme('default')} sx={{ color: '#2A324B', cursor: 'pointer' }} />
                   </motion.div>
 
-                  {/* vertical line to divide default colors from custom colors */}
+                  {/* Vertical line to divide default colors from custom colors */}
                   <motion.div variants={colorPickerChildrenVariants} style={{ borderRight: '2px solid', borderColor: (theme) => theme.palette.primary.dark }} />
 
                   <motion.div

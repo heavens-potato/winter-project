@@ -226,7 +226,7 @@ function App() {
     localStorage.setItem('theme', currentTheme);
   }, [currentTheme]);
 
-  //high contrast theme state variable
+  // High contrast theme state variable
   const [highContrast, setHighContrast] = useState(() => {
     const savedHighContrast = localStorage.getItem('highContrast');
     return savedHighContrast === 'true'; 
