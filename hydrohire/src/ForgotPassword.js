@@ -14,7 +14,7 @@ const ForgotPassword = () => {
         event.preventDefault();
         try {
             await sendPasswordResetEmail(auth, email, {
-                url: 'http://localhost:3000/login',
+                url: 'http://localhost:3000/login', // CLAIRE CHANGE THIS ONCE WITH ACTUAL LINK
                 handleCodeInApp: false,
             });
             setMessage('Password reset email sent. Please check your inbox.');
