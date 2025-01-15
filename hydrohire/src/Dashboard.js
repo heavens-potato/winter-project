@@ -37,7 +37,7 @@ function Dashboard() {
     let user = auth.currentUser;
 
     React.useEffect(() => {
-        document.title = 'hydroHire - Dashboard';
+        document.title = 'Job Capyture - Dashboard';
     }, []);
 
     const columns = [

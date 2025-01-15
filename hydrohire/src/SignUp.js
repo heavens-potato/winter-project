@@ -31,7 +31,7 @@ function SignUp() {
   const theme = useTheme();
 
   React.useEffect(() => {
-    document.title = 'hydroHire - Sign Up';
+    document.title = 'Job Capyture - Sign Up';
   }, []);
 
   const [showPassword, setShowPassword] = React.useState(false);

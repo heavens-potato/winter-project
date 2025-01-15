@@ -71,7 +71,7 @@ function Navbar() {
               cursor: 'pointer'
             }}
           >
-            hydroHire
+            Job Capyture
           </Typography>
         </Link>
 

@@ -25,7 +25,7 @@ function Login() {
   const theme = useTheme();
 
   React.useEffect(() => {
-    document.title = 'hydroHire - Log In';
+    document.title = 'Job Capyture - Log In';
   }, []);
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -72,7 +72,7 @@ function Login() {
                   Welcome back!
                 </Typography>
                 <Typography variant="body2">
-                  Log in to hydroHire
+                  Log in to Job Capyture
                 </Typography>
               </div>
 

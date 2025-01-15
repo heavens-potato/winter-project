@@ -10,7 +10,7 @@ import { auth } from './firebase';
 
 function Landing() {
   React.useEffect(() => {
-    document.title = 'hydroHire';
+    document.title = 'Job Capyture';
   }, []);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -64,7 +64,7 @@ function Landing() {
                 transition={{ duration: 0.3, delay: 0.5 }}
               >
                 <Typography variant="h3" sx={{ fontWeight: 'bold', textAlign: 'left' }}>
-                  Take charge of your job hunt with hydroHire
+                  Capture your career goals with Job Capyture
                 </Typography>
               </motion.div>
 
@@ -75,7 +75,7 @@ function Landing() {
                 transition={{ duration: 0.3, delay: 0.6 }}
               >
                 <Typography variant="h6" sx={{ textAlign: 'left', marginTop: 2 }}>
-                  Say goodbye to scattered spreadsheets and lost opportunities. Designed by college students, for college students, hydroHire is here to help you track, visualize, and optimize your job search in one seamless platform.
+                  Say goodbye to scattered spreadsheets and lost opportunities. Designed by college students, for college students, Job Capyture is here to help you capture, visualize, and optimize your job search in one seamless platform.
                 </Typography>
               </motion.div>
 
