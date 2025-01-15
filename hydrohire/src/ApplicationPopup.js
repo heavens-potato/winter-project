@@ -164,6 +164,7 @@ const ApplicationPopup = ({
                         name="appDate"
                         value={formData.appDate}
                         onChange={handleInputChange}
+                        required
                     />
                     <TextField
                         label="Salary"

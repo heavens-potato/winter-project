@@ -27,7 +27,7 @@ const PieChartComponent = ({ data, pieColors }) => {
                 <Tooltip />
                 <Legend verticalAlign="bottom" />
             </PieChart>
-        </div>
+        </div >
     );
 };
 
