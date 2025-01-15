@@ -208,6 +208,7 @@ const ApplicationPopup = ({
                             name="description"
                             value={formData.description}
                             onChange={handleInputChange}
+                            placeholder="Use this space for your resume URL, job notes, or anything else relevant."
                         />
                     </Box>
                 </FormControl>
