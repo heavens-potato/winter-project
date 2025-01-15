@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Tab, Tabs, Box, TextField, IconButton, Button, Paper, Divider, Select, MenuItem, Typography, useTheme } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
@@ -12,6 +12,7 @@ import { ThemeProvider, useMediaQuery } from '@mui/system';
 import BarChartComponent from './BarChartComponent';
 import PieChartComponent from './PieChartComponent';
 import { darken, lighten } from '@mui/system';
+import { highContrastContext } from './App';
 
 // Accordion imports for responsive filter panel
 import Accordion from '@mui/material/Accordion';
@@ -29,6 +30,8 @@ function Dashboard() {
     const lightenColor = (color, factor) => lighten(color, factor);
 
     const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+
+    const { highContrast } = useContext(highContrastContext);
 
     // Get current user to display their name and application CRUD operations
     let user = auth.currentUser;
@@ -108,7 +111,12 @@ function Dashboard() {
             count,
         }));
 
-    const barColors = [
+    const barColors = highContrast ? ['#93C572',
+        '#00C2CC',
+        '#FF99CC',
+        '#CF9FFF',
+        '#F4C430'
+    ] : [
         theme.palette.primary.light,
         darkenColor(theme.palette.primary.light, 0.25),
         lightenColor(theme.palette.primary.dark, 0.25),
@@ -117,12 +125,18 @@ function Dashboard() {
         theme.palette.primary.dark,
     ];
 
-    const pieColors = [
-        '#93C572',
+    const pieColors = highContrast ? ['#93C572',
         '#00C2CC',
         '#FF99CC',
         '#CF9FFF',
         '#F4C430'
+    ] : [
+        theme.palette.primary.light,
+        darkenColor(theme.palette.primary.light, 0.25),
+        lightenColor(theme.palette.primary.dark, 0.25),
+        lightenColor(theme.palette.primary.dark, 0.5),
+        darkenColor(theme.palette.primary.dark, 0.3),
+        theme.palette.primary.dark,
     ];
 
     const handleDialogOpen = () => setOpenDialog(true);
@@ -260,7 +274,7 @@ function Dashboard() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const uid = userRef.current?.uid; 
+                const uid = userRef.current?.uid;
                 const parentDocRef = doc(db, 'applications', uid);
                 const docSnap = await getDoc(parentDocRef);
                 if (docSnap.exists()) {
@@ -329,7 +343,7 @@ function Dashboard() {
                     ) : (
                         <>
                             <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }}>
-                                <Box flex={1} display="flex" flexDirection="column" sx={{ alignItems: 'center', justifyContent: 'center', padding: { xs: '0', md: '20px' }, width: { xs: '100%', md: '50%' } }}>
+                                <Box flex={1} display="flex" flexDirection="column" sx={{ alignItems: 'center', justifyContent: 'center', padding: { xs: '0', md: '20px' }, width: { xs: '100%', md: '65%' } }}>
                                     {/* Charts */}
                                     <Box flex={1} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                                         <Box sx={{ width: '100%' }}>
@@ -338,7 +352,7 @@ function Dashboard() {
                                                 <Tab label="Pie Chart" />
                                             </Tabs>
                                         </Box>
-                                        <Box sx={{ width: '100%', height: { xs: '300px', md: '400px' } }}>
+                                        <Box sx={{ width: '100%', height: { xs: '300px', md: '400px' }}}>
                                             {selectedTab === 0 ? (
                                                 <BarChartComponent data={chartData} barColors={barColors} />
                                             ) : (
@@ -347,32 +361,32 @@ function Dashboard() {
                                         </Box>
                                     </Box>
                                 </Box>
-                                <Box flex={1} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: { xs: '100%', md: '50%' }, gap: { xs: '0', md: '20px' } }}>
+                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: { xs: '100%', md: '35%' }, gap: { xs: '0', md: '20px' }, marginTop: {xs: '1rem', md: '0'} }}>
                                     {Object.entries(counts)
                                         .filter(([status, count]) => count > 0)
                                         .map(([status, count]) => {
                                             let displayText = '';
                                             switch (status.toLowerCase()) {
                                                 case 'total':
-                                                    displayText = (<span style={{ fontWeight: 900, fontSize: '1.7rem' }}>
+                                                    displayText = (<span style={{ fontWeight: 700, fontSize: { xs: '1.2 rem', md: '1.3 rem', lg: '1.5 rem', xl: '1.5 rem'} }}>
                                                         {count === 1 ? 'total application' : 'total applications'}
                                                     </span>
                                                     );
                                                     break;
                                                 case 'applied':
-                                                    displayText = `${count === 1 ? 'job' : 'jobs'} awaiting action`;
+                                                    displayText = `${count === 1 ? 'job' : 'jobs'} under review`;
                                                     break;
                                                 case 'screening':
-                                                    displayText = `screening ${count === 1 ? 'opportunity' : 'opportunities'}`;
+                                                    displayText = `screening upcoming`;
                                                     break;
                                                 case 'interview':
-                                                    displayText = `${count === 1 ? 'chance' : 'chances'} to interview`;
+                                                    displayText = `${count === 1 ? 'interview' : 'interviews'} upcoming`;
                                                     break;
                                                 case 'offer':
                                                     displayText = `offer${count === 1 ? '' : 's'} coming your way!`;
                                                     break;
                                                 case 'rejected':
-                                                    displayText = `${count === 1 ? 'time' : 'times'} companies missed out on you`;
+                                                    displayText = `${count === 1 ? 'time' : 'times'} they missed out`;
                                                     break;
                                                 default:
                                                     displayText = `${count === 1 ? 'job' : 'jobs'} without a status`;
@@ -382,19 +396,25 @@ function Dashboard() {
                                                 <div
                                                     key={status}
                                                     style={{
-                                                        fontSize: '1.5rem',
+                                                        fontSize: '1.3rem',
                                                         display: 'flex',
                                                         alignItems: 'center',
                                                         justifyContent: 'center',
+                                                        backgroundColor: theme.palette.secondary.light,
                                                         ...(theme.breakpoints.down('sm') && {
                                                             fontSize: '1rem'
-                                                        })
+                                                        }),
+                                                        marginTop: '0.5rem',
+                                                        paddingRight: '3rem',
+                                                        paddingLeft: '3rem',
+                                                        borderRadius: '25px',
+                                                        width: '90%'
                                                     }}
                                                 >
                                                     <span
                                                         style={{
-                                                            color: status === 'total' ? barColors[1] : theme.palette.primary.light,
-                                                            fontWeight: 900,
+                                                            color: theme.palette.primary.light,
+                                                            fontWeight: 800,
                                                             fontSize: status === 'total' ? '2rem' : '1.8rem',
                                                             marginRight: '10px',
                                                         }}
@@ -403,7 +423,7 @@ function Dashboard() {
                                                     </span>
                                                     <span
                                                         style={{
-                                                            fontSize: status === 'total' ? {xs: '1.5rem', md: '2rem'} : { xs: '1.25rem', md: '1.8rem' },
+                                                            fontSize: status === 'total' ? { xs: '1.5rem', md: '2rem' } : { xs: '1.1rem', md: '1.8rem' },
                                                             textAlign: 'center',
                                                             ...(theme.breakpoints.down('sm') && {
                                                                 fontSize: '1rem',

@@ -42,7 +42,7 @@ function App() {
       },
       secondary: {
         main: '#DFB48A', // Light Brown
-        light: '#FFD9B3', // Light Orange-gray
+        light: '#FFF2E6', // Light Orange-gray
 
       },
       background: {
@@ -64,7 +64,7 @@ function App() {
       },
       secondary: {
         main: '#DFB48A', // Light Brown
-        light: '#D9EAF5', // Light Blue-gray
+        light: '#ECF4F8', // Light Blue-gray
       },
       background: {
         default: '#FFFFFF', // White
@@ -85,7 +85,7 @@ function App() {
       },
       secondary: {
         main: '#DFB48A', // Light Brown
-        light: '#E6CCFF', // Light Violet-gray
+        light: '#F2E6FF', // Light Violet-gray
       },
       background: {
         default: '#FFFFFF', // White
@@ -101,12 +101,12 @@ function App() {
       primary: {
         main: '#FF99CC', // Light pink
         light: '#FF99CC', // Light pink
-        dark: '#4D0026', // Dark pink
+        dark: '#33001A', // Dark pink
         white: '#FFFFFF', // White
       },
       secondary: {
         main: '#DFB48A', // Light Brown
-        light: '#FFCCE6', // Light Pink-white
+        light: '#FFE6F2', // Light Pink-white
       },
       background: {
         default: '#FFFFFF', // White
@@ -127,7 +127,7 @@ function App() {
       },
       secondary: {
         main: '#DFB48A', // Light Brown
-        light: '#D8F3E1', // Whiteish Green
+        light: '#ECF9F0', // Whiteish Green
       },
       background: {
         default: '#FFFFFF', // White
@@ -148,7 +148,7 @@ function App() {
       },
       secondary: {
         main: '#DFB48A', // Light Brown
-        light: '#FCF1CF', // Whiteish Saffron
+        light: '#FEF8E7', // Whiteish Saffron
       },
       background: {
         default: '#FFFFFF', // White
@@ -169,7 +169,7 @@ function App() {
       },
       secondary: {
         main: '#DFB48A', // Light Brown
-        light: '#CCFCFF', // Whiteish electric blue
+        light: '#E6FEFF', // Whiteish electric blue
       },
       background: {
         default: '#FFFFFF', // White
@@ -190,7 +190,7 @@ function App() {
       },
       secondary: {
         main: '#DFB48A', // Light Brown
-        light: '#E3F0DB', // Whiteish pistachio
+        light: '#F1F8ED', // Whiteish pistachio
       },
       background: {
         default: '#FFFFFF', // White
@@ -225,13 +225,21 @@ function App() {
     localStorage.setItem('theme', currentTheme);
   }, [currentTheme]);
 
+  //high contrast theme state variable
+  const [highContrast, setHighContrast] = useState(() => {
+    const savedHighContrast = localStorage.getItem('highContrast');
+    return savedHighContrast === 'true'; 
+  });
+
   return (
 
     <ThemeProvider theme={themes[currentTheme]}>
       <ThemeContext.Provider value={{ currentTheme, setCurrentTheme }}>
-        <Router>
-          <AppContent />
-        </Router>
+        <highContrastContext.Provider value={{ highContrast, setHighContrast }}>
+          <Router>
+            <AppContent />
+          </Router>
+        </highContrastContext.Provider>
       </ThemeContext.Provider>
     </ThemeProvider>
   );
@@ -262,3 +270,4 @@ export default App;
 
 // Export the theme context
 export const ThemeContext = createContext();
+export const highContrastContext = createContext();

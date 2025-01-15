@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { TextField, IconButton, Typography, Button, Box, InputLabel, OutlinedInput, InputAdornment, FormControl, Switch } from '@mui/material';
 import PaletteIcon from '@mui/icons-material/Palette';
 import { signOut, verifyBeforeUpdateEmail } from 'firebase/auth';
@@ -14,8 +14,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { getAuth, updateProfile, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
 import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 import { useTheme } from '@mui/material/styles';
-import { useContext } from 'react';
-import { ThemeContext } from './App';
+import { highContrastContext, ThemeContext } from './App';
 import CircleIcon from '@mui/icons-material/Circle';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
@@ -38,6 +37,31 @@ function ProfilePop({ onClose }) {
 
   // Import the theme context
   const { setCurrentTheme } = useContext(ThemeContext);
+
+  // Import context for the high contrast switcher
+  const { highContrast, setHighContrast } = useContext(highContrastContext);
+  const [ switchStatus, setSwitchStatus ] = React.useState(false);
+
+  // on contrast change, update the state variable for both the switch (to show checked/unchecked) and high contrast state variable itself
+  function handleContrastChange() {
+    setHighContrast(!highContrast);
+    setSwitchStatus(!switchStatus);
+  }
+
+  //everytime high contrast changes, push to local storage and set the status of the switch
+  useEffect(() => {
+    localStorage.setItem('highContrast', highContrast);
+    setSwitch();
+  }, [highContrast]);
+
+  //function that sets the way to switch looks
+  function setSwitch() {    
+    if(highContrast) {
+      setSwitchStatus(true);
+    } else {
+      setSwitchStatus(false);
+    }
+  }
 
   // Get currentUser
   const user = auth.currentUser;
@@ -511,9 +535,9 @@ function ProfilePop({ onClose }) {
                 >
                   <FormControlLabel
                     control={
-                      <Switch name="high-contrast" />
+                      <Switch name="high-contrast" onChange={ handleContrastChange } checked={ switchStatus } />
                     }
-                    label="High Contrast Graph Colors"
+                    label="Unique Graph Colors"
                   />
                 </motion.div>
 
