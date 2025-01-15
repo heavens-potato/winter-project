@@ -8,6 +8,7 @@ import Login from './Login';
 import SignUp from './SignUp';
 import Dashboard from './Dashboard';
 import About from './About'
+import ForgotPassword from './ForgotPassword';
 
 function App() {
   const themeDefault = createTheme({
@@ -255,6 +256,7 @@ function AppContent() {
         {/* Login & Sign Up Routes */}
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
+        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
 
         {/* Dashboard */}
         <Route path="/dashboard" element={<Dashboard />}></Route>

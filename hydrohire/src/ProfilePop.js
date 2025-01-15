@@ -42,19 +42,19 @@ function ProfilePop({ onClose }) {
   const { highContrast, setHighContrast } = useContext(highContrastContext);
   const [ switchStatus, setSwitchStatus ] = React.useState(false);
 
-  // on contrast change, update the state variable for both the switch (to show checked/unchecked) and high contrast state variable itself
+  // On contrast change, update the state variable for both the switch (to show checked/unchecked) and high contrast state variable itself
   function handleContrastChange() {
     setHighContrast(!highContrast);
     setSwitchStatus(!switchStatus);
   }
 
-  //everytime high contrast changes, push to local storage and set the status of the switch
+  // Everytime high contrast changes, push to local storage and set the status of the switch
   useEffect(() => {
     localStorage.setItem('highContrast', highContrast);
     setSwitch();
   }, [highContrast]);
 
-  //function that sets the way to switch looks
+  // Function that sets the way to switch looks
   function setSwitch() {    
     if(highContrast) {
       setSwitchStatus(true);

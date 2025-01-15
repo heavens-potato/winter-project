@@ -15,8 +15,8 @@ function validateEmail(email) {
 function Login() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if(user) {
-        window.location.href = "/dashboard"; 
+      if (user) {
+        window.location.href = "/dashboard";
       }
     });
     return () => unsubscribe();
@@ -145,6 +145,17 @@ function Login() {
                   {errorMessage}
                 </Typography>
               )}
+
+              {/* Forgot Password */}
+              <Typography variant="body1" align="center">
+                <Link
+                  href="/forgot-password"
+                  underline="hover"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Forgot Password?
+                </Link>
+              </Typography>
 
               {/* Sign Up Link */}
               <Typography variant="body1" align="center">
