@@ -47,9 +47,9 @@ function ResponsiveNav({ onClose }) {
                 <Button component={Link} to="/about" sx={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>
                     About
                 </Button>
-                <Button component={Link} to="/contact" sx={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>
+                {/* <Button component={Link} to="/contact" sx={{ color: 'black', fontSize: '20px', fontWeight: 'bold' }}>
                     Contact
-                </Button>
+                </Button> */}
                 {isLoggedIn ? (
                     <>
                         {/* My Profile Button */}
