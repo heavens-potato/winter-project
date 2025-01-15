@@ -15,8 +15,8 @@ function AboutCard({name}) {
     return (
         <>
             <text>{name}</text>
+            <img src={map.get(name).img} style={{ maxWidth: '20%' }}></img>
             <text>{map.get(name).description}</text>
-            <img src={map.get(name).img}></img>
         </>
     );
 }
