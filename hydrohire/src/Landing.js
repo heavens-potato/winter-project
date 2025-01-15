@@ -127,7 +127,7 @@ function Landing() {
       </Box>
 
       {/* 3 Features */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -186,7 +186,7 @@ function Landing() {
             </Grid>
           ))}
         </Grid>
-      </motion.div>
+      </motion.div> */}
     </div>
   );
 }
