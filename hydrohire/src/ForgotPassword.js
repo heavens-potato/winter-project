@@ -13,7 +13,10 @@ const ForgotPassword = () => {
     const handlePasswordReset = async (event) => {
         event.preventDefault();
         try {
-            await sendPasswordResetEmail(auth, email);
+            await sendPasswordResetEmail(auth, email, {
+                url: 'http://localhost:3000/login',
+                handleCodeInApp: false,
+            });
             setMessage('Password reset email sent. Please check your inbox.');
         } catch (error) {
             setMessage('Failed to send password reset email. Please try again.');
