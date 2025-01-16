@@ -36,7 +36,7 @@ const BarChartComponent = ({ data, barColors }) => {
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '25px', width: '100%', margin: 0 }}>
       <BarChart width={chartWidth} height={chartHeight} data={data}>
         <XAxis dataKey="status" style={{ fontSize: xAxisFontSize }} />
-        <YAxis />
+        <YAxis tickFormatter={(value) => Math.round(value)} />
         <Tooltip />
         <Legend verticalAlign="bottom" content={renderLegend} />
         <Bar dataKey="count" name="Status" fill={barColors[5]}>
