@@ -207,7 +207,7 @@ function ProfilePop({ onClose }) {
     >
       <div className="flex flex-col items-center justify-center w-screen">
         <div className="flex flex-row justify-between items-center p-3 md:p-10 rounded-t-lg w-4/5 xl:w-3/5" style={{ borderRadius: '20px 20px 0 0', backgroundColor: theme.palette.primary.main }}>
-          <h2 className="text-3xl font-bold">Hi, {user.displayName || "there"}</h2>
+          <h2 className="text-3xl font-bold overflow-hidden text-nowrap">Hi, {user.displayName || "there"}</h2>
           <HighlightOffIcon onClick={onClose} sx={{ cursor: 'pointer' }} />
         </div>
         <div className="flex flex-col md:flex-row space-evenly bg-white pl-5 md:pl-10 pr-5 md:pr-10 gap-0 md:gap-5 rounded-b-lg w-4/5 xl:w-3/5" style={{ borderRadius: '0 0 20px 20px' }}>
