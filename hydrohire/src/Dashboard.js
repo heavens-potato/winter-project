@@ -109,7 +109,7 @@ function Dashboard() {
         .map(([status, count]) => ({
             status: status.charAt(0).toUpperCase() + status.slice(1),
             count,
-        }));
+    }));
 
     const barColors = highContrast ? ['#93C572',
         '#00C2CC',

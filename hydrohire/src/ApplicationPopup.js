@@ -168,6 +168,7 @@ const ApplicationPopup = ({
                     />
                     <TextField
                         label="Salary"
+                        type="number"
                         fullWidth
                         variant="outlined"
                         name="salary"
