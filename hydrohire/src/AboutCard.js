@@ -1,7 +1,7 @@
 import justinProf from './assets/img/Justin.png';
 import claireProf from './assets/img/Claire.jpg';
 import stephenProf from './assets/img/Stephen.jpg';
-import alexisProf from './assets/img/Alexis.jpg';
+import alexisProf from './assets/img/Alexis.JPG';
 import { Description } from '@mui/icons-material';
 
 // Map holding descriptions
