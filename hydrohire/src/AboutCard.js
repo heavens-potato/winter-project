@@ -2,6 +2,8 @@ import justinProf from './assets/img/Justin.png';
 import claireProf from './assets/img/Claire.jpg';
 import stephenProf from './assets/img/Stephen.jpg';
 import alexisProf from './assets/img/Alexis.JPG';
+import { borderColor } from '@mui/system';
+import { Typography } from '@mui/material';
 
 // Map holding info for each person
 const map = new Map();
@@ -13,9 +15,9 @@ map.set('Alexis', {description: "Post Grad Life", title: 'UI/UX Designer', img: 
 function AboutCard({name}) {
     return (
         <>
-            <div class="flex flex-row">
+            <div class="flex flex-row" style ={{border: '3px solid', borderRadius: '1rem', backgroundColor: '#D9EAF5'}}>
                 <div> {/* Left Half */}
-                    <img src={map.get(name).img} style={{ maxWidth: '20%' }}></img>
+                    <img src={map.get(name).img} style={{ width: 300 , height: 300}}></img>
                     <h1>{name}</h1>
                     <div>
                         <button onClick={()=> window.open(map.get(name).li, "_blank")}>LinkedIn!   </button>
