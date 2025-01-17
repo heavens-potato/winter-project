@@ -7,7 +7,7 @@ function About(){
   return (
     <>
       <Navbar/>
-      <div>
+      <div> {/* Parent Div */}
         <div> {/* Top Part */}
           <div className = 'flex justify-center mt-1'>
             <Typography variant="h4" sx={{ fontSize: 32}}>Meet the Team</Typography>
@@ -20,7 +20,7 @@ function About(){
               Job Capyture is essential for maintaining clarity and confidence during the often-overwhelming job 
               application journey.</p>
           </div>
-        </div>
+        </div> {/* Top End */}
         <div className="grid grid-cols-2 gap-3 p-4"> {/* Grid Parent */}
           <div className="grid gap-3">
             <div>
@@ -38,8 +38,13 @@ function About(){
               <AboutCard name = 'Alexis Giobbi'></AboutCard>
             </div>
           </div>
-        </div>
-      </div>
+        </div> {/* Grid End */}
+        <div className="flex justify-center gap-32"> {/* Bottom Part */}
+          <text>Box</text>
+          <text>Box</text>
+          <text>Box</text>
+        </div> {/* Bottom End */}
+      </div> {/* Content End */}
     </>
   );
 }
