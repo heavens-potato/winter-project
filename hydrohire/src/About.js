@@ -9,22 +9,22 @@ function About(){
     <>
       <Navbar/>
       <div>
-        <Typography class = 'flex justify-center' variant="h4" sx={{ fontSize: 28, fontWeight: 'bold'}}>Meet the Team</Typography>
-        <div class = "flex space-between">
-          <div>
+        <Typography className = 'flex justify-center' variant="h4" sx={{ fontSize: 28}}>Meet the Team</Typography>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="grid gap-3">
             <div>
-              <AboutCard name = 'Stephen' ></AboutCard>
+              <AboutCard name = 'Stephen Wu' ></AboutCard>
             </div>
             <div>
-              <AboutCard name = 'Justin'></AboutCard>
+              <AboutCard name = 'Justin Glazer'></AboutCard>
             </div>
           </div>
-          <div>
+          <div className="grid gap-3">
             <div>
-              <AboutCard name = 'Claire'></AboutCard>
+              <AboutCard name = 'Claire Chen'></AboutCard>
             </div>
             <div>
-              <AboutCard name = 'Alexis'></AboutCard>
+              <AboutCard name = 'Alexis Giobbi'></AboutCard>
             </div>
           </div>
         </div>
