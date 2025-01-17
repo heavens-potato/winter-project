@@ -19,7 +19,7 @@ function AboutCard({name}) {
         <>
             <div className='flex flex-row p-5 gap-3' style ={{borderRadius: '1.25rem', backgroundColor: '#D9EAF5'}}>
                 <div className='w-1/3 flex flex-col justify-center'> {/* Left Half */}
-                    <img className= 'flex justify-center overflow-hidden max-h-52 max-w-52 object-cover rounded-xl' src={map.get(name).img}></img>
+                    <img className= 'flex justify-center h-52 object-cover rounded-xl' src={map.get(name).img} />
                     <Typography className='flex justify-center'sx={{ fontSize: 24, fontWeight: 'bold'}}>{name}</Typography>
                     <div className='flex justify-center gap-2'>
                         <LinkedInIcon onClick={()=> window.open(map.get(name).li, "_blank")}>LinkedIn!   </LinkedInIcon>
