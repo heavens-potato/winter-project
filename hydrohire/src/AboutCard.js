@@ -4,8 +4,8 @@ import stephenProf from './assets/img/Stephen.jpg';
 import alexisProf from './assets/img/Alexis.JPG';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { borderColor } from '@mui/system';
 import { Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 // Map holding info for each person
 const map = new Map();
@@ -15,20 +15,21 @@ map.set('Stephen Wu', {description: "Stevey Stretchie", title: 'Project Lead, De
 map.set('Alexis Giobbi', {description: "Post Grad Life", title: 'UI/UX Designer', img: alexisProf, li:'https://www.linkedin.com/in/alexis-giobbi/', gh: 'https://github.com/alexisgiobbi'});
 
 function AboutCard({name}) {
+    const theme = useTheme();
     return (
         <>
-            <div className='flex flex-row p-5 gap-3' style ={{borderRadius: '1.25rem', backgroundColor: '#D9EAF5'}}>
+            <div className='flex flex-row p-5 gap-3' style ={{borderRadius: '1.25rem', backgroundColor: theme.palette.secondary.light}}>
                 <div className='w-1/3 flex flex-col justify-center'> {/* Left Half */}
                 <img className= 'flex justify-center h-52 object-cover rounded-xl' src={map.get(name).img} />
-                    <Typography className='flex justify-center'sx={{ fontSize: 24, fontWeight: 'bold'}}>{name}</Typography>
+                    <Typography className='flex justify-center'sx={{ fontSize: 24, fontWeight: 'bold', color: theme.palette.primary.dark}}>{name}</Typography>
                     <div className='flex justify-center gap-2'>
-                        <LinkedInIcon onClick={()=> window.open(map.get(name).li, "_blank")}>LinkedIn!   </LinkedInIcon>
-                        <GitHubIcon onClick={()=> window.open(map.get(name).gh, "_blank")}>GitHub!</GitHubIcon>
+                        <LinkedInIcon style={{color: theme.palette.primary.dark}} onClick={()=> window.open(map.get(name).li, "_blank")}>LinkedIn!   </LinkedInIcon>
+                        <GitHubIcon style={{color: theme.palette.primary.dark}} onClick={()=> window.open(map.get(name).gh, "_blank")}>GitHub!</GitHubIcon>
                     </div>
                 </div>
                 <div className='w-2/3'> {/* Right Half */}
-                    <Typography sx={{ fontSize: 20, fontWeight: 'bold'}}>{map.get(name).title}</Typography>
-                    <p>{map.get(name).description}</p>
+                    <Typography sx={{ fontSize: 20, fontWeight: 'bold', color: theme.palette.primary.dark}}>{map.get(name).title}</Typography>
+                    <p style={{color: theme.palette.primary.dark}}>{map.get(name).description}</p>
                 </div>
             </div>
         </>
