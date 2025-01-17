@@ -9,7 +9,7 @@ import { Typography } from '@mui/material';
 
 // Map holding info for each person
 const map = new Map();
-map.set('Justin Glazer', {description: 'He\'s Cool', title: 'Backend Developer', img: justinProf, li: 'https://www.linkedin.com/in/justin-glazer/', gh: 'https://github.com/justin-glazer'});
+map.set('Justin Glazer', {description: 'Hi! Im Justin, and I am a CS major at the University of Maryland, College Park (UMD). I have been coding since eleventh grade, and I have primarily studied Java and C. I am interested in becoming a software developer in the future. In my free time, I like to snowboard, skateboard, and play sports with friends', title: 'Backend Developer', img: justinProf, li: 'https://www.linkedin.com/in/justin-glazer/', gh: 'https://github.com/justin-glazer'});
 map.set('Claire Chen', {description: 'Hi!', title: 'Frontend Developer', img: claireProf, li: 'https://www.linkedin.com/in/claire-s-chen/', gh: 'https://github.com/cc13985'});
 map.set('Stephen Wu', {description: "Stevey Stretchie", title: 'Project Lead, Developer', img: stephenProf, li:'https://www.linkedin.com/in/stephen-wu-210a96304/' ,gh: 'https://github.com/heavens-potato'});
 map.set('Alexis Giobbi', {description: "Post Grad Life", title: 'UI/UX Designer', img: alexisProf, li:'https://www.linkedin.com/in/alexis-giobbi/', gh: 'https://github.com/alexisgiobbi'});
@@ -19,7 +19,7 @@ function AboutCard({name}) {
         <>
             <div className='flex flex-row p-5 gap-3' style ={{borderRadius: '1.25rem', backgroundColor: '#D9EAF5'}}>
                 <div className='w-1/3 flex flex-col justify-center'> {/* Left Half */}
-                    <img className= 'flex justify-center h-52 object-cover rounded-xl' src={map.get(name).img} />
+                <img className= 'flex justify-center h-52 object-cover rounded-xl' src={map.get(name).img} />
                     <Typography className='flex justify-center'sx={{ fontSize: 24, fontWeight: 'bold'}}>{name}</Typography>
                     <div className='flex justify-center gap-2'>
                         <LinkedInIcon onClick={()=> window.open(map.get(name).li, "_blank")}>LinkedIn!   </LinkedInIcon>

@@ -9,8 +9,8 @@ function About(){
     <>
       <Navbar/>
       <div>
-        <Typography className = 'flex justify-center' variant="h4" sx={{ fontSize: 28}}>Meet the Team</Typography>
-        <div className="grid grid-cols-2 gap-3">
+        <Typography className = 'flex justify-center' variant="h4" sx={{ fontSize: 32}}>Meet the Team</Typography>
+        <div className="grid grid-cols-2 gap-3 p-4">
           <div className="grid gap-3">
             <div>
               <AboutCard name = 'Stephen Wu' ></AboutCard>
