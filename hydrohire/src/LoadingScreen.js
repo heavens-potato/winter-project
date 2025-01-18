@@ -4,26 +4,28 @@ import { motion } from 'framer-motion';
 
 const LoadingScreen = () => {
     return (
-        <div className="fixed w-full h-full bg-white flex flex-col justify-center items-center space-y-10">
+        <div className="fixed w-full h-full bg-white flex flex-col justify-center items-center">
             <motion.div
-                initial={{ x: 500 }}
-                animate={{ x: -500 }}
-                transition={{ duration: 1.5, repeat: Infinity, repeatType: 'loop' }}
-                style={{ maxWidth: '20%'}}
-                className="flex justify-center items-center flex-row"
+                initial={{ x: '100%' }}
+                animate={{ x: '-100%' }}
+                transition={{ duration: 2, repeat: Infinity, repeatType: 'loop' }}
+                className="flex flex-row justify-center"
             >
-                <img src={capybaraLogo} alt="Capybara" />
-                <img src={capybaraLogo} alt="Capybara" />
-                <img src={capybaraLogo} alt="Capybara" />
-                <img src={capybaraLogo} alt="Capybara" />
-                <img src={capybaraLogo} alt="Capybara" />
-                <img src={capybaraLogo} alt="Capybara" />
-                <img src={capybaraLogo} alt="Capybara" />
+                <img src={capybaraLogo} style={{ maxWidth: '20%'}} alt="Capybara" />
+                <img src={capybaraLogo} style={{ maxWidth: '20%'}} alt="Capybara" />
+                <img src={capybaraLogo} style={{ maxWidth: '20%'}} alt="Capybara" />
+                <img src={capybaraLogo} style={{ maxWidth: '20%'}} alt="Capybara" />
+                <img src={capybaraLogo} style={{ maxWidth: '20%'}} alt="Capybara" />
+                <img src={capybaraLogo} style={{ maxWidth: '20%'}} alt="Capybara" />
+                <img src={capybaraLogo} style={{ maxWidth: '20%'}} alt="Capybara" />
+                <img src={capybaraLogo} style={{ maxWidth: '20%'}} alt="Capybara" />
+                <img src={capybaraLogo} style={{ maxWidth: '20%'}} alt="Capybara" />
+                <img src={capybaraLogo} style={{ maxWidth: '20%'}} alt="Capybara" />
             </motion.div>
             <motion.div
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 0 }}
-                transition={{ duration: 0.5, repeat: Infinity, repeatType: 'loop' }}
+                transition={{ duration: 1, repeat: Infinity, repeatType: 'loop' }}
                 className="flex items-center"
             >
                 <h1 className="text-2xl font-bold">Loading...</h1>
