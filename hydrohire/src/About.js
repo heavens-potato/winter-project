@@ -12,11 +12,11 @@ const features = [
   },
   {
     title: 'Smart Application Tracker',
-    description: 'Effortlessly manage all your job applications in one convenient location. Our DataGrid structure makes it simple to add, view, edit, and delete entries. With powerful native and customized filtering options, you can quickly find the applications that matter most. You can also personalize your dashboard and display only the information that’s most relevant to you.',
+    description: 'Effortlessly manage all your job applications in one convenient location. Our DataGrid structure makes it simple to add, view, edit, and delete entries. With powerful native and additional custom filtering options, you can quickly find the applications that matter most. You can also personalize your dashboard and display only the information that’s most relevant to you.',
   },
   {
     title: 'Personalized Workspace',
-    description: 'Make Job Capyture your own with customizable themes and account settings. Choose from nine vibrant color themes to match your style, and for a flexible and seamless workflow, easily and securely update your email, password, and profile settings whenever needed.',
+    description: 'Make Job Capyture your own with customizable themes and account settings. Choose from nine vibrant color themes to match your style, and enjoy a flexible workflow with the ability to easily and securely update your email, password, and profile settings whenever needed.',
   },
 ];
 
