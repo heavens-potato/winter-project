@@ -28,92 +28,80 @@ function About(){
     <>
       <Navbar/>
       <div> {/* Parent Div */}
-        <div style={{backgroundColor: theme.palette.primary.dark}}> {/* Top Part */}
+        <div className='p-3 lg:p-14' style={{backgroundColor: theme.palette.primary.dark}}> {/* Top Part */}
           <div className = 'flex flex-col gap-6'>
-            <div className = 'flex justify-center'>
-              <Typography variant="h4" sx={{ fontSize: 32, color: theme.palette.primary.white}}>Who We Are</Typography>
-            </div>
-            <div className = 'flex justify-center mx-7'>
-              <p style={{color: theme.palette.primary.white}}>{paragraph}</p>
+            <div className = 'flex justify-center pt-2'>
+              <Typography variant="h4" sx={{ fontSize: 32, color: theme.palette.primary.white, fontWeight: 'bold'}}>Who We Are</Typography>
             </div>
           </div>
           {/* 3 Features */}
-          <motion.div
-            initial = {{ opacity: 0 }}
-            whileInView={{ opacity: 1 }} 
-            viewport={{ once: true }}
-            transition = {{ duration: 0.3 }}
-          >
-            <Grid container spacing={3} sx={{
-              backgroundColor: (theme) => theme.palette.primary.dark,
-              display: 'flex',
-              flexDirection: { xs: 'column', lg: 'row' },
-              justifyContent: 'space-between', 
-              alignItems: 'center', 
-              padding: { xs: 5 , md: 15 },
-              gap: 5
+            <motion.div
+              initial = {{ opacity: 0 }}
+              whileInView={{ opacity: 1 }} 
+              viewport={{ once: true }}
+              transition = {{ duration: 0.3 }}
+              >
+              <p className="text-center mt-4" style={{color: theme.palette.primary.white}}>{paragraph}</p>
+              <Grid className="mt-8" container spacing={3} sx={{
+                backgroundColor: (theme) => theme.palette.primary.dark,
+                display: 'flex',
+                flexDirection: { xs: 'column', lg: 'row' },
+                alignItems: 'center',
+                justifyContent: 'center', 
+                // padding: 5,
+                height: '100%',
+                gap: 5,
+                paddingBottom: {xs: 4, sm:0}
               }}>
-                {features.map((feature, index) => (
-                <Grid item xs={12} sm={4} key={index} sx={{
-                  minWidth: { xs: 350, md: 600, lg: 350 },
-                  maxWidth: 350,
-                  borderRadius: 25,
-                }}>
-                  <motion.div
-                    initial={{ y: 100, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }} 
-                    viewport={{ once: true }}
-                    transition = {{ duration: 0.3, delay: 0.3 }}
-                  >
-                    <Card>
-                      <CardContent>
-                        <Typography variant="h5" component="h2" sx={{
-                          fontSize: 32,
-                          color: (theme) => theme.palette.primary.main,
-                          justifyContent: 'center',
-                          textAlign: 'center',
-                          fontWeight: 'bold',
-                          padding: { xs: 2, md: 3 }
+                  {features.map((feature, index) => (
+                    <Grid item xs={12} sm={4} key={index} sx={{
+                      //  minWidth: { xs: 350, md: 600, lg: 350 },
+                      maxWidth:{xs: '100%', lg: 415},
+                      borderRadius: 25,
+                    }}>
+                    <motion.div
+                      initial={{ y: 100, opacity: 0 }}
+                      whileInView={{ y: 0, opacity: 1 }} 
+                      viewport={{ once: true }}
+                      transition = {{ duration: 0.3, delay: 0.3 }}
+                    >
+                      <Card sx={{minHeight:{xs: 0, lg:450}}}>
+                        <CardContent>
+                          <Typography variant="h5" component="h2" sx={{
+                            fontSize: 32,
+                            color: (theme) => theme.palette.primary.main,
+                            justifyContent: 'center',
+                            textAlign: 'center',
+                            fontWeight: 'bold',
+                            padding: { xs: 2, md: 3 },
                           }}>
-                          {feature.title}
-                        </Typography>
-                        <Typography variant="body2" sx={{
-                          fontSize: 18,
-                          justifyContent: 'center',
-                          textAlign: 'center',
-                          wordWrap: 'break-word',
-                          color: (theme) => theme.palette.primary.dark,
-                        }}>
-                          {feature.description}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                    </motion.div>           {/* 3 Features End */}
-                  </Grid>
-                ))}
-              </Grid>
-            </motion.div>
-        </div> {/* Top End */}
+                            {feature.title}
+                          </Typography>
+                          <Typography variant="body2" sx={{
+                            fontSize: 18,
+                            justifyContent: 'center',
+                            textAlign: 'center',
+                            wordWrap: 'break-word',
+                            color: (theme) => theme.palette.primary.dark,
+                          }}>
+                            {feature.description}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                      </motion.div>           
+                    </Grid>
+                  ))}
+                </Grid>
+              </motion.div> {/* 3 Features End */}
+            </div>
         <div className = 'flex justify-center mt-10'>
           <Typography variant="h4" sx={{ fontSize: 32}}>Meet the Team</Typography>
         </div>
-        <div className="grid grid-cols-2 gap-3 p-4 mb-10"> {/* Grid Parent */}
-          <div className="grid gap-3">
-            <div>
-              <AboutCard name = 'Stephen Wu' ></AboutCard>
-            </div>
-            <div>
-              <AboutCard name = 'Justin Glazer'></AboutCard>
-            </div>
-          </div>
-          <div className="grid gap-3">
-            <div>
-              <AboutCard name = 'Claire Chen'></AboutCard>
-            </div>
-            <div>
-              <AboutCard name = 'Alexis Giobbi'></AboutCard>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 p-4 mb-10"> {/* Grid Parent */}
+          <AboutCard name = 'Stephen Wu' />
+          <AboutCard name = 'Justin Glazer'/>
+          <AboutCard name = 'Claire Chen'/>
+          <AboutCard name = 'Alexis Giobbi'/>
         </div> {/* Grid End */}
       </div> {/* Content End */}
     </>

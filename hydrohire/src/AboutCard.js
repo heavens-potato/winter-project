@@ -18,17 +18,17 @@ function AboutCard({name}) {
     const theme = useTheme();
     return (
         <>
-            <div className='flex flex-row p-5 gap-3' style ={{borderRadius: '1.25rem', backgroundColor: theme.palette.secondary.light}}>
+            <div className='flex flex-row p-2 lg:p-5 gap-3' style ={{borderRadius: '1.25rem', backgroundColor: theme.palette.secondary.light}}>
                 <div className='w-1/3 flex flex-col justify-center'> {/* Left Half */}
-                <img className= 'flex justify-center h-52 object-cover rounded-xl' src={map.get(name).img} />
-                    <Typography className='flex justify-center'sx={{ fontSize: 24, fontWeight: 'bold', color: theme.palette.primary.dark}}>{name}</Typography>
+                <img className= 'flex justify-center h-64 object-cover rounded-xl' src={map.get(name).img} />
+                    <Typography sx={{ textAlign: 'center', fontSize: 24, fontWeight: 'bold', color: theme.palette.primary.dark}}>{name}</Typography>
                     <div className='flex justify-center gap-2'>
                         <LinkedInIcon className='cursor-pointer' style={{color: theme.palette.primary.dark}} onClick={()=> window.open(map.get(name).li, "_blank")}>LinkedIn!   </LinkedInIcon>
                         <GitHubIcon className='cursor-pointer' style={{color: theme.palette.primary.dark}} onClick={()=> window.open(map.get(name).gh, "_blank")}>GitHub!</GitHubIcon>
                     </div>
                 </div>
                 <div className='w-2/3'> {/* Right Half */}
-                    <Typography sx={{ fontSize: 20, fontWeight: 'bold', color: theme.palette.primary.dark}}>{map.get(name).title}</Typography>
+                    <Typography sx={{fontSize: 20, fontWeight: 'bold', color: theme.palette.primary.dark}}>{map.get(name).title}</Typography>
                     <p style={{color: theme.palette.primary.dark}}>{map.get(name).description}</p>
                 </div>
             </div>
