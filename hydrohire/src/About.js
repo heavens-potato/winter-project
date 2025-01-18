@@ -95,7 +95,7 @@ function About(){
               </motion.div> {/* 3 Features End */}
             </div>
         <div className = 'flex justify-center mt-10'>
-          <Typography variant="h4" sx={{ fontSize: 32}}>Meet the Team</Typography>
+          <Typography variant="h4" sx={{ fontSize: 32, fontWeight: 'bold' }}>Meet the Team</Typography>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 p-4 mb-10"> {/* Grid Parent */}
           <AboutCard name = 'Stephen Wu' />
