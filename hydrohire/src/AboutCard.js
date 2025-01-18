@@ -23,8 +23,8 @@ function AboutCard({name}) {
                 <img className= 'flex justify-center h-52 object-cover rounded-xl' src={map.get(name).img} />
                     <Typography className='flex justify-center'sx={{ fontSize: 24, fontWeight: 'bold', color: theme.palette.primary.dark}}>{name}</Typography>
                     <div className='flex justify-center gap-2'>
-                        <LinkedInIcon style={{color: theme.palette.primary.dark}} onClick={()=> window.open(map.get(name).li, "_blank")}>LinkedIn!   </LinkedInIcon>
-                        <GitHubIcon style={{color: theme.palette.primary.dark}} onClick={()=> window.open(map.get(name).gh, "_blank")}>GitHub!</GitHubIcon>
+                        <LinkedInIcon className='cursor-pointer' style={{color: theme.palette.primary.dark}} onClick={()=> window.open(map.get(name).li, "_blank")}>LinkedIn!   </LinkedInIcon>
+                        <GitHubIcon className='cursor-pointer' style={{color: theme.palette.primary.dark}} onClick={()=> window.open(map.get(name).gh, "_blank")}>GitHub!</GitHubIcon>
                     </div>
                 </div>
                 <div className='w-2/3'> {/* Right Half */}
