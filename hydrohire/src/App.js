@@ -38,7 +38,7 @@ function App() {
       primary: {
         main: '#FFB165', // Light Orange
         light: '#FFB165', // Light Orange
-        dark: '#4D2600', // Dark Orange
+        dark: '#331A00', // Dark Orange
         white: '#FFFFFF', // White
       },
       secondary: {
@@ -81,7 +81,7 @@ function App() {
       primary: {
         main: '#CF9FFF', // Light violet
         light: '#CF9FFF', // Light violet
-        dark: '#26004D', // Dark Violet
+        dark: '#1A0033', // Dark Violet
         white: '#FFFFFF', // White
       },
       secondary: {
