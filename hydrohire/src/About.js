@@ -12,15 +12,31 @@ const features = [
   },
   {
     title: 'Smart Application Tracker',
-    description: 'Effortlessly manage all your job applications in one convenient location. Our DataGrid structure makes it simple to add, view, edit, and delete entries. With powerful native and additional custom filtering options, you can quickly find the applications that matter most. You can also personalize your dashboard and display only the information that’s most relevant to you.',
+    description: 'Effortlessly manage all your job applications in one convenient location. Our DataGrid structure makes it simple to add, view, edit, and delete entries. With powerful native and customized filtering options, you can quickly find the applications that matter most. You can also personalize your dashboard and display only the information that’s most relevant to you.',
   },
   {
     title: 'Personalized Workspace',
-    description: 'Make Job Capyture your own with customizable themes and account settings. Choose from nine vibrant color themes to match your style, and enjoy a flexible workflow with the ability to easily and securely update your email, password, and profile settings whenever needed.',
+    description: 'Make Job Capyture your own with customizable themes and account settings. Choose from nine vibrant color themes to match your style, and for a flexible and seamless workflow, easily and securely update your email, password, and profile settings whenever needed.',
   },
 ];
 
 const paragraph = "Job Capyture simplifies and streamlines your job search process with an organized and customizable way to manage applications. We aim to solve the chaos of tracking applications across spreadsheets, emails, and scattered documents by offering a centralized, intuitive platform that visualizes progress and offers an organized method of viewing jobs. Designed for job seekers at all stages, Job Capyture is essential for maintaining clarity and confidence during the often-overwhelming job application journey."
+
+const aboutCardParentVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+}
+
+const aboutCardChildVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  // hover: { scale: 1.1 }
+}
 
 function About(){
   const theme = useTheme();
@@ -30,9 +46,12 @@ function About(){
       <div> {/* Parent Div */}
         <div className='p-3 lg:p-14' style={{backgroundColor: theme.palette.primary.dark}}> {/* Top Part */}
           <div className = 'flex flex-col gap-6'>
-            <div className = 'flex justify-center pt-2'>
+            <motion.div className = 'flex justify-center pt-2'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}>
               <Typography variant="h4" sx={{ fontSize: 32, color: theme.palette.primary.white, fontWeight: 'bold'}}>Who We Are</Typography>
-            </div>
+            </motion.div>
           </div>
           {/* 3 Features */}
             <motion.div
@@ -41,7 +60,12 @@ function About(){
               viewport={{ once: true }}
               transition = {{ duration: 0.3 }}
               >
-              <p className="text-center mt-4" style={{color: theme.palette.primary.white}}>{paragraph}</p>
+              <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.1}}>
+                  <p className="text-center mt-4" style={{color: theme.palette.primary.white}}>{paragraph}</p>
+              </motion.div>
               <Grid className="mt-8" container spacing={3} sx={{
                 backgroundColor: (theme) => theme.palette.primary.dark,
                 display: 'flex',
@@ -94,15 +118,37 @@ function About(){
                 </Grid>
               </motion.div> {/* 3 Features End */}
             </div>
-        <div className = 'flex justify-center mt-10'>
-          <Typography variant="h4" sx={{ fontSize: 32, fontWeight: 'bold' }}>Meet the Team</Typography>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 p-4 mb-10"> {/* Grid Parent */}
-          <AboutCard name = 'Stephen Wu' />
-          <AboutCard name = 'Justin Glazer'/>
-          <AboutCard name = 'Claire Chen'/>
-          <AboutCard name = 'Alexis Giobbi'/>
-        </div> {/* Grid End */}
+        <motion.div className = 'flex justify-center mt-10'
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.1}}>
+          <Typography variant="h4" sx={{ fontSize: 32}}>Meet the Team</Typography>
+        </motion.div>
+        <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-3 p-4 mb-10"
+          variants={aboutCardParentVariants}
+          initial="hidden"
+          whileInView="visible"> {/* Grid Parent */}
+          <motion.div
+            variants={aboutCardChildVariants}
+            whileHover={{ scale: 1.1 }}>
+            <AboutCard name = 'Stephen Wu' />
+          </motion.div>
+          <motion.div
+            variants={aboutCardChildVariants}
+            whileHover={{ scale: 1.1 }}> 
+            <AboutCard name = 'Justin Glazer'/>
+          </motion.div>
+          <motion.div
+            variants={aboutCardChildVariants}
+            whileHover={{ scale: 1.1 }}>
+            <AboutCard name = 'Claire Chen'/>
+          </motion.div>
+          <motion.div
+            variants={aboutCardChildVariants}
+            whileHover={{ scale: 1.1 }}>
+            <AboutCard name = 'Alexis Giobbi'/>
+          </motion.div>
+        </motion.div> {/* Grid End */}
       </div> {/* Content End */}
     </>
   );
