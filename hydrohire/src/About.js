@@ -131,7 +131,7 @@ function About() {
           variants={aboutCardParentVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}> {/* Grid Parent */}
+          viewport={{ once: true, amount: 0.25 }}> {/* Grid Parent */}
           <motion.div
             variants={aboutCardChildVariants}>
             <AboutCard name='Stephen Wu' />
