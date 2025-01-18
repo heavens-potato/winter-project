@@ -27,7 +27,7 @@ const aboutCardParentVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
+      staggerChildren: 0.2
     }
   }
 }
@@ -121,31 +121,29 @@ function About(){
         <motion.div className = 'flex justify-center mt-10'
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.3, delay: 0.1}}>
           <Typography variant="h4" sx={{ fontSize: 32}}>Meet the Team</Typography>
         </motion.div>
         <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-3 p-4 mb-10"
           variants={aboutCardParentVariants}
           initial="hidden"
-          whileInView="visible"> {/* Grid Parent */}
+          whileInView="visible"
+          viewport={{ once: true }}> {/* Grid Parent */}
           <motion.div
-            variants={aboutCardChildVariants}
-            whileHover={{ scale: 1.1 }}>
+            variants={aboutCardChildVariants}>
             <AboutCard name = 'Stephen Wu' />
           </motion.div>
           <motion.div
-            variants={aboutCardChildVariants}
-            whileHover={{ scale: 1.1 }}> 
+            variants={aboutCardChildVariants}> 
             <AboutCard name = 'Justin Glazer'/>
           </motion.div>
           <motion.div
-            variants={aboutCardChildVariants}
-            whileHover={{ scale: 1.1 }}>
+            variants={aboutCardChildVariants}>
             <AboutCard name = 'Claire Chen'/>
           </motion.div>
           <motion.div
-            variants={aboutCardChildVariants}
-            whileHover={{ scale: 1.1 }}>
+            variants={aboutCardChildVariants}>
             <AboutCard name = 'Alexis Giobbi'/>
           </motion.div>
         </motion.div> {/* Grid End */}
