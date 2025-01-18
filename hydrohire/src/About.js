@@ -2,7 +2,7 @@ import Navbar from "./Navbar";
 import AboutCard from "./AboutCard";
 import { Button, Typography, Box, Card, CardContent } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-
+import { useTheme } from '@mui/material/styles';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const features = [
@@ -24,13 +24,14 @@ const features = [
 ];
 
 function About(){
+  const theme = useTheme();
   return (
     <>
       <Navbar/>
       <div> {/* Parent Div */}
-        <div> {/* Top Part */}
-          <div className = 'flex justify-center mt-1'>
-            <Typography variant="h4" sx={{ fontSize: 32}}>Meet the Team</Typography>
+        <div style={{backgroundColor: theme.palette.primary.main}}> {/* Top Part */}
+          <div className = 'flex justify-center'>
+            <Typography variant="h4" sx={{ fontSize: 32}}>Who We Are</Typography>
           </div>
           <div className = 'flex justify-center mx-7'>
             <p> Job Capyture simplifies and streamlines your job search process with an organized and customizable 
@@ -97,7 +98,10 @@ function About(){
             </Grid>
             </motion.div>
         </div> {/* Top End */}
-        <div className="grid grid-cols-2 gap-3 p-4"> {/* Grid Parent */}
+        <div className = 'flex justify-center mt-10'>
+          <Typography variant="h4" sx={{ fontSize: 32}}>Meet the Team</Typography>
+        </div>
+        <div className="grid grid-cols-2 gap-3 p-4 mb-10"> {/* Grid Parent */}
           <div className="grid gap-3">
             <div>
               <AboutCard name = 'Stephen Wu' ></AboutCard>
