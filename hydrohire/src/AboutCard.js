@@ -8,7 +8,6 @@ import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 
-
 // Map holding info for each person
 const map = new Map();
 map.set('Justin Glazer', {description: 'Hi! Im Justin, and I am a CS major at the University of Maryland, College Park (UMD). I have been coding since eleventh grade, and I have primarily studied Java and C. I am interested in becoming a software developer in the future. In my free time, I like to snowboard, skateboard, and play sports with friends', title: 'Backend Engineer', img: justinProf, li: 'https://www.linkedin.com/in/justin-glazer/', gh: 'https://github.com/justin-glazer'});
