@@ -20,6 +20,8 @@ const features = [
   },
 ];
 
+const paragraph = "Job Capyture simplifies and streamlines your job search process with an organized and customizable way to manage applications. We aim to solve the chaos of tracking applications across spreadsheets, emails, and scattered documents by offering a centralized, intuitive platform that visualizes progress and offers an organized method of viewing jobs. Designed for job seekers at all stages, Job Capyture is essential for maintaining clarity and confidence during the often-overwhelming job application journey."
+
 function About(){
   const theme = useTheme();
   return (
@@ -32,12 +34,7 @@ function About(){
               <Typography variant="h4" sx={{ fontSize: 32, color: theme.palette.primary.white}}>Who We Are</Typography>
             </div>
             <div className = 'flex justify-center mx-7'>
-              <p style={{color: theme.palette.primary.white}}> Job Capyture simplifies and streamlines your job search process with an organized and customizable 
-                way to manage applications. We aim to solve the chaos of tracking applications across spreadsheets, 
-                emails, and scattered documents by offering a centralized, intuitive platform that visualizes progress 
-                and offers an organized method of viewing jobs. Designed for job seekers at all stages, 
-                Job Capyture is essential for maintaining clarity and confidence during the often-overwhelming job 
-                application journey.</p>
+              <p style={{color: theme.palette.primary.white}}>{paragraph}</p>
             </div>
           </div>
           {/* 3 Features */}
