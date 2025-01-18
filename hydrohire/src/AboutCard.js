@@ -9,9 +9,9 @@ import { useTheme } from '@mui/material/styles';
 
 // Map holding info for each person
 const map = new Map();
-map.set('Justin Glazer', {description: 'Hi! Im Justin, and I am a CS major at the University of Maryland, College Park (UMD). I have been coding since eleventh grade, and I have primarily studied Java and C. I am interested in becoming a software developer in the future. In my free time, I like to snowboard, skateboard, and play sports with friends', title: 'Backend Developer', img: justinProf, li: 'https://www.linkedin.com/in/justin-glazer/', gh: 'https://github.com/justin-glazer'});
-map.set('Claire Chen', {description: 'Hi!', title: 'Frontend Developer', img: claireProf, li: 'https://www.linkedin.com/in/claire-s-chen/', gh: 'https://github.com/cc13985'});
-map.set('Stephen Wu', {description: "Stevey Stretchie", title: 'Project Lead, Developer', img: stephenProf, li:'https://www.linkedin.com/in/stephen-wu-210a96304/' ,gh: 'https://github.com/heavens-potato'});
+map.set('Justin Glazer', {description: 'Hi! Im Justin, and I am a CS major at the University of Maryland, College Park (UMD). I have been coding since eleventh grade, and I have primarily studied Java and C. I am interested in becoming a software developer in the future. In my free time, I like to snowboard, skateboard, and play sports with friends', title: 'Backend Engineer', img: justinProf, li: 'https://www.linkedin.com/in/justin-glazer/', gh: 'https://github.com/justin-glazer'});
+map.set('Claire Chen', {description: 'Hi!', title: 'Frontend Engineer', img: claireProf, li: 'https://www.linkedin.com/in/claire-s-chen/', gh: 'https://github.com/cc13985'});
+map.set('Stephen Wu', {description: "Stevey Stretchie", title: 'Product Manager & Frontend Engineer', img: stephenProf, li:'https://www.linkedin.com/in/stephen-wu-210a96304/' ,gh: 'https://github.com/heavens-potato'});
 map.set('Alexis Giobbi', {description: "Post Grad Life", title: 'UI/UX Designer', img: alexisProf, li:'https://www.linkedin.com/in/alexis-giobbi/', gh: 'https://github.com/alexisgiobbi'});
 
 function AboutCard({name}) {
