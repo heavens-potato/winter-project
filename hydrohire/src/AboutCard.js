@@ -6,6 +6,8 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { motion } from 'framer-motion';
+
 
 // Map holding info for each person
 const map = new Map();
