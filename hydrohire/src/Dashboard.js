@@ -352,21 +352,27 @@ function Dashboard() {
                                     <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }}>
                                         <Box flex={1} display="flex" flexDirection="column" sx={{ alignItems: 'center', justifyContent: 'center', padding: { xs: '0', md: '20px' }, width: { xs: '100%', md: '65%' } }}>
                                             {/* Charts */}
-                                            <Box flex={1} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-                                                <Box sx={{ width: '100%' }}>
-                                                    <Tabs value={selectedTab} onChange={handleTabChange} variant="fullWidth">
-                                                        <Tab label="Bar Chart" />
-                                                        <Tab label="Pie Chart" />
-                                                    </Tabs>
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ duration: 0.3, delay: 0.2 }}
+                                            >
+                                                <Box flex={1} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                                                    <Box sx={{ width: '100%' }}>
+                                                        <Tabs value={selectedTab} onChange={handleTabChange} variant="fullWidth">
+                                                            <Tab label="Bar Chart" />
+                                                            <Tab label="Pie Chart" />
+                                                        </Tabs>
+                                                    </Box>
+                                                    <Box sx={{ width: '100%', height: { xs: '300px', md: '400px' } }}>
+                                                        {selectedTab === 0 ? (
+                                                            <BarChartComponent data={chartData} barColors={barColors} />
+                                                        ) : (
+                                                            <PieChartComponent data={chartData} pieColors={pieColors} />
+                                                        )}
+                                                    </Box>
                                                 </Box>
-                                                <Box sx={{ width: '100%', height: { xs: '300px', md: '400px' } }}>
-                                                    {selectedTab === 0 ? (
-                                                        <BarChartComponent data={chartData} barColors={barColors} />
-                                                    ) : (
-                                                        <PieChartComponent data={chartData} pieColors={pieColors} />
-                                                    )}
-                                                </Box>
-                                            </Box>
+                                            </motion.div>
                                         </Box>
                                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: { xs: '100%', md: '35%' }, gap: { xs: '0', md: '20px' }, marginTop: { xs: '1rem', md: '0' } }}>
                                             {Object.entries(counts)
@@ -400,7 +406,10 @@ function Dashboard() {
                                                     }
 
                                                     return (
-                                                        <div
+                                                        <motion.div
+                                                            initial={{ opacity: 0 }}
+                                                            animate={{ opacity: 1 }}
+                                                            transition={{ duration: 0.3, delay: 0.3 }}
                                                             key={status}
                                                             style={{
                                                                 fontSize: '1.3rem',
@@ -440,7 +449,7 @@ function Dashboard() {
                                                             >
                                                                 {displayText}
                                                             </span>
-                                                        </div>
+                                                        </motion.div>
                                                     );
                                                 })}
                                         </Box>
