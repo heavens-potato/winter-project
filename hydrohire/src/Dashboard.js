@@ -356,6 +356,7 @@ function Dashboard() {
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
                                                 transition={{ duration: 0.3, delay: 0.2 }}
+                                                className="w-full"
                                             >
                                                 <Box flex={1} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                                                     <Box sx={{ width: '100%' }}>
