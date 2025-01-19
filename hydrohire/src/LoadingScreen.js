@@ -8,7 +8,7 @@ const LoadingScreen = () => {
             <motion.div
                 initial={{ x: '100%' }}
                 animate={{ x: '-100%' }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: 'loop' }}
+                transition={{ duration: 3, repeat: Infinity, repeatType: 'loop' }}
                 className="flex flex-row justify-center"
             >
                 <img src={capybaraLogo} style={{ maxWidth: '20%'}} alt="Capybara" />

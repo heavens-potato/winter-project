@@ -23,6 +23,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { onAuthStateChanged } from 'firebase/auth';
 
 import { motion } from 'framer-motion';
+import zIndex from '@mui/material/styles/zIndex';
 
 function Dashboard() {
     // Responsive breakpoint
