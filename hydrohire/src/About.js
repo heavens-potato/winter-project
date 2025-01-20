@@ -8,19 +8,19 @@ import { motion } from 'framer-motion';
 const features = [
   {
     title: 'Visual Insights & Dashboard',
-    description: 'Our visually engaging dashboard and insight overview keeps you on top of your job applications at a glance. With bar and pie charts and key metrics, you’ll have a snapshot of your progress throughout your journey. Track statuses, analyze trends, and stay motivated with these visualizations keeping you informed and in control.',
+    description: 'Our visually engaging dashboard keeps you on top of your job applications with a single glance. Throughbar and pie charts and key metrics, you will have a snapshot of your progress as you advance through your journey. Track statuses, analyze trends, and stay informed and in control with these visualizations.',
   },
   {
     title: 'Smart Application Tracker',
-    description: 'Effortlessly manage all your job applications in one convenient location. Our DataGrid structure makes it simple to add, view, edit, and delete entries. With powerful native and customized filtering options, you can quickly find the applications that matter most. You can also personalize your dashboard and display only the information that’s most relevant to you.',
+    description: 'Effortlessly manage all your job applications in one convenient location. Our DataGrid structure makes it simple to add, view, edit, and delete entries. With powerful native and custom filtering options, you can quickly find the applications that matter most.',
   },
   {
     title: 'Personalized Workspace',
-    description: 'Make Job Capyture your own with customizable themes and account settings. Choose from nine vibrant color themes to match your style, and for a flexible and seamless workflow, easily and securely update your email, password, and profile settings whenever needed.',
+    description: 'Make Job Capyture your own with customizable themes and account settings. Choose from nine vibrant color themes to match your style Enjoy a flexible workflow with the ability to easily and securely update your email, password, and profile settings whenever needed.',
   },
 ];
 
-const paragraph = "Job Capyture simplifies and streamlines your job search process with an organized and customizable way to manage applications. We aim to solve the chaos of tracking applications across spreadsheets, emails, and scattered documents by offering a centralized, intuitive platform that visualizes progress and offers an organized method of viewing jobs. Designed for job seekers at all stages, Job Capyture is essential for maintaining clarity and confidence during the often-overwhelming job application journey."
+const paragraph = "Job Capyture simplifies and streamlines your career search with an organized and customizable way to manage applications. We aim to solve the chaos of tracking various opportunities across spreadsheets, emails, and scattered documents by offering a centralized, intuitive platform that visualizes both jobs and progress in a clear and coherent manner. Designed for career seekers at all levels, Job Capyture is a valuable asset that allows candidates to maintain confidence and clarity during the often overwhelming job application journey."
 
 const aboutCardParentVariants = {
   hidden: { opacity: 0 },
