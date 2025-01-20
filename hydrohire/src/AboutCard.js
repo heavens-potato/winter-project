@@ -6,7 +6,6 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { motion } from 'framer-motion';
 
 // Map holding info for each person
 const map = new Map();
@@ -21,7 +20,7 @@ function AboutCard({name}) {
         <>
             <div className='flex flex-row p-2 lg:p-5 gap-3' style ={{borderRadius: '1.25rem', backgroundColor: theme.palette.secondary.light}}>
                 <div className='w-1/3 flex flex-col justify-center'> {/* Left Half */}
-                <img className= 'flex justify-center h-64 object-cover rounded-xl' src={map.get(name).img} />
+                <img className= 'flex justify-center h-64 object-cover rounded-xl' src={map.get(name).img} alt={name}/>
                     <Typography sx={{ textAlign: 'center', fontSize: 24, fontWeight: 'bold', color: theme.palette.primary.dark}}>{name}</Typography>
                     <div className='flex justify-center gap-2'>
                         <LinkedInIcon className='cursor-pointer' style={{color: theme.palette.primary.dark}} onClick={()=> window.open(map.get(name).li, "_blank")}>LinkedIn!   </LinkedInIcon>

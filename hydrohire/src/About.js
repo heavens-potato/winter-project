@@ -1,10 +1,9 @@
 import Navbar from "./Navbar";
 import AboutCard from "./AboutCard";
-import { Button, Typography, Box, Card, CardContent } from '@mui/material';
+import { Typography, Card, CardContent } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useTheme } from '@mui/material/styles';
 import { motion } from 'framer-motion';
-import { useMediaQuery } from '@mui/system';
 
 const features = [
   {
