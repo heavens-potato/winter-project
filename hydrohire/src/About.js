@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 const features = [
   {
     title: 'Visual Insights & Dashboard',
-    description: 'Our visually engaging dashboard keeps you on top of your job applications with a single glance. Throughbar and pie charts and key metrics, you will have a snapshot of your progress as you advance through your journey. Track statuses, analyze trends, and stay informed and in control with these visualizations.',
+    description: 'Our visually engaging dashboard keeps you on top of your job applications with a single glance. Through bar and pie charts and key metrics, you will have a snapshot of your progress as you advance through your journey. Track statuses, analyze trends, and stay informed and in control with these visualizations.',
   },
   {
     title: 'Smart Application Tracker',
@@ -16,7 +16,7 @@ const features = [
   },
   {
     title: 'Personalized Workspace',
-    description: 'Make Job Capyture your own with customizable themes and account settings. Choose from nine vibrant color themes to match your style Enjoy a flexible workflow with the ability to easily and securely update your email, password, and profile settings whenever needed.',
+    description: 'Make Job Capyture your own with customizable themes and account settings. Choose from nine vibrant color themes to match your style. Enjoy a flexible workflow with the ability to easily and securely update your email, password, and profile settings whenever needed.',
   },
 ];
 
