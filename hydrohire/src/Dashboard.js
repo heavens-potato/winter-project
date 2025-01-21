@@ -291,6 +291,7 @@ function Dashboard() {
                     return unsubscribe;
                 } else {
                     console.log("No such document!");
+                    setIsLoading(false);
                     return () => { }; // No-op unsubscribe
                 }
             } catch (error) {
@@ -351,7 +352,7 @@ function Dashboard() {
                                     animate={{ opacity: 1 }}
                                     transition={{ duration: 0.3, delay: 0.2 }}
                                 >
-                                    <Typography variant="body1" sx={{ fontSize: 16, color: 'text.secondary', marginBottom: '30px' }}>
+                                    <Typography variant="body1" sx={{ fontSize: 16, color: 'text.secondary', marginBottom: '30px', marginTop: '30px' }}>
                                         Start adding applications to receive insightful visualizations about your job application process.
                                     </Typography>
                                 </motion.div>
