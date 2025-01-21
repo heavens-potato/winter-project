@@ -4,6 +4,7 @@ import { Typography, Card, CardContent } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useTheme } from '@mui/material/styles';
 import { motion } from 'framer-motion';
+import React from 'react';
 
 const features = [
   {
@@ -39,11 +40,11 @@ const aboutCardChildVariants = {
   visible: { opacity: 1 },
 }
 
-React.useEffect(() => {
-  document.title = 'Job Capyture - About';
-}, []);
-
 function About() {
+  React.useEffect(() => {
+    document.title = 'Job Capyture - About';
+  }, []);
+
   const theme = useTheme();
   return (
     <>
