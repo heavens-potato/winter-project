@@ -39,6 +39,10 @@ const aboutCardChildVariants = {
   visible: { opacity: 1 },
 }
 
+React.useEffect(() => {
+  document.title = 'Job Capyture - About';
+}, []);
+
 function About() {
   const theme = useTheme();
   return (
