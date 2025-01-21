@@ -304,6 +304,15 @@ function Dashboard() {
         })
     }, []);
 
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+          if (!user) {
+            window.location.href = "/";
+          }
+        });
+        return () => unsubscribe();
+      }, []);
+
     return (
         <>
             {isLoading && <LoadingScreen />}
