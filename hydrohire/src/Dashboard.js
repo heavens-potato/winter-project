@@ -161,11 +161,11 @@ function Dashboard() {
                 const uid = user.uid;
                 let parentDocRef = doc(db, 'applications', uid);
                 let docSnap = await getDoc(parentDocRef);
-                if (!docSnap.exists()) {
-                    await setDoc(doc(db, "applications", uid), {});
-                    parentDocRef = doc(db, 'applications', uid);
-                    docSnap = await getDoc(parentDocRef);
-                }
+                // if (!docSnap.exists()) {
+                //     await setDoc(doc(db, "applications", uid), {});
+                //     parentDocRef = doc(db, 'applications', uid);
+                //     docSnap = await getDoc(parentDocRef);
+                // }
                 if (selectedApp) {
                     console.log(selectedApp.id);
                     const docRef = doc(docSnap.ref, 'apps', selectedApp.id);

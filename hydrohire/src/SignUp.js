@@ -5,7 +5,7 @@ import capybaraLogo from './assets/img/Capybara.png';
 import { auth, db } from './firebase'; // Import auth from firebase.js
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { motion } from 'framer-motion';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 
 function checkPasswordStrength(password) {
@@ -64,6 +64,10 @@ function SignUp() {
       await setDoc(doc(db, "users", user.uid), {
         displayName: displayInput,
       });
+      await setDoc(doc(db, "applications", user.uid), {});
+      const parentDocRef = doc(db, 'applications', user.uid);
+      await getDoc(parentDocRef);
+
       setErrorMessage("");
       setSuccessMessage("Successfully created an account!");
       console.log('SignUp Success!');
