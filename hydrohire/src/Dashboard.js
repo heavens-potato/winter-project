@@ -528,7 +528,7 @@ function Dashboard() {
                                     open={openDialog}
                                     handleClose={handleDialogClose}
                                     handleSubmit={handleSubmit}
-                                    title={selectedApp ? "Edit This Application" : "Add New Job"}
+                                    title={selectedApp ? "Edit This Application" : "Add New Application"}
                                     actionButton={selectedApp ? "Save" : "Add"}
                                     appData={selectedApp}
                                 />
