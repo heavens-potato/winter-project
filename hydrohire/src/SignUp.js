@@ -48,10 +48,10 @@ function SignUp() {
       return;
     }
 
-    if (!checkPasswordStrength(password)) {
-      setErrorMessage('Password must have at least 1 lowercase letter, uppercase letter, number, and special character');
-      return;
-    }
+    // if (!checkPasswordStrength(password)) {
+    //   setErrorMessage('Password must have at least 1 lowercase letter, uppercase letter, number, and special character');
+    //   return;
+    // }
 
     if (password !== confirmPassword) {
       setErrorMessage('Passwords must match.');
