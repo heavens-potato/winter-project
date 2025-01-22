@@ -9,7 +9,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 
 function checkPasswordStrength(password) {
-  const passwordRegex = new RegExp(/^(?=.*[@$!%*?&])(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d@$!%?&]{8,}$/);
+  const passwordRegex = new RegExp(/^(?=.*[!@#$%^&*()_+-=[]{};':"\\|,.<>\/?])(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d!@#$%^&*()_+-=[]{};':"\\|,.<>\/?]{8,}$/);
   return passwordRegex.test(password);
 }
 
