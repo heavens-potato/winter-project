@@ -9,7 +9,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 
 function checkPasswordStrength(password) {
-  const passwordRegex = new RegExp(/^(?=.*[@$!%*?&])(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d@$!%?&]{8,}$/);
+  const passwordRegex = new RegExp(/^(?=.*[!@#$%^&*()_+-=[]{};':"\\|,.<>\/?])(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[A-Za-z\d!@#$%^&*()_+-=[]{};':"\\|,.<>\/?]{8,}$/);
   return passwordRegex.test(password);
 }
 
@@ -48,10 +48,10 @@ function SignUp() {
       return;
     }
 
-    if (!checkPasswordStrength(password)) {
-      setErrorMessage('Password must have at least 1 lowercase letter, uppercase letter, number, and special character');
-      return;
-    }
+    // if (!checkPasswordStrength(password)) {
+    //   setErrorMessage('Password must have at least 1 lowercase letter, uppercase letter, number, and special character');
+    //   return;
+    // }
 
     if (password !== confirmPassword) {
       setErrorMessage('Passwords must match.');
@@ -69,8 +69,11 @@ function SignUp() {
       console.log('SignUp Success!');
       navigate('/dashboard');
     } catch (error) {
-      setErrorMessage('Failed to login.');
-      console.log('Failure');
+      if (error.code === 'auth/password-does-not-meet-requirements') {
+        setErrorMessage('Password must have at least 1 lowercase letter, uppercase letter, number, and special character');
+      } else {
+        setErrorMessage('Login Failed. Please try again later.');
+      }
     }
   }
 
