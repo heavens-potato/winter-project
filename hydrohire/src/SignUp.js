@@ -69,8 +69,11 @@ function SignUp() {
       console.log('SignUp Success!');
       navigate('/dashboard');
     } catch (error) {
-      setErrorMessage('Failed to login.');
-      console.log('Failure');
+      if (error.code === 'auth/password-does-not-meet-requirements') {
+        setErrorMessage('Password must have at least 1 lowercase letter, uppercase letter, number, and special character');
+      } else {
+        setErrorMessage('Login Failed. Please try again later.');
+      }
     }
   }
 
